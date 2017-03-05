@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-02-25T21:59:16Z" product-name="chapted">
+		<header/>
+		<body>
+			<trans-unit id="title.description">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="description.description">
+				<source>description</source>
+			</trans-unit>
+			<trans-unit id="reckoning.description">
+				<source>reckoning</source>
+			</trans-unit>
+			<trans-unit id="likes.description">
+				<source>likes</source>
+			</trans-unit>
+			<trans-unit id="winning_point.description">
+				<source>winningPoint</source>
+			</trans-unit>
+			<trans-unit id="qr_code.description">
+				<source>qrCode</source>
+			</trans-unit>
+			<trans-unit id="latitude.description">
+				<source>latitude</source>
+			</trans-unit>
+			<trans-unit id="longitude.description">
+				<source>longitude</source>
+			</trans-unit>
+			<trans-unit id="moves.description">
+				<source>moves</source>
+			</trans-unit>
+			<trans-unit id="owner.description">
+				<source>owner</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

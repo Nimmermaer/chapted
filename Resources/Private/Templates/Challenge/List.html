@@ -1,0 +1,51 @@
+
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+<h1>Listing for Challenge</h1>
+
+<f:flashMessages />
+
+<table  class="tx_chapted" >
+	<tr>
+		<th><f:translate key="tx_chapted_domain_model_challenge.title" /></th>
+		<th><f:translate key="tx_chapted_domain_model_challenge.description" /></th>
+		<th><f:translate key="tx_chapted_domain_model_challenge.reckoning" /></th>
+		<th><f:translate key="tx_chapted_domain_model_challenge.likes" /></th>
+		<th><f:translate key="tx_chapted_domain_model_challenge.winning_point" /></th>
+		<th><f:translate key="tx_chapted_domain_model_challenge.qr_code" /></th>
+		<th><f:translate key="tx_chapted_domain_model_challenge.latitude" /></th>
+		<th><f:translate key="tx_chapted_domain_model_challenge.longitude" /></th>
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{challenges}" as="challenge">
+		<tr>
+			<td><f:link.action action="show" arguments="{challenge : challenge}"> {challenge.title}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{challenge : challenge}"> {challenge.description}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{challenge : challenge}"> {challenge.reckoning}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{challenge : challenge}"> {challenge.likes}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{challenge : challenge}"> {challenge.winningPoint}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{challenge : challenge}"> {challenge.qrCode}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{challenge : challenge}"> {challenge.latitude}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{challenge : challenge}"> {challenge.longitude}</f:link.action></td>
+			<td><f:link.action action="edit" arguments="{challenge : challenge}">Edit</f:link.action></td>
+			<td><f:link.action action="delete" arguments="{challenge : challenge}">Delete</f:link.action></td>
+		</tr>
+	</f:for>
+</table>
+
+<f:link.action action="new">New Challenge</f:link.action>
+</f:section>

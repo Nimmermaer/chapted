@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-02-25T21:59:16Z" product-name="chapted">
+		<header/>
+		<body>
+			<trans-unit id="tx_chapted_domain_model_player">
+				<source>Player</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_player.wins">
+				<source>Wins</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_player.lose">
+				<source>Lose</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_player.custom_color">
+				<source>Custom Color</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_player.custom_profil">
+				<source>Custom Profil</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_player.challenges">
+				<source>Challenges</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_move">
+				<source>Move</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_move.media">
+				<source>Media</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_move.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_move.point">
+				<source>Point</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_move.field">
+				<source>Field</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_move.like_move">
+				<source>Like Move</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_move.player">
+				<source>Player</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_challenge">
+				<source>Challenge</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_challenge.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_challenge.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_challenge.reckoning">
+				<source>Reckoning</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_challenge.likes">
+				<source>Likes</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_challenge.winning_point">
+				<source>Winning Point</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_challenge.qr_code">
+				<source>Qr Code</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_challenge.latitude">
+				<source>Latitude</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_challenge.longitude">
+				<source>Longitude</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_challenge.moves">
+				<source>Moves</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_challenge.owner">
+				<source>Owner</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_table">
+				<source>Table</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_table.month">
+				<source>Month</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_table.year">
+				<source>Year</source>
+			</trans-unit>
+			<trans-unit id="tx_chapted_domain_model_table.challenges">
+				<source>Challenges</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
