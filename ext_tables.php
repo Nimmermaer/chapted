@@ -34,7 +34,8 @@ if (TYPO3_MODE === 'BE') {
 		array(
 			'Challenge' => 'list, show, filter, new, create',
 			'Player' => 'list, show, new',
-			
+			'Table' => 'list, show, new',
+
 		),
 		array(
 			'access' => 'user,group',

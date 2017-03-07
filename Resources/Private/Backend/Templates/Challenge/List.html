@@ -17,7 +17,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
 <f:flashMessages />
 
-<table  class="tx_chapted" >
+<table  class="table tx_chapted" >
 	<tr>
 		<th><f:translate key="tx_chapted_domain_model_challenge.title" /></th>
 		<th><f:translate key="tx_chapted_domain_model_challenge.description" /></th>
@@ -41,11 +41,11 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<td><f:link.action action="show" arguments="{challenge : challenge}"> {challenge.qrCode}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{challenge : challenge}"> {challenge.latitude}</f:link.action></td>
 			<td><f:link.action action="show" arguments="{challenge : challenge}"> {challenge.longitude}</f:link.action></td>
-			<td><f:link.action action="edit" arguments="{challenge : challenge}">Edit</f:link.action></td>
-			<td><f:link.action action="delete" arguments="{challenge : challenge}">Delete</f:link.action></td>
+			<td><f:link.action action="edit" arguments="{challenge : challenge}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</f:link.action></td>
+			<td><f:link.action action="delete" arguments="{challenge : challenge}"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</f:link.action></td>
 		</tr>
 	</f:for>
 </table>
 
-<f:link.action action="new">New Challenge</f:link.action>
+<f:link.action action="new"><i class="fa fa-plus-square-o" aria-hidden="true"></i> New Challenge</f:link.action>
 </f:section>
