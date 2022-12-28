@@ -42,28 +42,28 @@ class Player
      *
      * @var string
      */
-    protected $wins = '';
+    protected string $wins = '';
 
     /**
      * lose
      *
      * @var string
      */
-    protected $lose = '';
+    protected string $lose = '';
 
     /**
      * customColor
      *
      * @var string
      */
-    protected $customColor = '';
+    protected string $customColor = '';
 
     /**
      * normal
      *
      * @var int
      */
-    protected $customProfil = 0;
+    protected int $customProfil = 0;
 
     /**
      * challenges
@@ -71,7 +71,7 @@ class Player
      * @var ObjectStorage<Challenge>
      * @Extbase\ORM\Cascade("remove")
      */
-    protected $challenges;
+    protected ObjectStorage $challenges;
 
     /**
      * __construct
@@ -94,17 +94,15 @@ class Player
     }
 
     /**
-     * Returns the wins
-     *
      * @return string
      */
-    public function getWins()
+    public function getWins(): string
     {
         return $this->wins;
     }
 
     /**
-     * Sets the wins
+     * @param string $wins
      */
     public function setWins(string $wins): void
     {
@@ -112,17 +110,15 @@ class Player
     }
 
     /**
-     * Returns the lose
-     *
      * @return string
      */
-    public function getLose()
+    public function getLose(): string
     {
         return $this->lose;
     }
 
     /**
-     * Sets the lose
+     * @param string $lose
      */
     public function setLose(string $lose): void
     {
@@ -130,17 +126,15 @@ class Player
     }
 
     /**
-     * Returns the customColor
-     *
      * @return string
      */
-    public function getCustomColor()
+    public function getCustomColor(): string
     {
         return $this->customColor;
     }
 
     /**
-     * Sets the customColor
+     * @param string $customColor
      */
     public function setCustomColor(string $customColor): void
     {
@@ -148,17 +142,15 @@ class Player
     }
 
     /**
-     * Returns the customProfil
-     *
      * @return int
      */
-    public function getCustomProfil()
+    public function getCustomProfil(): int
     {
         return $this->customProfil;
     }
 
     /**
-     * Sets the customProfil
+     * @param int $customProfil
      */
     public function setCustomProfil(int $customProfil): void
     {
@@ -166,40 +158,19 @@ class Player
     }
 
     /**
-     * Adds a Challenge
+     * @return ObjectStorage
      */
-    public function addChallenge(Challenge $challenge): void
-    {
-        $this->challenges->attach($challenge);
-    }
-
-    /**
-     * Removes a Challenge
-     *
-     * @param Challenge $challenge The Challenge to be removed
-     */
-    public function removeChallenge(Challenge $challenge): void
-    {
-        $this->challenges->detach($challenge);
-    }
-
-    /**
-     * Returns the challenges
-     *
-     * @return ObjectStorage<Challenge> $challenges
-     */
-    public function getChallenges()
+    public function getChallenges(): ObjectStorage
     {
         return $this->challenges;
     }
 
     /**
-     * Sets the challenges
-     *
-     * @param ObjectStorage<Challenge> $objectStorage
+     * @param ObjectStorage $challenges
      */
-    public function setChallenges(ObjectStorage $objectStorage): void
+    public function setChallenges(ObjectStorage $challenges): void
     {
-        $this->challenges = $objectStorage;
+        $this->challenges = $challenges;
     }
+
 }

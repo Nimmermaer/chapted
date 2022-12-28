@@ -102,7 +102,7 @@ class Challenge extends AbstractEntity
      * @var ObjectStorage<Move>
      * @Extbase\ORM\Cascade("remove")
      */
-    protected $moves;
+    protected ObjectStorage $moves;
 
     /**
      * owner
@@ -110,7 +110,7 @@ class Challenge extends AbstractEntity
      * @var ObjectStorage<Player>
      * @Extbase\ORM\Cascade("remove")
      */
-    protected $owner;
+    protected ObjectStorage $owner;
 
     /**
      * __construct
@@ -138,7 +138,7 @@ class Challenge extends AbstractEntity
      *
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -156,7 +156,7 @@ class Challenge extends AbstractEntity
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -174,7 +174,7 @@ class Challenge extends AbstractEntity
      *
      * @return string
      */
-    public function getReckoning()
+    public function getReckoning(): string
     {
         return $this->reckoning;
     }
@@ -192,7 +192,7 @@ class Challenge extends AbstractEntity
      *
      * @return int
      */
-    public function getLikes()
+    public function getLikes(): int
     {
         return $this->likes;
     }
@@ -210,7 +210,7 @@ class Challenge extends AbstractEntity
      *
      * @return string
      */
-    public function getWinningPoint()
+    public function getWinningPoint(): string
     {
         return $this->winningPoint;
     }
@@ -228,7 +228,7 @@ class Challenge extends AbstractEntity
      *
      * @return string
      */
-    public function getQrCode()
+    public function getQrCode(): string
     {
         return $this->qrCode;
     }
@@ -264,7 +264,7 @@ class Challenge extends AbstractEntity
      *
      * @return string
      */
-    public function getLongitude()
+    public function getLongitude(): string
     {
         return $this->longitude;
     }
@@ -300,7 +300,7 @@ class Challenge extends AbstractEntity
      *
      * @return ObjectStorage<Move> $moves
      */
-    public function getMoves()
+    public function getMoves(): ObjectStorage
     {
         return $this->moves;
     }
@@ -338,7 +338,7 @@ class Challenge extends AbstractEntity
      *
      * @return ObjectStorage<Player> $owner
      */
-    public function getOwner()
+    public function getOwner(): ObjectStorage
     {
         return $this->owner;
     }

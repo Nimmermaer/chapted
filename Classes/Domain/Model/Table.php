@@ -6,6 +6,7 @@ namespace ChaptedTeam\Chapted\Domain\Model;
 
 use DateTime;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /***************************************************************
  *
@@ -43,73 +44,67 @@ class Table extends AbstractEntity
      *
      * @var DateTime
      */
-    protected $month;
+    protected \DateTime $month;
 
     /**
      * year
      *
      * @var DateTime
      */
-    protected $year;
+    protected \DateTime $year;
 
     /**
      * challenges
      *
      * @var Challenge
      */
-    protected $challenges;
+    protected Challenge $challenge;
 
     /**
-     * Returns the month
-     *
      * @return DateTime
      */
-    public function getMonth()
+    public function getMonth(): DateTime
     {
         return $this->month;
     }
 
     /**
-     * Sets the month
+     * @param DateTime $month
      */
-    public function setMonth(DateTime $dateTime): void
+    public function setMonth(DateTime $month): void
     {
-        $this->month = $dateTime;
+        $this->month = $month;
     }
 
     /**
-     * Returns the year
-     *
      * @return DateTime
      */
-    public function getYear()
+    public function getYear(): DateTime
     {
         return $this->year;
     }
 
     /**
-     * Sets the year
+     * @param DateTime $year
      */
-    public function setYear(DateTime $dateTime): void
+    public function setYear(DateTime $year): void
     {
-        $this->year = $dateTime;
+        $this->year = $year;
     }
 
     /**
-     * Returns the challenges
-     *
      * @return Challenge
      */
-    public function getChallenges()
+    public function getChallenge(): Challenge
     {
-        return $this->challenges;
+        return $this->challenge;
     }
 
     /**
-     * Sets the challenges
+     * @param Challenge $challenge
      */
-    public function setChallenges(Challenge $challenge): void
+    public function setChallenge(Challenge $challenge): void
     {
-        $this->challenges = $challenge;
+        $this->challenge = $challenge;
     }
 }

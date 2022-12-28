@@ -44,35 +44,35 @@ class Move extends AbstractEntity
      *
      * @var FileReference
      */
-    protected $media;
+    protected FileReference $media;
 
     /**
      * description
      *
      * @var string
      */
-    protected $description = '';
+    protected string $description = '';
 
     /**
      * point
      *
      * @var int
      */
-    protected $point = 0;
+    protected int $point = 0;
 
     /**
      * field
      *
      * @var int
      */
-    protected $field = 0;
+    protected int $field = 0;
 
     /**
      * likeMove
      *
      * @var int
      */
-    protected $likeMove = 0;
+    protected int $likeMove = 0;
 
     /**
      * player
@@ -103,35 +103,31 @@ class Move extends AbstractEntity
     }
 
     /**
-     * Returns the media
-     *
      * @return FileReference
      */
-    public function getMedia()
+    public function getMedia(): FileReference
     {
         return $this->media;
     }
 
     /**
-     * Sets the media
+     * @param FileReference $media
      */
-    public function setMedia(FileReference $fileReference): void
+    public function setMedia(FileReference $media): void
     {
-        $this->media = $fileReference;
+        $this->media = $media;
     }
 
     /**
-     * Returns the description
-     *
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
     /**
-     * Sets the description
+     * @param string $description
      */
     public function setDescription(string $description): void
     {
@@ -139,37 +135,31 @@ class Move extends AbstractEntity
     }
 
     /**
-     * Returns the point
-     *
      * @return int
      */
-    public function getPoint()
+    public function getPoint(): int
     {
         return $this->point;
     }
 
     /**
-     * Sets the point
-     *
-     * @param string $point
+     * @param int $point
      */
-    public function setPoint($point): void
+    public function setPoint(int $point): void
     {
         $this->point = $point;
     }
 
     /**
-     * Returns the field
-     *
      * @return int
      */
-    public function getField()
+    public function getField(): int
     {
         return $this->field;
     }
 
     /**
-     * Sets the field
+     * @param int $field
      */
     public function setField(int $field): void
     {
@@ -177,17 +167,15 @@ class Move extends AbstractEntity
     }
 
     /**
-     * Returns the likeMove
-     *
      * @return int
      */
-    public function getLikeMove()
+    public function getLikeMove(): int
     {
         return $this->likeMove;
     }
 
     /**
-     * Sets the likeMove
+     * @param int $likeMove
      */
     public function setLikeMove(int $likeMove): void
     {
@@ -195,40 +183,19 @@ class Move extends AbstractEntity
     }
 
     /**
-     * Adds a Player
+     * @return ObjectStorage
      */
-    public function addPlayer(Player $player): void
-    {
-        $this->player->attach($player);
-    }
-
-    /**
-     * Removes a Player
-     *
-     * @param Player $player The Player to be removed
-     */
-    public function removePlayer(Player $player): void
-    {
-        $this->player->detach($player);
-    }
-
-    /**
-     * Returns the player
-     *
-     * @return ObjectStorage<Player> $player
-     */
-    public function getPlayer()
+    public function getPlayer(): ObjectStorage
     {
         return $this->player;
     }
 
     /**
-     * Sets the player
-     *
-     * @param ObjectStorage<Player> $objectStorage
+     * @param ObjectStorage $player
      */
-    public function setPlayer(ObjectStorage $objectStorage): void
+    public function setPlayer(ObjectStorage $player): void
     {
-        $this->player = $objectStorage;
+        $this->player = $player;
     }
+
 }
