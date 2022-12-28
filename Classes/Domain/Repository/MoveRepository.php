@@ -1,7 +1,9 @@
 <?php
+
 namespace ChaptedTeam\Chapted\Domain\Repository;
 
 use TYPO3\CMS\Extbase\Persistence\Repository;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -32,6 +34,4 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class MoveRepository extends Repository
 {
-
-    
 }

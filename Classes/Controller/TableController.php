@@ -1,12 +1,14 @@
 <?php
+
 namespace ChaptedTeam\Chapted\Controller;
 
-use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use ChaptedTeam\Chapted\Domain\Model\Table;
 use ChaptedTeam\Chapted\Domain\Repository\TableRepository;
 use Psr\Http\Message\ResponseInterface;
-use ChaptedTeam\Chapted\Domain\Model\Table;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -37,14 +39,13 @@ use TYPO3\CMS\Core\Messaging\AbstractMessage;
  */
 class TableController extends ActionController
 {
-
     /**
      * tableRepository
      *
      * @var TableRepository
      */
     protected $tableRepository;
-    
+
     /**
      * action list
      */
@@ -54,7 +55,7 @@ class TableController extends ActionController
         $this->view->assign('tables', $tables);
         return $this->htmlResponse();
     }
-    
+
     /**
      * action show
      */
@@ -63,7 +64,7 @@ class TableController extends ActionController
         $this->view->assign('table', $table);
         return $this->htmlResponse();
     }
-    
+
     /**
      * action new
      */
@@ -71,7 +72,7 @@ class TableController extends ActionController
     {
         return $this->htmlResponse();
     }
-    
+
     /**
      * action create
      */
@@ -81,7 +82,7 @@ class TableController extends ActionController
         $this->tableRepository->add($newTable);
         $this->redirect('list');
     }
-    
+
     /**
      * action edit
      *
@@ -92,7 +93,7 @@ class TableController extends ActionController
         $this->view->assign('table', $table);
         return $this->htmlResponse();
     }
-    
+
     /**
      * action update
      */
@@ -102,7 +103,7 @@ class TableController extends ActionController
         $this->tableRepository->update($table);
         $this->redirect('list');
     }
-    
+
     /**
      * action delete
      */
@@ -112,7 +113,7 @@ class TableController extends ActionController
         $this->tableRepository->remove($table);
         $this->redirect('list');
     }
-    
+
     /**
      * action filter
      */
@@ -125,5 +126,4 @@ class TableController extends ActionController
     {
         $this->tableRepository = $tableRepository;
     }
-
 }

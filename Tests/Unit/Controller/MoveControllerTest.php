@@ -1,11 +1,13 @@
 <?php
+
 namespace ChaptedTeam\Chapted\Tests\Unit\Controller;
+
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2017 Michael Blunck <mi.blunck@gmail.com>
  *  			Mirco Winkler <mirco.winkler@gmail.com>
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -33,108 +35,106 @@ namespace ChaptedTeam\Chapted\Tests\Unit\Controller;
  */
 class MoveControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
+    /**
+     * @var \ChaptedTeam\Chapted\Controller\MoveController
+     */
+    protected $subject = null;
 
-	/**
-	 * @var \ChaptedTeam\Chapted\Controller\MoveController
-	 */
-	protected $subject = NULL;
+    public function setUp()
+    {
+        $this->subject = $this->getMock('ChaptedTeam\\Chapted\\Controller\\MoveController', ['redirect', 'forward', 'addFlashMessage'], [], '', false);
+    }
 
-	public function setUp()
-	{
-		$this->subject = $this->getMock('ChaptedTeam\\Chapted\\Controller\\MoveController', array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
-	}
+    public function tearDown()
+    {
+        unset($this->subject);
+    }
 
-	public function tearDown()
-	{
-		unset($this->subject);
-	}
+    /**
+     * @test
+     */
+    public function listActionFetchesAllmovesFromRepositoryAndAssignsThemToView()
+    {
+        $allmoves = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
 
-	/**
-	 * @test
-	 */
-	public function listActionFetchesAllmovesFromRepositoryAndAssignsThemToView()
-	{
+        $moveRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\MoveRepository', ['findAll'], [], '', false);
+        $moveRepository->expects($this->once())->method('findAll')->will($this->returnValue($allmoves));
+        $this->inject($this->subject, 'moveRepository', $moveRepository);
 
-		$allmoves = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view->expects($this->once())->method('assign')->with('moves', $allmoves);
+        $this->inject($this->subject, 'view', $view);
 
-		$moveRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\MoveRepository', array('findAll'), array(), '', FALSE);
-		$moveRepository->expects($this->once())->method('findAll')->will($this->returnValue($allmoves));
-		$this->inject($this->subject, 'moveRepository', $moveRepository);
+        $this->subject->listAction();
+    }
 
-		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->once())->method('assign')->with('moves', $allmoves);
-		$this->inject($this->subject, 'view', $view);
+    /**
+     * @test
+     */
+    public function showActionAssignsTheGivenMoveToView()
+    {
+        $move = new \ChaptedTeam\Chapted\Domain\Model\Move();
 
-		$this->subject->listAction();
-	}
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $this->inject($this->subject, 'view', $view);
+        $view->expects($this->once())->method('assign')->with('move', $move);
 
-	/**
-	 * @test
-	 */
-	public function showActionAssignsTheGivenMoveToView()
-	{
-		$move = new \ChaptedTeam\Chapted\Domain\Model\Move();
+        $this->subject->showAction($move);
+    }
 
-		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$this->inject($this->subject, 'view', $view);
-		$view->expects($this->once())->method('assign')->with('move', $move);
+    /**
+     * @test
+     */
+    public function createActionAddsTheGivenMoveToMoveRepository()
+    {
+        $move = new \ChaptedTeam\Chapted\Domain\Model\Move();
 
-		$this->subject->showAction($move);
-	}
+        $moveRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\MoveRepository', ['add'], [], '', false);
+        $moveRepository->expects($this->once())->method('add')->with($move);
+        $this->inject($this->subject, 'moveRepository', $moveRepository);
 
-	/**
-	 * @test
-	 */
-	public function createActionAddsTheGivenMoveToMoveRepository()
-	{
-		$move = new \ChaptedTeam\Chapted\Domain\Model\Move();
+        $this->subject->createAction($move);
+    }
 
-		$moveRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\MoveRepository', array('add'), array(), '', FALSE);
-		$moveRepository->expects($this->once())->method('add')->with($move);
-		$this->inject($this->subject, 'moveRepository', $moveRepository);
+    /**
+     * @test
+     */
+    public function editActionAssignsTheGivenMoveToView()
+    {
+        $move = new \ChaptedTeam\Chapted\Domain\Model\Move();
 
-		$this->subject->createAction($move);
-	}
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $this->inject($this->subject, 'view', $view);
+        $view->expects($this->once())->method('assign')->with('move', $move);
 
-	/**
-	 * @test
-	 */
-	public function editActionAssignsTheGivenMoveToView()
-	{
-		$move = new \ChaptedTeam\Chapted\Domain\Model\Move();
+        $this->subject->editAction($move);
+    }
 
-		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$this->inject($this->subject, 'view', $view);
-		$view->expects($this->once())->method('assign')->with('move', $move);
+    /**
+     * @test
+     */
+    public function updateActionUpdatesTheGivenMoveInMoveRepository()
+    {
+        $move = new \ChaptedTeam\Chapted\Domain\Model\Move();
 
-		$this->subject->editAction($move);
-	}
+        $moveRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\MoveRepository', ['update'], [], '', false);
+        $moveRepository->expects($this->once())->method('update')->with($move);
+        $this->inject($this->subject, 'moveRepository', $moveRepository);
 
-	/**
-	 * @test
-	 */
-	public function updateActionUpdatesTheGivenMoveInMoveRepository()
-	{
-		$move = new \ChaptedTeam\Chapted\Domain\Model\Move();
+        $this->subject->updateAction($move);
+    }
 
-		$moveRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\MoveRepository', array('update'), array(), '', FALSE);
-		$moveRepository->expects($this->once())->method('update')->with($move);
-		$this->inject($this->subject, 'moveRepository', $moveRepository);
+    /**
+     * @test
+     */
+    public function deleteActionRemovesTheGivenMoveFromMoveRepository()
+    {
+        $move = new \ChaptedTeam\Chapted\Domain\Model\Move();
 
-		$this->subject->updateAction($move);
-	}
+        $moveRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\MoveRepository', ['remove'], [], '', false);
+        $moveRepository->expects($this->once())->method('remove')->with($move);
+        $this->inject($this->subject, 'moveRepository', $moveRepository);
 
-	/**
-	 * @test
-	 */
-	public function deleteActionRemovesTheGivenMoveFromMoveRepository()
-	{
-		$move = new \ChaptedTeam\Chapted\Domain\Model\Move();
-
-		$moveRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\MoveRepository', array('remove'), array(), '', FALSE);
-		$moveRepository->expects($this->once())->method('remove')->with($move);
-		$this->inject($this->subject, 'moveRepository', $moveRepository);
-
-		$this->subject->deleteAction($move);
-	}
+        $this->subject->deleteAction($move);
+    }
 }

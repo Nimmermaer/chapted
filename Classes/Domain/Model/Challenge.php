@@ -1,9 +1,11 @@
 <?php
+
 namespace ChaptedTeam\Chapted\Domain\Model;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -34,7 +36,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Challenge extends AbstractEntity
 {
-
     /**
      * title
      *
@@ -42,7 +43,7 @@ class Challenge extends AbstractEntity
      * @Extbase\Validate("NotEmpty")
      */
     protected $title = '';
-    
+
     /**
      * description
      *
@@ -50,49 +51,49 @@ class Challenge extends AbstractEntity
      * @Extbase\Validate("NotEmpty")
      */
     protected $description = '';
-    
+
     /**
      * reckoning
-     * 
+     *
      * @var string
      */
     protected $reckoning = '';
-    
+
     /**
      * likes
-     * 
+     *
      * @var int
      */
     protected $likes = 0;
-    
+
     /**
      * winningPoint
-     * 
+     *
      * @var string
      */
     protected $winningPoint = '';
-    
+
     /**
      * qrCode
-     * 
+     *
      * @var string
      */
     protected $qrCode = '';
-    
+
     /**
      * latitude
-     * 
+     *
      * @var string
      */
     protected $latitude = '';
-    
+
     /**
      * longitude
-     * 
+     *
      * @var string
      */
     protected $longitude = '';
-    
+
     /**
      * moves
      *
@@ -100,7 +101,7 @@ class Challenge extends AbstractEntity
      * @Extbase\ORM\Cascade("remove")
      */
     protected $moves;
-    
+
     /**
      * owner
      *
@@ -108,7 +109,7 @@ class Challenge extends AbstractEntity
      * @Extbase\ORM\Cascade("remove")
      */
     protected $owner;
-    
+
     /**
      * __construct
      */
@@ -117,31 +118,29 @@ class Challenge extends AbstractEntity
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
     }
-    
+
     /**
      * Initializes all ObjectStorage properties
      * Do not modify this method!
      * It will be rewritten on each save in the extension builder
      * You may modify the constructor of this class instead
-     * 
-     * @return void
      */
     protected function initStorageObjects()
     {
         $this->moves = new ObjectStorage();
         $this->owner = new ObjectStorage();
     }
-    
+
     /**
      * Returns the title
-     * 
+     *
      * @return string $title
      */
     public function getTitle()
     {
         return $this->title;
     }
-    
+
     /**
      * Sets the title
      */
@@ -149,17 +148,17 @@ class Challenge extends AbstractEntity
     {
         $this->title = $title;
     }
-    
+
     /**
      * Returns the description
-     * 
+     *
      * @return string $description
      */
     public function getDescription()
     {
         return $this->description;
     }
-    
+
     /**
      * Sets the description
      */
@@ -167,17 +166,17 @@ class Challenge extends AbstractEntity
     {
         $this->description = $description;
     }
-    
+
     /**
      * Returns the reckoning
-     * 
+     *
      * @return string $reckoning
      */
     public function getReckoning()
     {
         return $this->reckoning;
     }
-    
+
     /**
      * Sets the reckoning
      */
@@ -185,17 +184,17 @@ class Challenge extends AbstractEntity
     {
         $this->reckoning = $reckoning;
     }
-    
+
     /**
      * Returns the likes
-     * 
+     *
      * @return int $likes
      */
     public function getLikes()
     {
         return $this->likes;
     }
-    
+
     /**
      * Sets the likes
      */
@@ -203,17 +202,17 @@ class Challenge extends AbstractEntity
     {
         $this->likes = $likes;
     }
-    
+
     /**
      * Returns the winningPoint
-     * 
+     *
      * @return string $winningPoint
      */
     public function getWinningPoint()
     {
         return $this->winningPoint;
     }
-    
+
     /**
      * Sets the winningPoint
      */
@@ -221,17 +220,17 @@ class Challenge extends AbstractEntity
     {
         $this->winningPoint = $winningPoint;
     }
-    
+
     /**
      * Returns the qrCode
-     * 
+     *
      * @return string $qrCode
      */
     public function getQrCode()
     {
         return $this->qrCode;
     }
-    
+
     /**
      * Sets the qrCode
      */
@@ -239,17 +238,17 @@ class Challenge extends AbstractEntity
     {
         $this->qrCode = $qrCode;
     }
-    
+
     /**
      * Returns the latitude
-     * 
+     *
      * @return string $latitude
      */
     public function getLatitude()
     {
         return $this->latitude;
     }
-    
+
     /**
      * Sets the latitude
      */
@@ -257,17 +256,17 @@ class Challenge extends AbstractEntity
     {
         $this->latitude = $latitude;
     }
-    
+
     /**
      * Returns the longitude
-     * 
+     *
      * @return string $longitude
      */
     public function getLongitude()
     {
         return $this->longitude;
     }
-    
+
     /**
      * Sets the longitude
      */
@@ -275,7 +274,7 @@ class Challenge extends AbstractEntity
     {
         $this->longitude = $longitude;
     }
-    
+
     /**
      * Adds a Move
      */
@@ -283,7 +282,7 @@ class Challenge extends AbstractEntity
     {
         $this->moves->attach($move);
     }
-    
+
     /**
      * Removes a Move
      *
@@ -293,7 +292,7 @@ class Challenge extends AbstractEntity
     {
         $this->moves->detach($move);
     }
-    
+
     /**
      * Returns the moves
      *
@@ -303,7 +302,7 @@ class Challenge extends AbstractEntity
     {
         return $this->moves;
     }
-    
+
     /**
      * Sets the moves
      *
@@ -313,7 +312,7 @@ class Challenge extends AbstractEntity
     {
         $this->moves = $objectStorage;
     }
-    
+
     /**
      * Adds a Player
      */
@@ -321,7 +320,7 @@ class Challenge extends AbstractEntity
     {
         $this->owner->attach($player);
     }
-    
+
     /**
      * Removes a Player
      *
@@ -331,7 +330,7 @@ class Challenge extends AbstractEntity
     {
         $this->owner->detach($player);
     }
-    
+
     /**
      * Returns the owner
      *
@@ -341,7 +340,7 @@ class Challenge extends AbstractEntity
     {
         return $this->owner;
     }
-    
+
     /**
      * Sets the owner
      *
@@ -351,5 +350,4 @@ class Challenge extends AbstractEntity
     {
         $this->owner = $objectStorage;
     }
-
 }

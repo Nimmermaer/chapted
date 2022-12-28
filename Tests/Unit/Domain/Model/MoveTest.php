@@ -38,161 +38,166 @@ namespace ChaptedTeam\Chapted\Tests\Unit\Domain\Model;
  */
 class MoveTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
-	/**
-	 * @var \ChaptedTeam\Chapted\Domain\Model\Move
-	 */
-	protected $subject = NULL;
+    /**
+     * @var \ChaptedTeam\Chapted\Domain\Model\Move
+     */
+    protected $subject = null;
 
-	public function setUp()
-	{
-		$this->subject = new \ChaptedTeam\Chapted\Domain\Model\Move();
-	}
+    public function setUp()
+    {
+        $this->subject = new \ChaptedTeam\Chapted\Domain\Model\Move();
+    }
 
-	public function tearDown()
-	{
-		unset($this->subject);
-	}
+    public function tearDown()
+    {
+        unset($this->subject);
+    }
 
-	/**
-	 * @test
-	 */
-	public function getMediaReturnsInitialValueForFileReference()
-	{
-		$this->assertEquals(
-			NULL,
-			$this->subject->getMedia()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getMediaReturnsInitialValueForFileReference()
+    {
+        $this->assertEquals(
+            null,
+            $this->subject->getMedia()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setMediaForFileReferenceSetsMedia()
-	{
-		$fileReferenceFixture = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-		$this->subject->setMedia($fileReferenceFixture);
+    /**
+     * @test
+     */
+    public function setMediaForFileReferenceSetsMedia()
+    {
+        $fileReferenceFixture = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+        $this->subject->setMedia($fileReferenceFixture);
 
-		$this->assertAttributeEquals(
-			$fileReferenceFixture,
-			'media',
-			$this->subject
-		);
-	}
+        $this->assertAttributeEquals(
+            $fileReferenceFixture,
+            'media',
+            $this->subject
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getDescriptionReturnsInitialValueForString()
-	{
-		$this->assertSame(
-			'',
-			$this->subject->getDescription()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getDescriptionReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            '',
+            $this->subject->getDescription()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setDescriptionForStringSetsDescription()
-	{
-		$this->subject->setDescription('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setDescriptionForStringSetsDescription()
+    {
+        $this->subject->setDescription('Conceived at T3CON10');
 
-		$this->assertAttributeEquals(
-			'Conceived at T3CON10',
-			'description',
-			$this->subject
-		);
-	}
+        $this->assertAttributeEquals(
+            'Conceived at T3CON10',
+            'description',
+            $this->subject
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getPointReturnsInitialValueForInt()
-	{	}
+    /**
+     * @test
+     */
+    public function getPointReturnsInitialValueForInt()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setPointForIntSetsPoint()
-	{	}
+    /**
+     * @test
+     */
+    public function setPointForIntSetsPoint()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function getFieldReturnsInitialValueForInt()
-	{	}
+    /**
+     * @test
+     */
+    public function getFieldReturnsInitialValueForInt()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setFieldForIntSetsField()
-	{	}
+    /**
+     * @test
+     */
+    public function setFieldForIntSetsField()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function getLikeMoveReturnsInitialValueForInt()
-	{	}
+    /**
+     * @test
+     */
+    public function getLikeMoveReturnsInitialValueForInt()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setLikeMoveForIntSetsLikeMove()
-	{	}
+    /**
+     * @test
+     */
+    public function setLikeMoveForIntSetsLikeMove()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function getPlayerReturnsInitialValueForPlayer()
-	{
-		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$this->assertEquals(
-			$newObjectStorage,
-			$this->subject->getPlayer()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getPlayerReturnsInitialValueForPlayer()
+    {
+        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->assertEquals(
+            $newObjectStorage,
+            $this->subject->getPlayer()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setPlayerForObjectStorageContainingPlayerSetsPlayer()
-	{
-		$player = new \ChaptedTeam\Chapted\Domain\Model\Player();
-		$objectStorageHoldingExactlyOnePlayer = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$objectStorageHoldingExactlyOnePlayer->attach($player);
-		$this->subject->setPlayer($objectStorageHoldingExactlyOnePlayer);
+    /**
+     * @test
+     */
+    public function setPlayerForObjectStorageContainingPlayerSetsPlayer()
+    {
+        $player = new \ChaptedTeam\Chapted\Domain\Model\Player();
+        $objectStorageHoldingExactlyOnePlayer = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorageHoldingExactlyOnePlayer->attach($player);
+        $this->subject->setPlayer($objectStorageHoldingExactlyOnePlayer);
 
-		$this->assertAttributeEquals(
-			$objectStorageHoldingExactlyOnePlayer,
-			'player',
-			$this->subject
-		);
-	}
+        $this->assertAttributeEquals(
+            $objectStorageHoldingExactlyOnePlayer,
+            'player',
+            $this->subject
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function addPlayerToObjectStorageHoldingPlayer()
-	{
-		$player = new \ChaptedTeam\Chapted\Domain\Model\Player();
-		$playerObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
-		$playerObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($player));
-		$this->inject($this->subject, 'player', $playerObjectStorageMock);
+    /**
+     * @test
+     */
+    public function addPlayerToObjectStorageHoldingPlayer()
+    {
+        $player = new \ChaptedTeam\Chapted\Domain\Model\Player();
+        $playerObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['attach'], [], '', false);
+        $playerObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($player));
+        $this->inject($this->subject, 'player', $playerObjectStorageMock);
 
-		$this->subject->addPlayer($player);
-	}
+        $this->subject->addPlayer($player);
+    }
 
-	/**
-	 * @test
-	 */
-	public function removePlayerFromObjectStorageHoldingPlayer()
-	{
-		$player = new \ChaptedTeam\Chapted\Domain\Model\Player();
-		$playerObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
-		$playerObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($player));
-		$this->inject($this->subject, 'player', $playerObjectStorageMock);
+    /**
+     * @test
+     */
+    public function removePlayerFromObjectStorageHoldingPlayer()
+    {
+        $player = new \ChaptedTeam\Chapted\Domain\Model\Player();
+        $playerObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['detach'], [], '', false);
+        $playerObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($player));
+        $this->inject($this->subject, 'player', $playerObjectStorageMock);
 
-		$this->subject->removePlayer($player);
-
-	}
+        $this->subject->removePlayer($player);
+    }
 }

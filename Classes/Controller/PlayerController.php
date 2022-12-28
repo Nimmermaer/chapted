@@ -1,12 +1,14 @@
 <?php
+
 namespace ChaptedTeam\Chapted\Controller;
 
-use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use ChaptedTeam\Chapted\Domain\Model\Player;
 use ChaptedTeam\Chapted\Domain\Repository\PlayerRepository;
 use Psr\Http\Message\ResponseInterface;
-use ChaptedTeam\Chapted\Domain\Model\Player;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -37,14 +39,13 @@ use TYPO3\CMS\Core\Messaging\AbstractMessage;
  */
 class PlayerController extends ActionController
 {
-
     /**
      * playerRepository
      *
      * @var PlayerRepository
      */
     protected $playerRepository;
-    
+
     /**
      * action list
      */
@@ -54,7 +55,7 @@ class PlayerController extends ActionController
         $this->view->assign('players', $players);
         return $this->htmlResponse();
     }
-    
+
     /**
      * action show
      */
@@ -63,7 +64,7 @@ class PlayerController extends ActionController
         $this->view->assign('player', $player);
         return $this->htmlResponse();
     }
-    
+
     /**
      * action new
      */
@@ -71,7 +72,7 @@ class PlayerController extends ActionController
     {
         return $this->htmlResponse();
     }
-    
+
     /**
      * action create
      */
@@ -81,7 +82,7 @@ class PlayerController extends ActionController
         $this->playerRepository->add($newPlayer);
         $this->redirect('list');
     }
-    
+
     /**
      * action edit
      *
@@ -92,7 +93,7 @@ class PlayerController extends ActionController
         $this->view->assign('player', $player);
         return $this->htmlResponse();
     }
-    
+
     /**
      * action update
      */
@@ -102,7 +103,7 @@ class PlayerController extends ActionController
         $this->playerRepository->update($player);
         $this->redirect('list');
     }
-    
+
     /**
      * action delete
      */
@@ -112,7 +113,7 @@ class PlayerController extends ActionController
         $this->playerRepository->remove($player);
         $this->redirect('list');
     }
-    
+
     /**
      * action login
      */
@@ -120,7 +121,7 @@ class PlayerController extends ActionController
     {
         return $this->htmlResponse();
     }
-    
+
     /**
      * action maximumChallenges
      */
@@ -128,7 +129,7 @@ class PlayerController extends ActionController
     {
         return $this->htmlResponse();
     }
-    
+
     /**
      * action sendNotificationMail
      */
@@ -136,7 +137,7 @@ class PlayerController extends ActionController
     {
         return $this->htmlResponse();
     }
-    
+
     /**
      * action sendInviteMail
      */
@@ -149,5 +150,4 @@ class PlayerController extends ActionController
     {
         $this->playerRepository = $playerRepository;
     }
-
 }

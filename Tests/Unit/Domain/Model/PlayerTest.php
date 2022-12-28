@@ -38,161 +38,162 @@ namespace ChaptedTeam\Chapted\Tests\Unit\Domain\Model;
  */
 class PlayerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
-	/**
-	 * @var \ChaptedTeam\Chapted\Domain\Model\Player
-	 */
-	protected $subject = NULL;
+    /**
+     * @var \ChaptedTeam\Chapted\Domain\Model\Player
+     */
+    protected $subject = null;
 
-	public function setUp()
-	{
-		$this->subject = new \ChaptedTeam\Chapted\Domain\Model\Player();
-	}
+    public function setUp()
+    {
+        $this->subject = new \ChaptedTeam\Chapted\Domain\Model\Player();
+    }
 
-	public function tearDown()
-	{
-		unset($this->subject);
-	}
+    public function tearDown()
+    {
+        unset($this->subject);
+    }
 
-	/**
-	 * @test
-	 */
-	public function getWinsReturnsInitialValueForString()
-	{
-		$this->assertSame(
-			'',
-			$this->subject->getWins()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getWinsReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            '',
+            $this->subject->getWins()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setWinsForStringSetsWins()
-	{
-		$this->subject->setWins('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setWinsForStringSetsWins()
+    {
+        $this->subject->setWins('Conceived at T3CON10');
 
-		$this->assertAttributeEquals(
-			'Conceived at T3CON10',
-			'wins',
-			$this->subject
-		);
-	}
+        $this->assertAttributeEquals(
+            'Conceived at T3CON10',
+            'wins',
+            $this->subject
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getLoseReturnsInitialValueForString()
-	{
-		$this->assertSame(
-			'',
-			$this->subject->getLose()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getLoseReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            '',
+            $this->subject->getLose()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setLoseForStringSetsLose()
-	{
-		$this->subject->setLose('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setLoseForStringSetsLose()
+    {
+        $this->subject->setLose('Conceived at T3CON10');
 
-		$this->assertAttributeEquals(
-			'Conceived at T3CON10',
-			'lose',
-			$this->subject
-		);
-	}
+        $this->assertAttributeEquals(
+            'Conceived at T3CON10',
+            'lose',
+            $this->subject
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getCustomColorReturnsInitialValueForString()
-	{
-		$this->assertSame(
-			'',
-			$this->subject->getCustomColor()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getCustomColorReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            '',
+            $this->subject->getCustomColor()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setCustomColorForStringSetsCustomColor()
-	{
-		$this->subject->setCustomColor('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setCustomColorForStringSetsCustomColor()
+    {
+        $this->subject->setCustomColor('Conceived at T3CON10');
 
-		$this->assertAttributeEquals(
-			'Conceived at T3CON10',
-			'customColor',
-			$this->subject
-		);
-	}
+        $this->assertAttributeEquals(
+            'Conceived at T3CON10',
+            'customColor',
+            $this->subject
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getCustomProfilReturnsInitialValueForInt()
-	{	}
+    /**
+     * @test
+     */
+    public function getCustomProfilReturnsInitialValueForInt()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function setCustomProfilForIntSetsCustomProfil()
-	{	}
+    /**
+     * @test
+     */
+    public function setCustomProfilForIntSetsCustomProfil()
+    {
+    }
 
-	/**
-	 * @test
-	 */
-	public function getChallengesReturnsInitialValueForChallenge()
-	{
-		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$this->assertEquals(
-			$newObjectStorage,
-			$this->subject->getChallenges()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getChallengesReturnsInitialValueForChallenge()
+    {
+        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->assertEquals(
+            $newObjectStorage,
+            $this->subject->getChallenges()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setChallengesForObjectStorageContainingChallengeSetsChallenges()
-	{
-		$challenge = new \ChaptedTeam\Chapted\Domain\Model\Challenge();
-		$objectStorageHoldingExactlyOneChallenges = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$objectStorageHoldingExactlyOneChallenges->attach($challenge);
-		$this->subject->setChallenges($objectStorageHoldingExactlyOneChallenges);
+    /**
+     * @test
+     */
+    public function setChallengesForObjectStorageContainingChallengeSetsChallenges()
+    {
+        $challenge = new \ChaptedTeam\Chapted\Domain\Model\Challenge();
+        $objectStorageHoldingExactlyOneChallenges = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorageHoldingExactlyOneChallenges->attach($challenge);
+        $this->subject->setChallenges($objectStorageHoldingExactlyOneChallenges);
 
-		$this->assertAttributeEquals(
-			$objectStorageHoldingExactlyOneChallenges,
-			'challenges',
-			$this->subject
-		);
-	}
+        $this->assertAttributeEquals(
+            $objectStorageHoldingExactlyOneChallenges,
+            'challenges',
+            $this->subject
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function addChallengeToObjectStorageHoldingChallenges()
-	{
-		$challenge = new \ChaptedTeam\Chapted\Domain\Model\Challenge();
-		$challengesObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
-		$challengesObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($challenge));
-		$this->inject($this->subject, 'challenges', $challengesObjectStorageMock);
+    /**
+     * @test
+     */
+    public function addChallengeToObjectStorageHoldingChallenges()
+    {
+        $challenge = new \ChaptedTeam\Chapted\Domain\Model\Challenge();
+        $challengesObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['attach'], [], '', false);
+        $challengesObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($challenge));
+        $this->inject($this->subject, 'challenges', $challengesObjectStorageMock);
 
-		$this->subject->addChallenge($challenge);
-	}
+        $this->subject->addChallenge($challenge);
+    }
 
-	/**
-	 * @test
-	 */
-	public function removeChallengeFromObjectStorageHoldingChallenges()
-	{
-		$challenge = new \ChaptedTeam\Chapted\Domain\Model\Challenge();
-		$challengesObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
-		$challengesObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($challenge));
-		$this->inject($this->subject, 'challenges', $challengesObjectStorageMock);
+    /**
+     * @test
+     */
+    public function removeChallengeFromObjectStorageHoldingChallenges()
+    {
+        $challenge = new \ChaptedTeam\Chapted\Domain\Model\Challenge();
+        $challengesObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['detach'], [], '', false);
+        $challengesObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($challenge));
+        $this->inject($this->subject, 'challenges', $challengesObjectStorageMock);
 
-		$this->subject->removeChallenge($challenge);
-
-	}
+        $this->subject->removeChallenge($challenge);
+    }
 }

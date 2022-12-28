@@ -1,11 +1,13 @@
 <?php
+
 namespace ChaptedTeam\Chapted\Tests\Unit\Controller;
+
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2017 Michael Blunck <mi.blunck@gmail.com>
  *  			Mirco Winkler <mirco.winkler@gmail.com>
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -33,108 +35,106 @@ namespace ChaptedTeam\Chapted\Tests\Unit\Controller;
  */
 class TableControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
+    /**
+     * @var \ChaptedTeam\Chapted\Controller\TableController
+     */
+    protected $subject = null;
 
-	/**
-	 * @var \ChaptedTeam\Chapted\Controller\TableController
-	 */
-	protected $subject = NULL;
+    public function setUp()
+    {
+        $this->subject = $this->getMock('ChaptedTeam\\Chapted\\Controller\\TableController', ['redirect', 'forward', 'addFlashMessage'], [], '', false);
+    }
 
-	public function setUp()
-	{
-		$this->subject = $this->getMock('ChaptedTeam\\Chapted\\Controller\\TableController', array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
-	}
+    public function tearDown()
+    {
+        unset($this->subject);
+    }
 
-	public function tearDown()
-	{
-		unset($this->subject);
-	}
+    /**
+     * @test
+     */
+    public function listActionFetchesAllTablesFromRepositoryAndAssignsThemToView()
+    {
+        $allTables = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
 
-	/**
-	 * @test
-	 */
-	public function listActionFetchesAllTablesFromRepositoryAndAssignsThemToView()
-	{
+        $tableRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\TableRepository', ['findAll'], [], '', false);
+        $tableRepository->expects($this->once())->method('findAll')->will($this->returnValue($allTables));
+        $this->inject($this->subject, 'tableRepository', $tableRepository);
 
-		$allTables = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view->expects($this->once())->method('assign')->with('tables', $allTables);
+        $this->inject($this->subject, 'view', $view);
 
-		$tableRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\TableRepository', array('findAll'), array(), '', FALSE);
-		$tableRepository->expects($this->once())->method('findAll')->will($this->returnValue($allTables));
-		$this->inject($this->subject, 'tableRepository', $tableRepository);
+        $this->subject->listAction();
+    }
 
-		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->once())->method('assign')->with('tables', $allTables);
-		$this->inject($this->subject, 'view', $view);
+    /**
+     * @test
+     */
+    public function showActionAssignsTheGivenTableToView()
+    {
+        $table = new \ChaptedTeam\Chapted\Domain\Model\Table();
 
-		$this->subject->listAction();
-	}
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $this->inject($this->subject, 'view', $view);
+        $view->expects($this->once())->method('assign')->with('table', $table);
 
-	/**
-	 * @test
-	 */
-	public function showActionAssignsTheGivenTableToView()
-	{
-		$table = new \ChaptedTeam\Chapted\Domain\Model\Table();
+        $this->subject->showAction($table);
+    }
 
-		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$this->inject($this->subject, 'view', $view);
-		$view->expects($this->once())->method('assign')->with('table', $table);
+    /**
+     * @test
+     */
+    public function createActionAddsTheGivenTableToTableRepository()
+    {
+        $table = new \ChaptedTeam\Chapted\Domain\Model\Table();
 
-		$this->subject->showAction($table);
-	}
+        $tableRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\TableRepository', ['add'], [], '', false);
+        $tableRepository->expects($this->once())->method('add')->with($table);
+        $this->inject($this->subject, 'tableRepository', $tableRepository);
 
-	/**
-	 * @test
-	 */
-	public function createActionAddsTheGivenTableToTableRepository()
-	{
-		$table = new \ChaptedTeam\Chapted\Domain\Model\Table();
+        $this->subject->createAction($table);
+    }
 
-		$tableRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\TableRepository', array('add'), array(), '', FALSE);
-		$tableRepository->expects($this->once())->method('add')->with($table);
-		$this->inject($this->subject, 'tableRepository', $tableRepository);
+    /**
+     * @test
+     */
+    public function editActionAssignsTheGivenTableToView()
+    {
+        $table = new \ChaptedTeam\Chapted\Domain\Model\Table();
 
-		$this->subject->createAction($table);
-	}
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $this->inject($this->subject, 'view', $view);
+        $view->expects($this->once())->method('assign')->with('table', $table);
 
-	/**
-	 * @test
-	 */
-	public function editActionAssignsTheGivenTableToView()
-	{
-		$table = new \ChaptedTeam\Chapted\Domain\Model\Table();
+        $this->subject->editAction($table);
+    }
 
-		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$this->inject($this->subject, 'view', $view);
-		$view->expects($this->once())->method('assign')->with('table', $table);
+    /**
+     * @test
+     */
+    public function updateActionUpdatesTheGivenTableInTableRepository()
+    {
+        $table = new \ChaptedTeam\Chapted\Domain\Model\Table();
 
-		$this->subject->editAction($table);
-	}
+        $tableRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\TableRepository', ['update'], [], '', false);
+        $tableRepository->expects($this->once())->method('update')->with($table);
+        $this->inject($this->subject, 'tableRepository', $tableRepository);
 
-	/**
-	 * @test
-	 */
-	public function updateActionUpdatesTheGivenTableInTableRepository()
-	{
-		$table = new \ChaptedTeam\Chapted\Domain\Model\Table();
+        $this->subject->updateAction($table);
+    }
 
-		$tableRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\TableRepository', array('update'), array(), '', FALSE);
-		$tableRepository->expects($this->once())->method('update')->with($table);
-		$this->inject($this->subject, 'tableRepository', $tableRepository);
+    /**
+     * @test
+     */
+    public function deleteActionRemovesTheGivenTableFromTableRepository()
+    {
+        $table = new \ChaptedTeam\Chapted\Domain\Model\Table();
 
-		$this->subject->updateAction($table);
-	}
+        $tableRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\TableRepository', ['remove'], [], '', false);
+        $tableRepository->expects($this->once())->method('remove')->with($table);
+        $this->inject($this->subject, 'tableRepository', $tableRepository);
 
-	/**
-	 * @test
-	 */
-	public function deleteActionRemovesTheGivenTableFromTableRepository()
-	{
-		$table = new \ChaptedTeam\Chapted\Domain\Model\Table();
-
-		$tableRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\TableRepository', array('remove'), array(), '', FALSE);
-		$tableRepository->expects($this->once())->method('remove')->with($table);
-		$this->inject($this->subject, 'tableRepository', $tableRepository);
-
-		$this->subject->deleteAction($table);
-	}
+        $this->subject->deleteAction($table);
+    }
 }

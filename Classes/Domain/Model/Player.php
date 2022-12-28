@@ -1,9 +1,11 @@
 <?php
+
 namespace ChaptedTeam\Chapted\Domain\Model;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -34,37 +36,34 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Player extends FrontendUser
 {
-
     /**
      * wins
-     * 
+     *
      * @var string
      */
     protected $wins = '';
-    
+
     /**
      * lose
-     * 
+     *
      * @var string
      */
     protected $lose = '';
-    
+
     /**
      * customColor
-     * 
+     *
      * @var string
      */
     protected $customColor = '';
-    
+
     /**
-    * normal
-    male
-    female
-    * 
-    * @var int
-    */
+     * normal
+     *
+     * @var int
+     */
     protected $customProfil = 0;
-    
+
     /**
      * challenges
      *
@@ -72,7 +71,7 @@ class Player extends FrontendUser
      * @Extbase\ORM\Cascade("remove")
      */
     protected $challenges;
-    
+
     /**
      * __construct
      */
@@ -81,30 +80,28 @@ class Player extends FrontendUser
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
     }
-    
+
     /**
      * Initializes all ObjectStorage properties
      * Do not modify this method!
      * It will be rewritten on each save in the extension builder
      * You may modify the constructor of this class instead
-     * 
-     * @return void
      */
     protected function initStorageObjects()
     {
         $this->challenges = new ObjectStorage();
     }
-    
+
     /**
      * Returns the wins
-     * 
+     *
      * @return string $wins
      */
     public function getWins()
     {
         return $this->wins;
     }
-    
+
     /**
      * Sets the wins
      */
@@ -112,17 +109,17 @@ class Player extends FrontendUser
     {
         $this->wins = $wins;
     }
-    
+
     /**
      * Returns the lose
-     * 
+     *
      * @return string $lose
      */
     public function getLose()
     {
         return $this->lose;
     }
-    
+
     /**
      * Sets the lose
      */
@@ -130,17 +127,17 @@ class Player extends FrontendUser
     {
         $this->lose = $lose;
     }
-    
+
     /**
      * Returns the customColor
-     * 
+     *
      * @return string $customColor
      */
     public function getCustomColor()
     {
         return $this->customColor;
     }
-    
+
     /**
      * Sets the customColor
      */
@@ -148,17 +145,17 @@ class Player extends FrontendUser
     {
         $this->customColor = $customColor;
     }
-    
+
     /**
      * Returns the customProfil
-     * 
+     *
      * @return int $customProfil
      */
     public function getCustomProfil()
     {
         return $this->customProfil;
     }
-    
+
     /**
      * Sets the customProfil
      */
@@ -166,7 +163,7 @@ class Player extends FrontendUser
     {
         $this->customProfil = $customProfil;
     }
-    
+
     /**
      * Adds a Challenge
      */
@@ -174,7 +171,7 @@ class Player extends FrontendUser
     {
         $this->challenges->attach($challenge);
     }
-    
+
     /**
      * Removes a Challenge
      *
@@ -184,7 +181,7 @@ class Player extends FrontendUser
     {
         $this->challenges->detach($challenge);
     }
-    
+
     /**
      * Returns the challenges
      *
@@ -194,7 +191,7 @@ class Player extends FrontendUser
     {
         return $this->challenges;
     }
-    
+
     /**
      * Sets the challenges
      *
@@ -204,5 +201,4 @@ class Player extends FrontendUser
     {
         $this->challenges = $objectStorage;
     }
-
 }

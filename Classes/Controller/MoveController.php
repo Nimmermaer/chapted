@@ -1,12 +1,14 @@
 <?php
+
 namespace ChaptedTeam\Chapted\Controller;
 
-use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use ChaptedTeam\Chapted\Domain\Model\Move;
 use ChaptedTeam\Chapted\Domain\Repository\MoveRepository;
 use Psr\Http\Message\ResponseInterface;
-use ChaptedTeam\Chapted\Domain\Model\Move;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -37,14 +39,13 @@ use TYPO3\CMS\Core\Messaging\AbstractMessage;
  */
 class MoveController extends ActionController
 {
-
     /**
      * moveRepository
      *
      * @var MoveRepository
      */
     protected $moveRepository;
-    
+
     /**
      * action list
      */
@@ -54,7 +55,7 @@ class MoveController extends ActionController
         $this->view->assign('moves', $moves);
         return $this->htmlResponse();
     }
-    
+
     /**
      * action show
      */
@@ -63,7 +64,7 @@ class MoveController extends ActionController
         $this->view->assign('move', $move);
         return $this->htmlResponse();
     }
-    
+
     /**
      * action new
      */
@@ -71,7 +72,7 @@ class MoveController extends ActionController
     {
         return $this->htmlResponse();
     }
-    
+
     /**
      * action create
      */
@@ -81,7 +82,7 @@ class MoveController extends ActionController
         $this->moveRepository->add($newMove);
         $this->redirect('list');
     }
-    
+
     /**
      * action edit
      *
@@ -92,7 +93,7 @@ class MoveController extends ActionController
         $this->view->assign('move', $move);
         return $this->htmlResponse();
     }
-    
+
     /**
      * action update
      */
@@ -102,7 +103,7 @@ class MoveController extends ActionController
         $this->moveRepository->update($move);
         $this->redirect('list');
     }
-    
+
     /**
      * action delete
      */
@@ -112,7 +113,7 @@ class MoveController extends ActionController
         $this->moveRepository->remove($move);
         $this->redirect('list');
     }
-    
+
     /**
      * action like
      */
@@ -120,7 +121,7 @@ class MoveController extends ActionController
     {
         return $this->htmlResponse();
     }
-    
+
     /**
      * action moreLikesmorePoints
      */
@@ -133,5 +134,4 @@ class MoveController extends ActionController
     {
         $this->moveRepository = $moveRepository;
     }
-
 }

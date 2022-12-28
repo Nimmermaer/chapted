@@ -1,12 +1,14 @@
 <?php
+
 namespace ChaptedTeam\Chapted\Controller;
 
-use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use ChaptedTeam\Chapted\Domain\Model\Challenge;
 use ChaptedTeam\Chapted\Domain\Repository\ChallengeRepository;
 use Psr\Http\Message\ResponseInterface;
-use ChaptedTeam\Chapted\Domain\Model\Challenge;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -37,14 +39,13 @@ use TYPO3\CMS\Core\Messaging\AbstractMessage;
  */
 class ChallengeController extends ActionController
 {
-
     /**
      * challengeRepository
      *
      * @var ChallengeRepository
      */
     protected $challengeRepository;
-    
+
     /**
      * action list
      */
@@ -54,7 +55,7 @@ class ChallengeController extends ActionController
         $this->view->assign('challenges', $challenges);
         return $this->htmlResponse();
     }
-    
+
     /**
      * action show
      */
@@ -63,7 +64,7 @@ class ChallengeController extends ActionController
         $this->view->assign('challenge', $challenge);
         return $this->htmlResponse();
     }
-    
+
     /**
      * action new
      */
@@ -71,7 +72,7 @@ class ChallengeController extends ActionController
     {
         return $this->htmlResponse();
     }
-    
+
     /**
      * action create
      */
@@ -81,7 +82,7 @@ class ChallengeController extends ActionController
         $this->challengeRepository->add($newChallenge);
         $this->redirect('list');
     }
-    
+
     /**
      * action edit
      *
@@ -92,7 +93,7 @@ class ChallengeController extends ActionController
         $this->view->assign('challenge', $challenge);
         return $this->htmlResponse();
     }
-    
+
     /**
      * action update
      */
@@ -102,7 +103,7 @@ class ChallengeController extends ActionController
         $this->challengeRepository->update($challenge);
         $this->redirect('list');
     }
-    
+
     /**
      * action delete
      */
@@ -112,7 +113,7 @@ class ChallengeController extends ActionController
         $this->challengeRepository->remove($challenge);
         $this->redirect('list');
     }
-    
+
     /**
      * action sortingWithLike
      */
@@ -120,7 +121,7 @@ class ChallengeController extends ActionController
     {
         return $this->htmlResponse();
     }
-    
+
     /**
      * action showMoves
      */
@@ -128,7 +129,7 @@ class ChallengeController extends ActionController
     {
         return $this->htmlResponse();
     }
-    
+
     /**
      * action filter
      */
@@ -141,5 +142,4 @@ class ChallengeController extends ActionController
     {
         $this->challengeRepository = $challengeRepository;
     }
-
 }

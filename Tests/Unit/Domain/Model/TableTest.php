@@ -38,96 +38,96 @@ namespace ChaptedTeam\Chapted\Tests\Unit\Domain\Model;
  */
 class TableTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
-	/**
-	 * @var \ChaptedTeam\Chapted\Domain\Model\Table
-	 */
-	protected $subject = NULL;
+    /**
+     * @var \ChaptedTeam\Chapted\Domain\Model\Table
+     */
+    protected $subject = null;
 
-	public function setUp()
-	{
-		$this->subject = new \ChaptedTeam\Chapted\Domain\Model\Table();
-	}
+    public function setUp()
+    {
+        $this->subject = new \ChaptedTeam\Chapted\Domain\Model\Table();
+    }
 
-	public function tearDown()
-	{
-		unset($this->subject);
-	}
+    public function tearDown()
+    {
+        unset($this->subject);
+    }
 
-	/**
-	 * @test
-	 */
-	public function getMonthReturnsInitialValueForDateTime()
-	{
-		$this->assertEquals(
-			NULL,
-			$this->subject->getMonth()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getMonthReturnsInitialValueForDateTime()
+    {
+        $this->assertEquals(
+            null,
+            $this->subject->getMonth()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setMonthForDateTimeSetsMonth()
-	{
-		$dateTimeFixture = new \DateTime();
-		$this->subject->setMonth($dateTimeFixture);
+    /**
+     * @test
+     */
+    public function setMonthForDateTimeSetsMonth()
+    {
+        $dateTimeFixture = new \DateTime();
+        $this->subject->setMonth($dateTimeFixture);
 
-		$this->assertAttributeEquals(
-			$dateTimeFixture,
-			'month',
-			$this->subject
-		);
-	}
+        $this->assertAttributeEquals(
+            $dateTimeFixture,
+            'month',
+            $this->subject
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getYearReturnsInitialValueForDateTime()
-	{
-		$this->assertEquals(
-			NULL,
-			$this->subject->getYear()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getYearReturnsInitialValueForDateTime()
+    {
+        $this->assertEquals(
+            null,
+            $this->subject->getYear()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setYearForDateTimeSetsYear()
-	{
-		$dateTimeFixture = new \DateTime();
-		$this->subject->setYear($dateTimeFixture);
+    /**
+     * @test
+     */
+    public function setYearForDateTimeSetsYear()
+    {
+        $dateTimeFixture = new \DateTime();
+        $this->subject->setYear($dateTimeFixture);
 
-		$this->assertAttributeEquals(
-			$dateTimeFixture,
-			'year',
-			$this->subject
-		);
-	}
+        $this->assertAttributeEquals(
+            $dateTimeFixture,
+            'year',
+            $this->subject
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function getChallengesReturnsInitialValueForChallenge()
-	{
-		$this->assertEquals(
-			NULL,
-			$this->subject->getChallenges()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getChallengesReturnsInitialValueForChallenge()
+    {
+        $this->assertEquals(
+            null,
+            $this->subject->getChallenges()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setChallengesForChallengeSetsChallenges()
-	{
-		$challengesFixture = new \ChaptedTeam\Chapted\Domain\Model\Challenge();
-		$this->subject->setChallenges($challengesFixture);
+    /**
+     * @test
+     */
+    public function setChallengesForChallengeSetsChallenges()
+    {
+        $challengesFixture = new \ChaptedTeam\Chapted\Domain\Model\Challenge();
+        $this->subject->setChallenges($challengesFixture);
 
-		$this->assertAttributeEquals(
-			$challengesFixture,
-			'challenges',
-			$this->subject
-		);
-	}
+        $this->assertAttributeEquals(
+            $challengesFixture,
+            'challenges',
+            $this->subject
+        );
+    }
 }

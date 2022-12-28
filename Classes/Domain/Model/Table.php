@@ -1,7 +1,9 @@
 <?php
+
 namespace ChaptedTeam\Chapted\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -32,38 +34,37 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class Table extends AbstractEntity
 {
-
     /**
      * month
-     * 
+     *
      * @var \DateTime
      */
     protected $month;
-    
+
     /**
      * year
-     * 
+     *
      * @var \DateTime
      */
     protected $year;
-    
+
     /**
      * challenges
      *
      * @var Challenge
      */
     protected $challenges;
-    
+
     /**
      * Returns the month
-     * 
+     *
      * @return \DateTime $month
      */
     public function getMonth()
     {
         return $this->month;
     }
-    
+
     /**
      * Sets the month
      */
@@ -71,17 +72,17 @@ class Table extends AbstractEntity
     {
         $this->month = $dateTime;
     }
-    
+
     /**
      * Returns the year
-     * 
+     *
      * @return \DateTime $year
      */
     public function getYear()
     {
         return $this->year;
     }
-    
+
     /**
      * Sets the year
      */
@@ -89,7 +90,7 @@ class Table extends AbstractEntity
     {
         $this->year = $dateTime;
     }
-    
+
     /**
      * Returns the challenges
      *
@@ -99,7 +100,7 @@ class Table extends AbstractEntity
     {
         return $this->challenges;
     }
-    
+
     /**
      * Sets the challenges
      */
@@ -107,5 +108,4 @@ class Table extends AbstractEntity
     {
         $this->challenges = $challenge;
     }
-
 }

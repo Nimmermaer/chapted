@@ -1,11 +1,13 @@
 <?php
+
 namespace ChaptedTeam\Chapted\Tests\Unit\Controller;
+
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2017 Michael Blunck <mi.blunck@gmail.com>
  *  			Mirco Winkler <mirco.winkler@gmail.com>
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -33,108 +35,106 @@ namespace ChaptedTeam\Chapted\Tests\Unit\Controller;
  */
 class PlayerControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 {
+    /**
+     * @var \ChaptedTeam\Chapted\Controller\PlayerController
+     */
+    protected $subject = null;
 
-	/**
-	 * @var \ChaptedTeam\Chapted\Controller\PlayerController
-	 */
-	protected $subject = NULL;
+    public function setUp()
+    {
+        $this->subject = $this->getMock('ChaptedTeam\\Chapted\\Controller\\PlayerController', ['redirect', 'forward', 'addFlashMessage'], [], '', false);
+    }
 
-	public function setUp()
-	{
-		$this->subject = $this->getMock('ChaptedTeam\\Chapted\\Controller\\PlayerController', array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
-	}
+    public function tearDown()
+    {
+        unset($this->subject);
+    }
 
-	public function tearDown()
-	{
-		unset($this->subject);
-	}
+    /**
+     * @test
+     */
+    public function listActionFetchesAllPlayersFromRepositoryAndAssignsThemToView()
+    {
+        $allPlayers = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
 
-	/**
-	 * @test
-	 */
-	public function listActionFetchesAllPlayersFromRepositoryAndAssignsThemToView()
-	{
+        $playerRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\PlayerRepository', ['findAll'], [], '', false);
+        $playerRepository->expects($this->once())->method('findAll')->will($this->returnValue($allPlayers));
+        $this->inject($this->subject, 'playerRepository', $playerRepository);
 
-		$allPlayers = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view->expects($this->once())->method('assign')->with('players', $allPlayers);
+        $this->inject($this->subject, 'view', $view);
 
-		$playerRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\PlayerRepository', array('findAll'), array(), '', FALSE);
-		$playerRepository->expects($this->once())->method('findAll')->will($this->returnValue($allPlayers));
-		$this->inject($this->subject, 'playerRepository', $playerRepository);
+        $this->subject->listAction();
+    }
 
-		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->once())->method('assign')->with('players', $allPlayers);
-		$this->inject($this->subject, 'view', $view);
+    /**
+     * @test
+     */
+    public function showActionAssignsTheGivenPlayerToView()
+    {
+        $player = new \ChaptedTeam\Chapted\Domain\Model\Player();
 
-		$this->subject->listAction();
-	}
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $this->inject($this->subject, 'view', $view);
+        $view->expects($this->once())->method('assign')->with('player', $player);
 
-	/**
-	 * @test
-	 */
-	public function showActionAssignsTheGivenPlayerToView()
-	{
-		$player = new \ChaptedTeam\Chapted\Domain\Model\Player();
+        $this->subject->showAction($player);
+    }
 
-		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$this->inject($this->subject, 'view', $view);
-		$view->expects($this->once())->method('assign')->with('player', $player);
+    /**
+     * @test
+     */
+    public function createActionAddsTheGivenPlayerToPlayerRepository()
+    {
+        $player = new \ChaptedTeam\Chapted\Domain\Model\Player();
 
-		$this->subject->showAction($player);
-	}
+        $playerRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\PlayerRepository', ['add'], [], '', false);
+        $playerRepository->expects($this->once())->method('add')->with($player);
+        $this->inject($this->subject, 'playerRepository', $playerRepository);
 
-	/**
-	 * @test
-	 */
-	public function createActionAddsTheGivenPlayerToPlayerRepository()
-	{
-		$player = new \ChaptedTeam\Chapted\Domain\Model\Player();
+        $this->subject->createAction($player);
+    }
 
-		$playerRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\PlayerRepository', array('add'), array(), '', FALSE);
-		$playerRepository->expects($this->once())->method('add')->with($player);
-		$this->inject($this->subject, 'playerRepository', $playerRepository);
+    /**
+     * @test
+     */
+    public function editActionAssignsTheGivenPlayerToView()
+    {
+        $player = new \ChaptedTeam\Chapted\Domain\Model\Player();
 
-		$this->subject->createAction($player);
-	}
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $this->inject($this->subject, 'view', $view);
+        $view->expects($this->once())->method('assign')->with('player', $player);
 
-	/**
-	 * @test
-	 */
-	public function editActionAssignsTheGivenPlayerToView()
-	{
-		$player = new \ChaptedTeam\Chapted\Domain\Model\Player();
+        $this->subject->editAction($player);
+    }
 
-		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$this->inject($this->subject, 'view', $view);
-		$view->expects($this->once())->method('assign')->with('player', $player);
+    /**
+     * @test
+     */
+    public function updateActionUpdatesTheGivenPlayerInPlayerRepository()
+    {
+        $player = new \ChaptedTeam\Chapted\Domain\Model\Player();
 
-		$this->subject->editAction($player);
-	}
+        $playerRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\PlayerRepository', ['update'], [], '', false);
+        $playerRepository->expects($this->once())->method('update')->with($player);
+        $this->inject($this->subject, 'playerRepository', $playerRepository);
 
-	/**
-	 * @test
-	 */
-	public function updateActionUpdatesTheGivenPlayerInPlayerRepository()
-	{
-		$player = new \ChaptedTeam\Chapted\Domain\Model\Player();
+        $this->subject->updateAction($player);
+    }
 
-		$playerRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\PlayerRepository', array('update'), array(), '', FALSE);
-		$playerRepository->expects($this->once())->method('update')->with($player);
-		$this->inject($this->subject, 'playerRepository', $playerRepository);
+    /**
+     * @test
+     */
+    public function deleteActionRemovesTheGivenPlayerFromPlayerRepository()
+    {
+        $player = new \ChaptedTeam\Chapted\Domain\Model\Player();
 
-		$this->subject->updateAction($player);
-	}
+        $playerRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\PlayerRepository', ['remove'], [], '', false);
+        $playerRepository->expects($this->once())->method('remove')->with($player);
+        $this->inject($this->subject, 'playerRepository', $playerRepository);
 
-	/**
-	 * @test
-	 */
-	public function deleteActionRemovesTheGivenPlayerFromPlayerRepository()
-	{
-		$player = new \ChaptedTeam\Chapted\Domain\Model\Player();
-
-		$playerRepository = $this->getMock('ChaptedTeam\\Chapted\\Domain\\Repository\\PlayerRepository', array('remove'), array(), '', FALSE);
-		$playerRepository->expects($this->once())->method('remove')->with($player);
-		$this->inject($this->subject, 'playerRepository', $playerRepository);
-
-		$this->subject->deleteAction($player);
-	}
+        $this->subject->deleteAction($player);
+    }
 }

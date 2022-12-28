@@ -1,10 +1,12 @@
 <?php
+
 namespace ChaptedTeam\Chapted\Domain\Model;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+
 /***************************************************************
  *
  *  Copyright notice
@@ -35,42 +37,41 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Move extends AbstractEntity
 {
-
     /**
      * media
      *
      * @var FileReference
      */
     protected $media;
-    
+
     /**
      * description
-     * 
+     *
      * @var string
      */
     protected $description = '';
-    
+
     /**
      * point
-     * 
+     *
      * @var int
      */
     protected $point = 0;
-    
+
     /**
      * field
-     * 
+     *
      * @var int
      */
     protected $field = 0;
-    
+
     /**
      * likeMove
-     * 
+     *
      * @var int
      */
     protected $likeMove = 0;
-    
+
     /**
      * player
      *
@@ -78,7 +79,7 @@ class Move extends AbstractEntity
      * @Extbase\ORM\Cascade("remove")
      */
     protected $player;
-    
+
     /**
      * __construct
      */
@@ -87,20 +88,18 @@ class Move extends AbstractEntity
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
     }
-    
+
     /**
      * Initializes all ObjectStorage properties
      * Do not modify this method!
      * It will be rewritten on each save in the extension builder
      * You may modify the constructor of this class instead
-     * 
-     * @return void
      */
     protected function initStorageObjects()
     {
         $this->player = new ObjectStorage();
     }
-    
+
     /**
      * Returns the media
      *
@@ -110,7 +109,7 @@ class Move extends AbstractEntity
     {
         return $this->media;
     }
-    
+
     /**
      * Sets the media
      */
@@ -118,17 +117,17 @@ class Move extends AbstractEntity
     {
         $this->media = $fileReference;
     }
-    
+
     /**
      * Returns the description
-     * 
+     *
      * @return string $description
      */
     public function getDescription()
     {
         return $this->description;
     }
-    
+
     /**
      * Sets the description
      */
@@ -136,17 +135,17 @@ class Move extends AbstractEntity
     {
         $this->description = $description;
     }
-    
+
     /**
      * Returns the point
-     * 
+     *
      * @return int $point
      */
     public function getPoint()
     {
         return $this->point;
     }
-    
+
     /**
      * Sets the point
      *
@@ -156,17 +155,17 @@ class Move extends AbstractEntity
     {
         $this->point = $point;
     }
-    
+
     /**
      * Returns the field
-     * 
+     *
      * @return int $field
      */
     public function getField()
     {
         return $this->field;
     }
-    
+
     /**
      * Sets the field
      */
@@ -174,17 +173,17 @@ class Move extends AbstractEntity
     {
         $this->field = $field;
     }
-    
+
     /**
      * Returns the likeMove
-     * 
+     *
      * @return int $likeMove
      */
     public function getLikeMove()
     {
         return $this->likeMove;
     }
-    
+
     /**
      * Sets the likeMove
      */
@@ -192,7 +191,7 @@ class Move extends AbstractEntity
     {
         $this->likeMove = $likeMove;
     }
-    
+
     /**
      * Adds a Player
      */
@@ -200,7 +199,7 @@ class Move extends AbstractEntity
     {
         $this->player->attach($player);
     }
-    
+
     /**
      * Removes a Player
      *
@@ -210,7 +209,7 @@ class Move extends AbstractEntity
     {
         $this->player->detach($player);
     }
-    
+
     /**
      * Returns the player
      *
@@ -220,7 +219,7 @@ class Move extends AbstractEntity
     {
         return $this->player;
     }
-    
+
     /**
      * Sets the player
      *
@@ -230,5 +229,4 @@ class Move extends AbstractEntity
     {
         $this->player = $objectStorage;
     }
-
 }
