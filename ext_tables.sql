@@ -3,7 +3,6 @@
 #
 CREATE TABLE fe_users
 (
-
     move            int(11) unsigned DEFAULT '0' NOT NULL,
     challenge       int(11) unsigned DEFAULT '0' NOT NULL,
     wins            varchar(255) DEFAULT '' NOT NULL,
@@ -20,7 +19,7 @@ CREATE TABLE fe_users
 CREATE TABLE tx_chapted_domain_model_move
 (
     challenge   int(11) unsigned DEFAULT '0' NOT NULL,
-    media       int(11) unsigned NOT NULL default '0',
+    media       tinytext,
     description text NOT NULL,
     point       int(11) DEFAULT '0' NOT NULL,
     field       int(11) DEFAULT '0' NOT NULL,

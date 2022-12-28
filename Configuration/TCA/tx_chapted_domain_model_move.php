@@ -6,7 +6,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:chapted/Resources/Private/Language/locallang_db.xlf:tx_chapted_domain_model_move',
-        'label' => 'media',
+        'label' => 'description',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'security' => [
@@ -22,17 +22,15 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'media,description,point,field,like_move,player,',
-        'iconfile' => 'EXT:chapted/Resources/Public/Icons/move.svg',
+        'typeicon_classes' => [
+            'default' => 'status-user-frontend',
+        ],
+        'useColumnsForDefaultValues' => 'hidden',
+        'searchFields' => 'media,description,point,field,like_move,player',
     ],
     'types' => [
-        '1' => [
-            'showitem' => 'sys_language_uid,--palette--,l10n_parent,l10n_diffsource,hidden,--palette--;;1,media,description,--palette--,point,field,like_move,player,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,starttime,endtime',
-        ],
-    ],
-    'palettes' => [
-        '1' => [
-            'showitem' => '',
+        '0' => [
+            'showitem' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,description,point,media,field,like_move,player,--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,starttime,endtime',
         ],
     ],
     'columns' => [
@@ -114,53 +112,6 @@ return [
                 ],
             ],
         ],
-        'media' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:chapted/Resources/Private/Language/locallang_db.xlf:tx_chapted_domain_model_move.media',
-            'config' => ExtensionManagementUtility::getFileFieldTCAConfig(
-                'media',
-                [
-                    'appearance' => [
-                        'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:media.addFileReference',
-                    ],
-                    'maxitems' => 1,
-                    'overrideChildTca' => [
-                        'types' => [
-                            '0' => [
-                                'showitem' => '
-							--palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette',
-                            ],
-                            File::FILETYPE_TEXT => [
-                                'showitem' => '
-							--palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette',
-                            ],
-                            File::FILETYPE_IMAGE => [
-                                'showitem' => '
-							--palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette',
-                            ],
-                            File::FILETYPE_AUDIO => [
-                                'showitem' => '
-							--palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette',
-                            ],
-                            File::FILETYPE_VIDEO => [
-                                'showitem' => '
-							--palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette',
-                            ],
-                            File::FILETYPE_APPLICATION => [
-                                'showitem' => '
-							--palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette',
-                            ],
-                        ],
-                    ],
-                ]
-            ),
-        ],
         'description' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:chapted/Resources/Private/Language/locallang_db.xlf:tx_chapted_domain_model_move.description',
@@ -177,6 +128,13 @@ return [
                         ],
                     ],
                 ],
+            ],
+        ],
+        'media' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.image',
+            'config' => [
+                'type' => 'file',
             ],
         ],
         'point' => [
