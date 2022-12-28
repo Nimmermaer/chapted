@@ -1,0 +1,23 @@
+{
+  "name": "chaptedteam/chapted",
+  "type": "typo3-cms-extension",
+  "description": "",
+  "homepage": "https://www.chapted.com",
+  "license": [
+    "GPL-2.0-or-later"
+  ],
+  "version": "1.0.0",
+  "require": {
+    "typo3/cms-core": "^12"
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "chapted"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "ChaptedTeam\\Chapted\\": "Classes/"
+    }
+  }
+}

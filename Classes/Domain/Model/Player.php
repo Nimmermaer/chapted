@@ -3,7 +3,6 @@
 namespace ChaptedTeam\Chapted\Domain\Model;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /***************************************************************
@@ -34,7 +33,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /**
  * Player
  */
-class Player extends FrontendUser
+class Player
 {
     /**
      * wins
