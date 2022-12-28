@@ -1,6 +1,9 @@
 <?php
 namespace ChaptedTeam\Chapted\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /***************************************************************
  *
  *  Copyright notice
@@ -26,11 +29,10 @@ namespace ChaptedTeam\Chapted\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Player
  */
-class Player extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
+class Player extends FrontendUser
 {
 
     /**
@@ -65,11 +67,11 @@ class Player extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     
     /**
      * challenges
-     * 
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ChaptedTeam\Chapted\Domain\Model\Challenge>
-     * @cascade remove
+     *
+     * @var ObjectStorage<Challenge>
+     * @Extbase\ORM\Cascade("remove")
      */
-    protected $challenges = null;
+    protected $challenges;
     
     /**
      * __construct
@@ -90,7 +92,7 @@ class Player extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      */
     protected function initStorageObjects()
     {
-        $this->challenges = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->challenges = new ObjectStorage();
     }
     
     /**
@@ -105,11 +107,8 @@ class Player extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     
     /**
      * Sets the wins
-     * 
-     * @param string $wins
-     * @return void
      */
-    public function setWins($wins)
+    public function setWins(string $wins): void
     {
         $this->wins = $wins;
     }
@@ -126,11 +125,8 @@ class Player extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     
     /**
      * Sets the lose
-     * 
-     * @param string $lose
-     * @return void
      */
-    public function setLose($lose)
+    public function setLose(string $lose): void
     {
         $this->lose = $lose;
     }
@@ -147,11 +143,8 @@ class Player extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     
     /**
      * Sets the customColor
-     * 
-     * @param string $customColor
-     * @return void
      */
-    public function setCustomColor($customColor)
+    public function setCustomColor(string $customColor): void
     {
         $this->customColor = $customColor;
     }
@@ -168,41 +161,34 @@ class Player extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     
     /**
      * Sets the customProfil
-     * 
-     * @param int $customProfil
-     * @return void
      */
-    public function setCustomProfil($customProfil)
+    public function setCustomProfil(int $customProfil): void
     {
         $this->customProfil = $customProfil;
     }
     
     /**
      * Adds a Challenge
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Challenge $challenge
-     * @return void
      */
-    public function addChallenge(\ChaptedTeam\Chapted\Domain\Model\Challenge $challenge)
+    public function addChallenge(Challenge $challenge): void
     {
         $this->challenges->attach($challenge);
     }
     
     /**
      * Removes a Challenge
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Challenge $challengeToRemove The Challenge to be removed
-     * @return void
+     *
+     * @param Challenge $challenge The Challenge to be removed
      */
-    public function removeChallenge(\ChaptedTeam\Chapted\Domain\Model\Challenge $challengeToRemove)
+    public function removeChallenge(Challenge $challenge): void
     {
-        $this->challenges->detach($challengeToRemove);
+        $this->challenges->detach($challenge);
     }
     
     /**
      * Returns the challenges
-     * 
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ChaptedTeam\Chapted\Domain\Model\Challenge> $challenges
+     *
+     * @return ObjectStorage<Challenge> $challenges
      */
     public function getChallenges()
     {
@@ -211,13 +197,12 @@ class Player extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
     
     /**
      * Sets the challenges
-     * 
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ChaptedTeam\Chapted\Domain\Model\Challenge> $challenges
-     * @return void
+     *
+     * @param ObjectStorage<Challenge> $objectStorage
      */
-    public function setChallenges(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $challenges)
+    public function setChallenges(ObjectStorage $objectStorage): void
     {
-        $this->challenges = $challenges;
+        $this->challenges = $objectStorage;
     }
 
 }

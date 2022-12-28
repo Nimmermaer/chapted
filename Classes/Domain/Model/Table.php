@@ -1,6 +1,7 @@
 <?php
 namespace ChaptedTeam\Chapted\Domain\Model;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /***************************************************************
  *
  *  Copyright notice
@@ -26,11 +27,10 @@ namespace ChaptedTeam\Chapted\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Table
  */
-class Table extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Table extends AbstractEntity
 {
 
     /**
@@ -38,21 +38,21 @@ class Table extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * 
      * @var \DateTime
      */
-    protected $month = null;
+    protected $month;
     
     /**
      * year
      * 
      * @var \DateTime
      */
-    protected $year = null;
+    protected $year;
     
     /**
      * challenges
-     * 
-     * @var \ChaptedTeam\Chapted\Domain\Model\Challenge
+     *
+     * @var Challenge
      */
-    protected $challenges = null;
+    protected $challenges;
     
     /**
      * Returns the month
@@ -66,13 +66,10 @@ class Table extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the month
-     * 
-     * @param \DateTime $month
-     * @return void
      */
-    public function setMonth(\DateTime $month)
+    public function setMonth(\DateTime $dateTime): void
     {
-        $this->month = $month;
+        $this->month = $dateTime;
     }
     
     /**
@@ -87,19 +84,16 @@ class Table extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the year
-     * 
-     * @param \DateTime $year
-     * @return void
      */
-    public function setYear(\DateTime $year)
+    public function setYear(\DateTime $dateTime): void
     {
-        $this->year = $year;
+        $this->year = $dateTime;
     }
     
     /**
      * Returns the challenges
-     * 
-     * @return \ChaptedTeam\Chapted\Domain\Model\Challenge $challenges
+     *
+     * @return Challenge $challenges
      */
     public function getChallenges()
     {
@@ -108,13 +102,10 @@ class Table extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the challenges
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Challenge $challenges
-     * @return void
      */
-    public function setChallenges(\ChaptedTeam\Chapted\Domain\Model\Challenge $challenges)
+    public function setChallenges(Challenge $challenge): void
     {
-        $this->challenges = $challenges;
+        $this->challenges = $challenge;
     }
 
 }

@@ -1,6 +1,7 @@
 <?php
 namespace ChaptedTeam\Chapted\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
 /***************************************************************
  *
  *  Copyright notice
@@ -26,11 +27,10 @@ namespace ChaptedTeam\Chapted\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * The repository for moves
  */
-class MoveRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class MoveRepository extends Repository
 {
 
     

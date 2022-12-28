@@ -1,6 +1,12 @@
 <?php
 namespace ChaptedTeam\Chapted\Controller;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use ChaptedTeam\Chapted\Domain\Repository\ChallengeRepository;
+use Psr\Http\Message\ResponseInterface;
+use ChaptedTeam\Chapted\Domain\Model\Challenge;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 /***************************************************************
  *
  *  Copyright notice
@@ -26,132 +32,114 @@ namespace ChaptedTeam\Chapted\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * ChallengeController
  */
-class ChallengeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class ChallengeController extends ActionController
 {
 
     /**
      * challengeRepository
-     * 
-     * @var \ChaptedTeam\Chapted\Domain\Repository\ChallengeRepository
-     * @inject
+     *
+     * @var ChallengeRepository
      */
-    protected $challengeRepository = NULL;
+    protected $challengeRepository;
     
     /**
      * action list
-     * 
-     * @return void
      */
-    public function listAction()
+    public function listAction(): ResponseInterface
     {
         $challenges = $this->challengeRepository->findAll();
         $this->view->assign('challenges', $challenges);
+        return $this->htmlResponse();
     }
     
     /**
      * action show
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Challenge $challenge
-     * @return void
      */
-    public function showAction(\ChaptedTeam\Chapted\Domain\Model\Challenge $challenge)
+    public function showAction(Challenge $challenge): ResponseInterface
     {
         $this->view->assign('challenge', $challenge);
+        return $this->htmlResponse();
     }
     
     /**
      * action new
-     * 
-     * @return void
      */
-    public function newAction()
+    public function newAction(): ResponseInterface
     {
-        
+        return $this->htmlResponse();
     }
     
     /**
      * action create
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Challenge $newChallenge
-     * @return void
      */
-    public function createAction(\ChaptedTeam\Chapted\Domain\Model\Challenge $newChallenge)
+    public function createAction(Challenge $newChallenge): void
     {
-        $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+        $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', AbstractMessage::ERROR);
         $this->challengeRepository->add($newChallenge);
         $this->redirect('list');
     }
     
     /**
      * action edit
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Challenge $challenge
-     * @ignorevalidation $challenge
-     * @return void
+     *
+     * @Extbase\IgnoreValidation("challenge")
      */
-    public function editAction(\ChaptedTeam\Chapted\Domain\Model\Challenge $challenge)
+    public function editAction(Challenge $challenge): ResponseInterface
     {
         $this->view->assign('challenge', $challenge);
+        return $this->htmlResponse();
     }
     
     /**
      * action update
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Challenge $challenge
-     * @return void
      */
-    public function updateAction(\ChaptedTeam\Chapted\Domain\Model\Challenge $challenge)
+    public function updateAction(Challenge $challenge): void
     {
-        $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+        $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', AbstractMessage::ERROR);
         $this->challengeRepository->update($challenge);
         $this->redirect('list');
     }
     
     /**
      * action delete
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Challenge $challenge
-     * @return void
      */
-    public function deleteAction(\ChaptedTeam\Chapted\Domain\Model\Challenge $challenge)
+    public function deleteAction(Challenge $challenge): void
     {
-        $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+        $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', AbstractMessage::ERROR);
         $this->challengeRepository->remove($challenge);
         $this->redirect('list');
     }
     
     /**
      * action sortingWithLike
-     * 
-     * @return void
      */
-    public function sortingWithLikeAction()
+    public function sortingWithLikeAction(): ResponseInterface
     {
-        
+        return $this->htmlResponse();
     }
     
     /**
      * action showMoves
-     * 
-     * @return void
      */
-    public function showMovesAction()
+    public function showMovesAction(): ResponseInterface
     {
-        
+        return $this->htmlResponse();
     }
     
     /**
      * action filter
-     * 
-     * @return void
      */
-    public function filterAction()
+    public function filterAction(): ResponseInterface
     {
-        
+        return $this->htmlResponse();
+    }
+
+    public function injectChallengeRepository(ChallengeRepository $challengeRepository): void
+    {
+        $this->challengeRepository = $challengeRepository;
     }
 
 }

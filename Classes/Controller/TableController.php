@@ -1,6 +1,12 @@
 <?php
 namespace ChaptedTeam\Chapted\Controller;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use ChaptedTeam\Chapted\Domain\Repository\TableRepository;
+use Psr\Http\Message\ResponseInterface;
+use ChaptedTeam\Chapted\Domain\Model\Table;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 /***************************************************************
  *
  *  Copyright notice
@@ -26,112 +32,98 @@ namespace ChaptedTeam\Chapted\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * TableController
  */
-class TableController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class TableController extends ActionController
 {
 
     /**
      * tableRepository
-     * 
-     * @var \ChaptedTeam\Chapted\Domain\Repository\TableRepository
-     * @inject
+     *
+     * @var TableRepository
      */
-    protected $tableRepository = NULL;
+    protected $tableRepository;
     
     /**
      * action list
-     * 
-     * @return void
      */
-    public function listAction()
+    public function listAction(): ResponseInterface
     {
         $tables = $this->tableRepository->findAll();
         $this->view->assign('tables', $tables);
+        return $this->htmlResponse();
     }
     
     /**
      * action show
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Table $table
-     * @return void
      */
-    public function showAction(\ChaptedTeam\Chapted\Domain\Model\Table $table)
+    public function showAction(Table $table): ResponseInterface
     {
         $this->view->assign('table', $table);
+        return $this->htmlResponse();
     }
     
     /**
      * action new
-     * 
-     * @return void
      */
-    public function newAction()
+    public function newAction(): ResponseInterface
     {
-        
+        return $this->htmlResponse();
     }
     
     /**
      * action create
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Table $newTable
-     * @return void
      */
-    public function createAction(\ChaptedTeam\Chapted\Domain\Model\Table $newTable)
+    public function createAction(Table $newTable): void
     {
-        $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+        $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', AbstractMessage::ERROR);
         $this->tableRepository->add($newTable);
         $this->redirect('list');
     }
     
     /**
      * action edit
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Table $table
-     * @ignorevalidation $table
-     * @return void
+     *
+     * @Extbase\IgnoreValidation("table")
      */
-    public function editAction(\ChaptedTeam\Chapted\Domain\Model\Table $table)
+    public function editAction(Table $table): ResponseInterface
     {
         $this->view->assign('table', $table);
+        return $this->htmlResponse();
     }
     
     /**
      * action update
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Table $table
-     * @return void
      */
-    public function updateAction(\ChaptedTeam\Chapted\Domain\Model\Table $table)
+    public function updateAction(Table $table): void
     {
-        $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+        $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', AbstractMessage::ERROR);
         $this->tableRepository->update($table);
         $this->redirect('list');
     }
     
     /**
      * action delete
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Table $table
-     * @return void
      */
-    public function deleteAction(\ChaptedTeam\Chapted\Domain\Model\Table $table)
+    public function deleteAction(Table $table): void
     {
-        $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+        $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', AbstractMessage::ERROR);
         $this->tableRepository->remove($table);
         $this->redirect('list');
     }
     
     /**
      * action filter
-     * 
-     * @return void
      */
-    public function filterAction()
+    public function filterAction(): ResponseInterface
     {
-        
+        return $this->htmlResponse();
+    }
+
+    public function injectTableRepository(TableRepository $tableRepository): void
+    {
+        $this->tableRepository = $tableRepository;
     }
 
 }

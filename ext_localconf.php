@@ -1,54 +1,33 @@
 <?php
-if (!defined('TYPO3_MODE')) {
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use ChaptedTeam\Chapted\Controller\TableController;
+use ChaptedTeam\Chapted\Controller\MoveController;
+use ChaptedTeam\Chapted\Controller\PlayerController;
+use ChaptedTeam\Chapted\Controller\ChallengeController;
+if (!defined('TYPO3')) {
 	die('Access denied.');
 }
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'ChaptedTeam.' . $_EXTKEY,
+ExtensionUtility::configurePlugin(
+	'Chapted',
 	'Table',
-	array(
-		'Table' => 'list, show, filter, new',
-		'Move' => 'like',
-		
-	),
+	[TableController::class => 'list, show, filter, new', MoveController::class => 'like'],
 	// non-cacheable actions
-	array(
-		'Table' => 'list, show, filter, new',
-		'Move' => 'like',
-		
-	)
+	[TableController::class => 'list, show, filter, new', MoveController::class => 'like']
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'ChaptedTeam.' . $_EXTKEY,
+ExtensionUtility::configurePlugin(
+	'Chapted',
 	'Profile',
-	array(
-		'Player' => 'show, edit, sendNotificationMail, sendInviteMail',
-		'Move' => 'delete',
-		
-	),
+	[PlayerController::class => 'show, edit, sendNotificationMail, sendInviteMail', MoveController::class => 'delete'],
 	// non-cacheable actions
-	array(
-		'Player' => 'show, edit, ',
-		'Move' => 'delete',
-		
-	)
+	[PlayerController::class => 'show, edit, ', MoveController::class => 'delete']
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'ChaptedTeam.' . $_EXTKEY,
+ExtensionUtility::configurePlugin(
+	'Chapted',
 	'Teaser',
-	array(
-		'Player' => 'list',
-		'Move' => 'list',
-		'Challenge' => 'list',
-		
-	),
+	[PlayerController::class => 'list', MoveController::class => 'list', ChallengeController::class => 'list'],
 	// non-cacheable actions
-	array(
-		'Player' => 'list',
-		'Move' => 'list',
-		'Challenge' => 'list',
-		
-	)
+	[PlayerController::class => 'list', MoveController::class => 'list', ChallengeController::class => 'list']
 );

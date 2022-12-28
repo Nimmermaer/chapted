@@ -1,6 +1,9 @@
 <?php
 namespace ChaptedTeam\Chapted\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /***************************************************************
  *
  *  Copyright notice
@@ -26,26 +29,25 @@ namespace ChaptedTeam\Chapted\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Challenge
  */
-class Challenge extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Challenge extends AbstractEntity
 {
 
     /**
      * title
-     * 
+     *
      * @var string
-     * @validate NotEmpty
+     * @Extbase\Validate("NotEmpty")
      */
     protected $title = '';
     
     /**
      * description
-     * 
+     *
      * @var string
-     * @validate NotEmpty
+     * @Extbase\Validate("NotEmpty")
      */
     protected $description = '';
     
@@ -93,19 +95,19 @@ class Challenge extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * moves
-     * 
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ChaptedTeam\Chapted\Domain\Model\Move>
-     * @cascade remove
+     *
+     * @var ObjectStorage<Move>
+     * @Extbase\ORM\Cascade("remove")
      */
-    protected $moves = null;
+    protected $moves;
     
     /**
      * owner
-     * 
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ChaptedTeam\Chapted\Domain\Model\Player>
-     * @cascade remove
+     *
+     * @var ObjectStorage<Player>
+     * @Extbase\ORM\Cascade("remove")
      */
-    protected $owner = null;
+    protected $owner;
     
     /**
      * __construct
@@ -126,8 +128,8 @@ class Challenge extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected function initStorageObjects()
     {
-        $this->moves = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->owner = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->moves = new ObjectStorage();
+        $this->owner = new ObjectStorage();
     }
     
     /**
@@ -142,11 +144,8 @@ class Challenge extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the title
-     * 
-     * @param string $title
-     * @return void
      */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
@@ -163,11 +162,8 @@ class Challenge extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the description
-     * 
-     * @param string $description
-     * @return void
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -184,11 +180,8 @@ class Challenge extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the reckoning
-     * 
-     * @param string $reckoning
-     * @return void
      */
-    public function setReckoning($reckoning)
+    public function setReckoning(string $reckoning): void
     {
         $this->reckoning = $reckoning;
     }
@@ -205,11 +198,8 @@ class Challenge extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the likes
-     * 
-     * @param int $likes
-     * @return void
      */
-    public function setLikes($likes)
+    public function setLikes(int $likes): void
     {
         $this->likes = $likes;
     }
@@ -226,11 +216,8 @@ class Challenge extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the winningPoint
-     * 
-     * @param string $winningPoint
-     * @return void
      */
-    public function setWinningPoint($winningPoint)
+    public function setWinningPoint(string $winningPoint): void
     {
         $this->winningPoint = $winningPoint;
     }
@@ -247,11 +234,8 @@ class Challenge extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the qrCode
-     * 
-     * @param string $qrCode
-     * @return void
      */
-    public function setQrCode($qrCode)
+    public function setQrCode(string $qrCode): void
     {
         $this->qrCode = $qrCode;
     }
@@ -268,11 +252,8 @@ class Challenge extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the latitude
-     * 
-     * @param string $latitude
-     * @return void
      */
-    public function setLatitude($latitude)
+    public function setLatitude(string $latitude): void
     {
         $this->latitude = $latitude;
     }
@@ -289,41 +270,34 @@ class Challenge extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the longitude
-     * 
-     * @param string $longitude
-     * @return void
      */
-    public function setLongitude($longitude)
+    public function setLongitude(string $longitude): void
     {
         $this->longitude = $longitude;
     }
     
     /**
      * Adds a Move
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Move $move
-     * @return void
      */
-    public function addMove(\ChaptedTeam\Chapted\Domain\Model\Move $move)
+    public function addMove(Move $move): void
     {
         $this->moves->attach($move);
     }
     
     /**
      * Removes a Move
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Move $moveToRemove The Move to be removed
-     * @return void
+     *
+     * @param Move $move The Move to be removed
      */
-    public function removeMove(\ChaptedTeam\Chapted\Domain\Model\Move $moveToRemove)
+    public function removeMove(Move $move): void
     {
-        $this->moves->detach($moveToRemove);
+        $this->moves->detach($move);
     }
     
     /**
      * Returns the moves
-     * 
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ChaptedTeam\Chapted\Domain\Model\Move> $moves
+     *
+     * @return ObjectStorage<Move> $moves
      */
     public function getMoves()
     {
@@ -332,41 +306,36 @@ class Challenge extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the moves
-     * 
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ChaptedTeam\Chapted\Domain\Model\Move> $moves
-     * @return void
+     *
+     * @param ObjectStorage<Move> $objectStorage
      */
-    public function setMoves(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $moves)
+    public function setMoves(ObjectStorage $objectStorage): void
     {
-        $this->moves = $moves;
+        $this->moves = $objectStorage;
     }
     
     /**
      * Adds a Player
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Player $owner
-     * @return void
      */
-    public function addOwner(\ChaptedTeam\Chapted\Domain\Model\Player $owner)
+    public function addOwner(Player $player): void
     {
-        $this->owner->attach($owner);
+        $this->owner->attach($player);
     }
     
     /**
      * Removes a Player
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Player $ownerToRemove The Player to be removed
-     * @return void
+     *
+     * @param Player $player The Player to be removed
      */
-    public function removeOwner(\ChaptedTeam\Chapted\Domain\Model\Player $ownerToRemove)
+    public function removeOwner(Player $player): void
     {
-        $this->owner->detach($ownerToRemove);
+        $this->owner->detach($player);
     }
     
     /**
      * Returns the owner
-     * 
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ChaptedTeam\Chapted\Domain\Model\Player> $owner
+     *
+     * @return ObjectStorage<Player> $owner
      */
     public function getOwner()
     {
@@ -375,13 +344,12 @@ class Challenge extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the owner
-     * 
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ChaptedTeam\Chapted\Domain\Model\Player> $owner
-     * @return void
+     *
+     * @param ObjectStorage<Player> $objectStorage
      */
-    public function setOwner(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $owner)
+    public function setOwner(ObjectStorage $objectStorage): void
     {
-        $this->owner = $owner;
+        $this->owner = $objectStorage;
     }
 
 }

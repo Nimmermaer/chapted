@@ -1,6 +1,12 @@
 <?php
 namespace ChaptedTeam\Chapted\Controller;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use ChaptedTeam\Chapted\Domain\Repository\PlayerRepository;
+use Psr\Http\Message\ResponseInterface;
+use ChaptedTeam\Chapted\Domain\Model\Player;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 /***************************************************************
  *
  *  Copyright notice
@@ -26,142 +32,122 @@ namespace ChaptedTeam\Chapted\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * PlayerController
  */
-class PlayerController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class PlayerController extends ActionController
 {
 
     /**
      * playerRepository
-     * 
-     * @var \ChaptedTeam\Chapted\Domain\Repository\PlayerRepository
-     * @inject
+     *
+     * @var PlayerRepository
      */
-    protected $playerRepository = NULL;
+    protected $playerRepository;
     
     /**
      * action list
-     * 
-     * @return void
      */
-    public function listAction()
+    public function listAction(): ResponseInterface
     {
         $players = $this->playerRepository->findAll();
         $this->view->assign('players', $players);
+        return $this->htmlResponse();
     }
     
     /**
      * action show
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Player $player
-     * @return void
      */
-    public function showAction(\ChaptedTeam\Chapted\Domain\Model\Player $player)
+    public function showAction(Player $player): ResponseInterface
     {
         $this->view->assign('player', $player);
+        return $this->htmlResponse();
     }
     
     /**
      * action new
-     * 
-     * @return void
      */
-    public function newAction()
+    public function newAction(): ResponseInterface
     {
-        
+        return $this->htmlResponse();
     }
     
     /**
      * action create
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Player $newPlayer
-     * @return void
      */
-    public function createAction(\ChaptedTeam\Chapted\Domain\Model\Player $newPlayer)
+    public function createAction(Player $newPlayer): void
     {
-        $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+        $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', AbstractMessage::ERROR);
         $this->playerRepository->add($newPlayer);
         $this->redirect('list');
     }
     
     /**
      * action edit
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Player $player
-     * @ignorevalidation $player
-     * @return void
+     *
+     * @Extbase\IgnoreValidation("player")
      */
-    public function editAction(\ChaptedTeam\Chapted\Domain\Model\Player $player)
+    public function editAction(Player $player): ResponseInterface
     {
         $this->view->assign('player', $player);
+        return $this->htmlResponse();
     }
     
     /**
      * action update
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Player $player
-     * @return void
      */
-    public function updateAction(\ChaptedTeam\Chapted\Domain\Model\Player $player)
+    public function updateAction(Player $player): void
     {
-        $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+        $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', AbstractMessage::ERROR);
         $this->playerRepository->update($player);
         $this->redirect('list');
     }
     
     /**
      * action delete
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Player $player
-     * @return void
      */
-    public function deleteAction(\ChaptedTeam\Chapted\Domain\Model\Player $player)
+    public function deleteAction(Player $player): void
     {
-        $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+        $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', AbstractMessage::ERROR);
         $this->playerRepository->remove($player);
         $this->redirect('list');
     }
     
     /**
      * action login
-     * 
-     * @return void
      */
-    public function loginAction()
+    public function loginAction(): ResponseInterface
     {
-        
+        return $this->htmlResponse();
     }
     
     /**
      * action maximumChallenges
-     * 
-     * @return void
      */
-    public function maximumChallengesAction()
+    public function maximumChallengesAction(): ResponseInterface
     {
-        
+        return $this->htmlResponse();
     }
     
     /**
      * action sendNotificationMail
-     * 
-     * @return void
      */
-    public function sendNotificationMailAction()
+    public function sendNotificationMailAction(): ResponseInterface
     {
-        
+        return $this->htmlResponse();
     }
     
     /**
      * action sendInviteMail
-     * 
-     * @return void
      */
-    public function sendInviteMailAction()
+    public function sendInviteMailAction(): ResponseInterface
     {
-        
+        return $this->htmlResponse();
+    }
+
+    public function injectPlayerRepository(PlayerRepository $playerRepository): void
+    {
+        $this->playerRepository = $playerRepository;
     }
 
 }

@@ -1,22 +1,27 @@
 <?php
-if (!defined('TYPO3_MODE')) {
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use ChaptedTeam\Chapted\Controller\ChallengeController;
+use ChaptedTeam\Chapted\Controller\PlayerController;
+use ChaptedTeam\Chapted\Controller\TableController;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+if (!defined('TYPO3')) {
 	die('Access denied.');
 }
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-	'ChaptedTeam.' . $_EXTKEY,
+ExtensionUtility::registerPlugin(
+	'Chapted',
 	'Table',
 	'Chapted Table '
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-	'ChaptedTeam.' . $_EXTKEY,
+ExtensionUtility::registerPlugin(
+	'Chapted',
 	'Profile',
 	'Profile'
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-	'ChaptedTeam.' . $_EXTKEY,
+ExtensionUtility::registerPlugin(
+	'Chapted',
 	'Teaser',
 	'Teaser'
 );
@@ -26,33 +31,24 @@ if (TYPO3_MODE === 'BE') {
 	/**
 	 * Registers a Backend Module
 	 */
-	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-		'ChaptedTeam.' . $_EXTKEY,
+	ExtensionUtility::registerModule(
+		'Chapted',
 		'web',	 // Make module a submodule of 'web'
 		'challenges',	// Submodule key
 		'',						// Position
-		array(
-			'Challenge' => 'list, show, filter, new, create',
-			'Player' => 'list, show, new',
-			'Table' => 'list, show, new',
-
-		),
-		array(
-			'access' => 'user,group',
-			'icon'   => 'EXT:' . $_EXTKEY . '/ext_icon.gif',
-			'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_challenges.xlf',
-		)
+		[ChallengeController::class => 'list, show, filter, new, create', PlayerController::class => 'list, show, new', TableController::class => 'list, show, new'],
+		['access' => 'user,group', 'icon'   => 'EXT:chapted/ext_icon.gif', 'labels' => 'LLL:EXT:chapted/Resources/Private/Language/locallang_challenges.xlf']
 	);
 
 }
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'chapted');
+ExtensionManagementUtility::addStaticFile('chapted', 'Configuration/TypoScript', 'chapted');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_chapted_domain_model_move', 'EXT:chapted/Resources/Private/Language/locallang_csh_tx_chapted_domain_model_move.xlf');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_chapted_domain_model_move');
+ExtensionManagementUtility::addLLrefForTCAdescr('tx_chapted_domain_model_move', 'EXT:chapted/Resources/Private/Language/locallang_csh_tx_chapted_domain_model_move.xlf');
+ExtensionManagementUtility::allowTableOnStandardPages('tx_chapted_domain_model_move');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_chapted_domain_model_challenge', 'EXT:chapted/Resources/Private/Language/locallang_csh_tx_chapted_domain_model_challenge.xlf');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_chapted_domain_model_challenge');
+ExtensionManagementUtility::addLLrefForTCAdescr('tx_chapted_domain_model_challenge', 'EXT:chapted/Resources/Private/Language/locallang_csh_tx_chapted_domain_model_challenge.xlf');
+ExtensionManagementUtility::allowTableOnStandardPages('tx_chapted_domain_model_challenge');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_chapted_domain_model_table', 'EXT:chapted/Resources/Private/Language/locallang_csh_tx_chapted_domain_model_table.xlf');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_chapted_domain_model_table');
+ExtensionManagementUtility::addLLrefForTCAdescr('tx_chapted_domain_model_table', 'EXT:chapted/Resources/Private/Language/locallang_csh_tx_chapted_domain_model_table.xlf');
+ExtensionManagementUtility::allowTableOnStandardPages('tx_chapted_domain_model_table');

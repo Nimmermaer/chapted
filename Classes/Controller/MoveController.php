@@ -1,6 +1,12 @@
 <?php
 namespace ChaptedTeam\Chapted\Controller;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use ChaptedTeam\Chapted\Domain\Repository\MoveRepository;
+use Psr\Http\Message\ResponseInterface;
+use ChaptedTeam\Chapted\Domain\Model\Move;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 /***************************************************************
  *
  *  Copyright notice
@@ -26,122 +32,106 @@ namespace ChaptedTeam\Chapted\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * MoveController
  */
-class MoveController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class MoveController extends ActionController
 {
 
     /**
      * moveRepository
-     * 
-     * @var \ChaptedTeam\Chapted\Domain\Repository\MoveRepository
-     * @inject
+     *
+     * @var MoveRepository
      */
-    protected $moveRepository = NULL;
+    protected $moveRepository;
     
     /**
      * action list
-     * 
-     * @return void
      */
-    public function listAction()
+    public function listAction(): ResponseInterface
     {
         $moves = $this->moveRepository->findAll();
         $this->view->assign('moves', $moves);
+        return $this->htmlResponse();
     }
     
     /**
      * action show
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Move $move
-     * @return void
      */
-    public function showAction(\ChaptedTeam\Chapted\Domain\Model\Move $move)
+    public function showAction(Move $move): ResponseInterface
     {
         $this->view->assign('move', $move);
+        return $this->htmlResponse();
     }
     
     /**
      * action new
-     * 
-     * @return void
      */
-    public function newAction()
+    public function newAction(): ResponseInterface
     {
-        
+        return $this->htmlResponse();
     }
     
     /**
      * action create
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Move $newMove
-     * @return void
      */
-    public function createAction(\ChaptedTeam\Chapted\Domain\Model\Move $newMove)
+    public function createAction(Move $newMove): void
     {
-        $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+        $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', AbstractMessage::ERROR);
         $this->moveRepository->add($newMove);
         $this->redirect('list');
     }
     
     /**
      * action edit
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Move $move
-     * @ignorevalidation $move
-     * @return void
+     *
+     * @Extbase\IgnoreValidation("move")
      */
-    public function editAction(\ChaptedTeam\Chapted\Domain\Model\Move $move)
+    public function editAction(Move $move): ResponseInterface
     {
         $this->view->assign('move', $move);
+        return $this->htmlResponse();
     }
     
     /**
      * action update
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Move $move
-     * @return void
      */
-    public function updateAction(\ChaptedTeam\Chapted\Domain\Model\Move $move)
+    public function updateAction(Move $move): void
     {
-        $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+        $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', AbstractMessage::ERROR);
         $this->moveRepository->update($move);
         $this->redirect('list');
     }
     
     /**
      * action delete
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Move $move
-     * @return void
      */
-    public function deleteAction(\ChaptedTeam\Chapted\Domain\Model\Move $move)
+    public function deleteAction(Move $move): void
     {
-        $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+        $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', AbstractMessage::ERROR);
         $this->moveRepository->remove($move);
         $this->redirect('list');
     }
     
     /**
      * action like
-     * 
-     * @return void
      */
-    public function likeAction()
+    public function likeAction(): ResponseInterface
     {
-        
+        return $this->htmlResponse();
     }
     
     /**
      * action moreLikesmorePoints
-     * 
-     * @return void
      */
-    public function moreLikesmorePointsAction()
+    public function moreLikesmorePointsAction(): ResponseInterface
     {
-        
+        return $this->htmlResponse();
+    }
+
+    public function injectMoveRepository(MoveRepository $moveRepository): void
+    {
+        $this->moveRepository = $moveRepository;
     }
 
 }

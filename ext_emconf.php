@@ -10,25 +10,4 @@
  * "version" and "dependencies" must not be touched!
  ***************************************************************/
 
-$EM_CONF[$_EXTKEY] = array(
-	'title' => 'chapted',
-	'description' => '',
-	'category' => 'plugin',
-	'author' => 'Michael Blunck, Mirco Winkler',
-	'author_email' => 'mi.blunck@gmail.com, mirco.winkler@gmail.com',
-	'state' => 'alpha',
-	'internal' => '',
-	'uploadfolder' => '1',
-	'createDirs' => '',
-	'clearCacheOnLoad' => 0,
-	'version' => '',
-	'constraints' => array(
-		'depends' => array(
-			'typo3' => '7.6.0-7.6.99',
-		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
-		),
-	),
-);
+$EM_CONF[$_EXTKEY] = ['title' => 'chapted', 'description' => '', 'category' => 'plugin', 'author' => 'Michael Blunck, Mirco Winkler', 'author_email' => 'mi.blunck@gmail.com, mirco.winkler@gmail.com', 'state' => 'alpha', 'version' => '', 'constraints' => ['depends' => ['typo3' => '7.6.0-7.6.99'], 'conflicts' => [], 'suggests' => []]];

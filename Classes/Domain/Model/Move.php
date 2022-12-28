@@ -1,6 +1,10 @@
 <?php
 namespace ChaptedTeam\Chapted\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /***************************************************************
  *
  *  Copyright notice
@@ -26,19 +30,18 @@ namespace ChaptedTeam\Chapted\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Move
  */
-class Move extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Move extends AbstractEntity
 {
 
     /**
      * media
-     * 
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     *
+     * @var FileReference
      */
-    protected $media = null;
+    protected $media;
     
     /**
      * description
@@ -70,11 +73,11 @@ class Move extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * player
-     * 
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ChaptedTeam\Chapted\Domain\Model\Player>
-     * @cascade remove
+     *
+     * @var ObjectStorage<Player>
+     * @Extbase\ORM\Cascade("remove")
      */
-    protected $player = null;
+    protected $player;
     
     /**
      * __construct
@@ -95,13 +98,13 @@ class Move extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected function initStorageObjects()
     {
-        $this->player = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->player = new ObjectStorage();
     }
     
     /**
      * Returns the media
-     * 
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $media
+     *
+     * @return FileReference $media
      */
     public function getMedia()
     {
@@ -110,13 +113,10 @@ class Move extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the media
-     * 
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $media
-     * @return void
      */
-    public function setMedia(\TYPO3\CMS\Extbase\Domain\Model\FileReference $media)
+    public function setMedia(FileReference $fileReference): void
     {
-        $this->media = $media;
+        $this->media = $fileReference;
     }
     
     /**
@@ -131,11 +131,8 @@ class Move extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the description
-     * 
-     * @param string $description
-     * @return void
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -152,11 +149,10 @@ class Move extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the point
-     * 
+     *
      * @param string $point
-     * @return void
      */
-    public function setPoint($point)
+    public function setPoint($point): void
     {
         $this->point = $point;
     }
@@ -173,11 +169,8 @@ class Move extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the field
-     * 
-     * @param int $field
-     * @return void
      */
-    public function setField($field)
+    public function setField(int $field): void
     {
         $this->field = $field;
     }
@@ -194,41 +187,34 @@ class Move extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the likeMove
-     * 
-     * @param int $likeMove
-     * @return void
      */
-    public function setLikeMove($likeMove)
+    public function setLikeMove(int $likeMove): void
     {
         $this->likeMove = $likeMove;
     }
     
     /**
      * Adds a Player
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Player $player
-     * @return void
      */
-    public function addPlayer(\ChaptedTeam\Chapted\Domain\Model\Player $player)
+    public function addPlayer(Player $player): void
     {
         $this->player->attach($player);
     }
     
     /**
      * Removes a Player
-     * 
-     * @param \ChaptedTeam\Chapted\Domain\Model\Player $playerToRemove The Player to be removed
-     * @return void
+     *
+     * @param Player $player The Player to be removed
      */
-    public function removePlayer(\ChaptedTeam\Chapted\Domain\Model\Player $playerToRemove)
+    public function removePlayer(Player $player): void
     {
-        $this->player->detach($playerToRemove);
+        $this->player->detach($player);
     }
     
     /**
      * Returns the player
-     * 
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ChaptedTeam\Chapted\Domain\Model\Player> $player
+     *
+     * @return ObjectStorage<Player> $player
      */
     public function getPlayer()
     {
@@ -237,13 +223,12 @@ class Move extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     
     /**
      * Sets the player
-     * 
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\ChaptedTeam\Chapted\Domain\Model\Player> $player
-     * @return void
+     *
+     * @param ObjectStorage<Player> $objectStorage
      */
-    public function setPlayer(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $player)
+    public function setPlayer(ObjectStorage $objectStorage): void
     {
-        $this->player = $player;
+        $this->player = $objectStorage;
     }
 
 }
