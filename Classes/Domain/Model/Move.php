@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ChaptedTeam\Chapted\Domain\Model;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
@@ -90,20 +92,9 @@ class Move extends AbstractEntity
     }
 
     /**
-     * Initializes all ObjectStorage properties
-     * Do not modify this method!
-     * It will be rewritten on each save in the extension builder
-     * You may modify the constructor of this class instead
-     */
-    protected function initStorageObjects()
-    {
-        $this->player = new ObjectStorage();
-    }
-
-    /**
      * Returns the media
      *
-     * @return FileReference $media
+     * @return FileReference
      */
     public function getMedia()
     {
@@ -121,7 +112,7 @@ class Move extends AbstractEntity
     /**
      * Returns the description
      *
-     * @return string $description
+     * @return string
      */
     public function getDescription()
     {
@@ -139,7 +130,7 @@ class Move extends AbstractEntity
     /**
      * Returns the point
      *
-     * @return int $point
+     * @return int
      */
     public function getPoint()
     {
@@ -159,7 +150,7 @@ class Move extends AbstractEntity
     /**
      * Returns the field
      *
-     * @return int $field
+     * @return int
      */
     public function getField()
     {
@@ -177,7 +168,7 @@ class Move extends AbstractEntity
     /**
      * Returns the likeMove
      *
-     * @return int $likeMove
+     * @return int
      */
     public function getLikeMove()
     {
@@ -228,5 +219,16 @@ class Move extends AbstractEntity
     public function setPlayer(ObjectStorage $objectStorage): void
     {
         $this->player = $objectStorage;
+    }
+
+    /**
+     * Initializes all ObjectStorage properties
+     * Do not modify this method!
+     * It will be rewritten on each save in the extension builder
+     * You may modify the constructor of this class instead
+     */
+    protected function initStorageObjects()
+    {
+        $this->player = new ObjectStorage();
     }
 }

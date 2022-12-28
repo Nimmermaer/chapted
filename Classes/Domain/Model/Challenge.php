@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ChaptedTeam\Chapted\Domain\Model;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
@@ -120,21 +122,9 @@ class Challenge extends AbstractEntity
     }
 
     /**
-     * Initializes all ObjectStorage properties
-     * Do not modify this method!
-     * It will be rewritten on each save in the extension builder
-     * You may modify the constructor of this class instead
-     */
-    protected function initStorageObjects()
-    {
-        $this->moves = new ObjectStorage();
-        $this->owner = new ObjectStorage();
-    }
-
-    /**
      * Returns the title
      *
-     * @return string $title
+     * @return string
      */
     public function getTitle()
     {
@@ -152,7 +142,7 @@ class Challenge extends AbstractEntity
     /**
      * Returns the description
      *
-     * @return string $description
+     * @return string
      */
     public function getDescription()
     {
@@ -170,7 +160,7 @@ class Challenge extends AbstractEntity
     /**
      * Returns the reckoning
      *
-     * @return string $reckoning
+     * @return string
      */
     public function getReckoning()
     {
@@ -188,7 +178,7 @@ class Challenge extends AbstractEntity
     /**
      * Returns the likes
      *
-     * @return int $likes
+     * @return int
      */
     public function getLikes()
     {
@@ -206,7 +196,7 @@ class Challenge extends AbstractEntity
     /**
      * Returns the winningPoint
      *
-     * @return string $winningPoint
+     * @return string
      */
     public function getWinningPoint()
     {
@@ -224,7 +214,7 @@ class Challenge extends AbstractEntity
     /**
      * Returns the qrCode
      *
-     * @return string $qrCode
+     * @return string
      */
     public function getQrCode()
     {
@@ -242,7 +232,7 @@ class Challenge extends AbstractEntity
     /**
      * Returns the latitude
      *
-     * @return string $latitude
+     * @return string
      */
     public function getLatitude()
     {
@@ -260,7 +250,7 @@ class Challenge extends AbstractEntity
     /**
      * Returns the longitude
      *
-     * @return string $longitude
+     * @return string
      */
     public function getLongitude()
     {
@@ -349,5 +339,17 @@ class Challenge extends AbstractEntity
     public function setOwner(ObjectStorage $objectStorage): void
     {
         $this->owner = $objectStorage;
+    }
+
+    /**
+     * Initializes all ObjectStorage properties
+     * Do not modify this method!
+     * It will be rewritten on each save in the extension builder
+     * You may modify the constructor of this class instead
+     */
+    protected function initStorageObjects()
+    {
+        $this->moves = new ObjectStorage();
+        $this->owner = new ObjectStorage();
     }
 }

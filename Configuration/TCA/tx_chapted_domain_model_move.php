@@ -1,7 +1,7 @@
 <?php
 
-use TYPO3\CMS\Core\Resource\File;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+declare(strict_types=1);
+
 
 return [
     'ctrl' => [
@@ -82,7 +82,7 @@ return [
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
+                    'lower' => mktime(0, 0, 0, (int) date('m'), (int) date('d'), (int) date('Y')),
                 ],
                 'renderType' => 'inputDateTime',
                 [
@@ -102,7 +102,7 @@ return [
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
+                    'lower' => mktime(0, 0, 0, (int) date('m'), (int) date('d'), (int) date('Y')),
                 ],
                 'renderType' => 'inputDateTime',
                 [

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ChaptedTeam\Chapted\Controller;
 
 use ChaptedTeam\Chapted\Domain\Model\Player;
@@ -39,12 +41,10 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class PlayerController extends ActionController
 {
-    /**
-     * playerRepository
-     *
-     * @var PlayerRepository
-     */
-    protected $playerRepository;
+    public function __construct(
+        private readonly PlayerRepository $playerRepository
+    ) {
+    }
 
     /**
      * action list
@@ -144,10 +144,5 @@ class PlayerController extends ActionController
     public function sendInviteMailAction(): ResponseInterface
     {
         return $this->htmlResponse();
-    }
-
-    public function injectPlayerRepository(PlayerRepository $playerRepository): void
-    {
-        $this->playerRepository = $playerRepository;
     }
 }

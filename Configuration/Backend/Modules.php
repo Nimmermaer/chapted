@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use ChaptedTeam\Chapted\Controller\ChallengeController;
 use ChaptedTeam\Chapted\Controller\PlayerController;
 use ChaptedTeam\Chapted\Controller\TableController;

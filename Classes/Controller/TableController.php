@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ChaptedTeam\Chapted\Controller;
 
 use ChaptedTeam\Chapted\Domain\Model\Table;
@@ -39,12 +41,10 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class TableController extends ActionController
 {
-    /**
-     * tableRepository
-     *
-     * @var TableRepository
-     */
-    protected $tableRepository;
+    public function __construct(
+        private readonly TableRepository $tableRepository
+    ) {
+    }
 
     /**
      * action list
@@ -120,10 +120,5 @@ class TableController extends ActionController
     public function filterAction(): ResponseInterface
     {
         return $this->htmlResponse();
-    }
-
-    public function injectTableRepository(TableRepository $tableRepository): void
-    {
-        $this->tableRepository = $tableRepository;
     }
 }

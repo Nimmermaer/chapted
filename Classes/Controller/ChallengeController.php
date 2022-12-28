@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ChaptedTeam\Chapted\Controller;
 
 use ChaptedTeam\Chapted\Domain\Model\Challenge;
@@ -39,12 +41,10 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class ChallengeController extends ActionController
 {
-    /**
-     * challengeRepository
-     *
-     * @var ChallengeRepository
-     */
-    protected $challengeRepository;
+    public function __construct(
+        private readonly ChallengeRepository $challengeRepository
+    ) {
+    }
 
     /**
      * action list
@@ -136,10 +136,5 @@ class ChallengeController extends ActionController
     public function filterAction(): ResponseInterface
     {
         return $this->htmlResponse();
-    }
-
-    public function injectChallengeRepository(ChallengeRepository $challengeRepository): void
-    {
-        $this->challengeRepository = $challengeRepository;
     }
 }

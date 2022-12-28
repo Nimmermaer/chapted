@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ChaptedTeam\Chapted\Domain\Model;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
@@ -81,20 +83,9 @@ class Player
     }
 
     /**
-     * Initializes all ObjectStorage properties
-     * Do not modify this method!
-     * It will be rewritten on each save in the extension builder
-     * You may modify the constructor of this class instead
-     */
-    protected function initStorageObjects()
-    {
-        $this->challenges = new ObjectStorage();
-    }
-
-    /**
      * Returns the wins
      *
-     * @return string $wins
+     * @return string
      */
     public function getWins()
     {
@@ -112,7 +103,7 @@ class Player
     /**
      * Returns the lose
      *
-     * @return string $lose
+     * @return string
      */
     public function getLose()
     {
@@ -130,7 +121,7 @@ class Player
     /**
      * Returns the customColor
      *
-     * @return string $customColor
+     * @return string
      */
     public function getCustomColor()
     {
@@ -148,7 +139,7 @@ class Player
     /**
      * Returns the customProfil
      *
-     * @return int $customProfil
+     * @return int
      */
     public function getCustomProfil()
     {
@@ -199,5 +190,16 @@ class Player
     public function setChallenges(ObjectStorage $objectStorage): void
     {
         $this->challenges = $objectStorage;
+    }
+
+    /**
+     * Initializes all ObjectStorage properties
+     * Do not modify this method!
+     * It will be rewritten on each save in the extension builder
+     * You may modify the constructor of this class instead
+     */
+    protected function initStorageObjects()
+    {
+        $this->challenges = new ObjectStorage();
     }
 }

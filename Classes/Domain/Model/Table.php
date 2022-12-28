@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ChaptedTeam\Chapted\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -58,7 +60,7 @@ class Table extends AbstractEntity
     /**
      * Returns the month
      *
-     * @return \DateTime $month
+     * @return \DateTime
      */
     public function getMonth()
     {
@@ -76,7 +78,7 @@ class Table extends AbstractEntity
     /**
      * Returns the year
      *
-     * @return \DateTime $year
+     * @return \DateTime
      */
     public function getYear()
     {
@@ -94,7 +96,7 @@ class Table extends AbstractEntity
     /**
      * Returns the challenges
      *
-     * @return Challenge $challenges
+     * @return Challenge
      */
     public function getChallenges()
     {

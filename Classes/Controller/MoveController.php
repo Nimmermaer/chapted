@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace ChaptedTeam\Chapted\Controller;
 
 use ChaptedTeam\Chapted\Domain\Model\Move;
@@ -39,12 +41,10 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class MoveController extends ActionController
 {
-    /**
-     * moveRepository
-     *
-     * @var MoveRepository
-     */
-    protected $moveRepository;
+    public function __construct(
+        private readonly MoveRepository $moveRepository
+    ) {
+    }
 
     /**
      * action list
@@ -128,10 +128,5 @@ class MoveController extends ActionController
     public function moreLikesmorePointsAction(): ResponseInterface
     {
         return $this->htmlResponse();
-    }
-
-    public function injectMoveRepository(MoveRepository $moveRepository): void
-    {
-        $this->moveRepository = $moveRepository;
     }
 }
