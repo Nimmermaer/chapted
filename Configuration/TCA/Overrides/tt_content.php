@@ -1,6 +1,7 @@
 <?php
 
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 defined('TYPO3') || die();
 
 call_user_func(static function (): void {
@@ -21,5 +22,4 @@ call_user_func(static function (): void {
         'Teaser',
         'Teaser'
     );
-
 });

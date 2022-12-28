@@ -5,9 +5,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 defined('TYPO3') || die();
 
 call_user_func(static function (): void {
-
-    if (!isset($GLOBALS['TCA']['fe_users']['ctrl']['type'])) {
-
+    if (! isset($GLOBALS['TCA']['fe_users']['ctrl']['type'])) {
         // no type field defined, so we define it here. This will only happen the first time the extension is installed!!
         $GLOBALS['TCA']['fe_users']['ctrl']['type'] = 'tx_extbase_type';
         ExtensionManagementUtility::addTCAcolumns('fe_users', [
@@ -119,8 +117,6 @@ call_user_func(static function (): void {
 
     $GLOBALS['TCA']['fe_users']['columns'][$GLOBALS['TCA']['fe_users']['ctrl']['type']]['config']['items'][] = [
         'LLL:EXT:chapted/Resources/Private/Language/locallang_db.xlf:fe_users.tx_extbase_type.Player',
-        'Player'
+        'Player',
     ];
-
 });
-

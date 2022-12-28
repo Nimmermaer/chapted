@@ -3,10 +3,13 @@
 use ChaptedTeam\Chapted\Controller\ChallengeController;
 use ChaptedTeam\Chapted\Controller\PlayerController;
 use ChaptedTeam\Chapted\Controller\TableController;
+
 return [
     'web_ChaptedChallenges' => [
         'parent' => 'web',
-        'position' => ['after' => 'web_info'],
+        'position' => [
+            'after' => 'web_info',
+        ],
         'access' => 'user,group',
         'workspaces' => 'live',
         'iconIdentifier' => 'module-challenges',
