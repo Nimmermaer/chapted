@@ -6,6 +6,7 @@ if (! isset($GLOBALS['TCA']['fe_users']['ctrl']['type'])) {
     if (file_exists($GLOBALS['TCA']['fe_users']['ctrl']['dynamicConfigFile'])) {
         require_once($GLOBALS['TCA']['fe_users']['ctrl']['dynamicConfigFile']);
     }
+
     // no type field defined, so we define it here. This will only happen the first time the extension is installed!!
     $GLOBALS['TCA']['fe_users']['ctrl']['type'] = 'tx_extbase_type';
     $tempColumnstx_chapted_fe_users = [];
@@ -15,8 +16,8 @@ if (! isset($GLOBALS['TCA']['fe_users']['ctrl']['type'])) {
         'config' => [
             'type' => 'select',
             'renderType' => 'selectSingle',
-            'items' => [['Player', 'Tx_Chapted_Player']],
-            'default' => 'Tx_Chapted_Player',
+            'items' => [['Player', 'Player']],
+            'default' => 'Player',
             'size' => 1,
             'maxitems' => 1,
         ],
@@ -106,21 +107,16 @@ ExtensionManagementUtility::addTCAcolumns('fe_users', $tmp_chapted_columns);
 /* inherit and extend the show items from the parent class */
 
 if (isset($GLOBALS['TCA']['fe_users']['types']['0']['showitem'])) {
-    $GLOBALS['TCA']['fe_users']['types']['Tx_Chapted_Player']['showitem'] = $GLOBALS['TCA']['fe_users']['types']['0']['showitem'];
+    $GLOBALS['TCA']['fe_users']['types']['Player']['showitem'] = $GLOBALS['TCA']['fe_users']['types']['0']['showitem'];
 } elseif (is_array($GLOBALS['TCA']['fe_users']['types'])) {
     // use first entry in types array
     $fe_users_type_definition = reset($GLOBALS['TCA']['fe_users']['types']);
-    $GLOBALS['TCA']['fe_users']['types']['Tx_Chapted_Player']['showitem'] = $fe_users_type_definition['showitem'];
+    $GLOBALS['TCA']['fe_users']['types']['Player']['showitem'] = $fe_users_type_definition['showitem'];
 } else {
-    $GLOBALS['TCA']['fe_users']['types']['Tx_Chapted_Player']['showitem'] = '';
+    $GLOBALS['TCA']['fe_users']['types']['Player']['showitem'] = '';
 }
 
-$GLOBALS['TCA']['fe_users']['types']['Tx_Chapted_Player']['showitem'] .= ',--div--;LLL:EXT:chapted/Resources/Private/Language/locallang_db.xlf:tx_chapted_domain_model_player,';
-$GLOBALS['TCA']['fe_users']['types']['Tx_Chapted_Player']['showitem'] .= 'wins, lose, custom_color, custom_profil, challenges';
+$GLOBALS['TCA']['fe_users']['types']['Player']['showitem'] .= ',--div--;LLL:EXT:chapted/Resources/Private/Language/locallang_db.xlf:tx_chapted_domain_model_player,';
+$GLOBALS['TCA']['fe_users']['types']['Player']['showitem'] .= 'wins, lose, custom_color, custom_profil, challenges';
 
-$GLOBALS['TCA']['fe_users']['columns'][$GLOBALS['TCA']['fe_users']['ctrl']['type']]['config']['items'][] = ['LLL:EXT:chapted/Resources/Private/Language/locallang_db.xlf:fe_users.tx_extbase_type.Tx_Chapted_Player', 'Tx_Chapted_Player'];
-
-ExtensionManagementUtility::addLLrefForTCAdescr(
-    '',
-    'EXT:/Resources/Private/Language/locallang_csh_.xlf'
-);
+$GLOBALS['TCA']['fe_users']['columns'][$GLOBALS['TCA']['fe_users']['ctrl']['type']]['config']['items'][] = ['LLL:EXT:chapted/Resources/Private/Language/locallang_db.xlf:fe_users.tx_extbase_type.Player', 'Player'];

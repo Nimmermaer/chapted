@@ -51,12 +51,3 @@ if (TYPO3_MODE === 'BE') {
 }
 
 ExtensionManagementUtility::addStaticFile('chapted', 'Configuration/TypoScript', 'chapted');
-
-ExtensionManagementUtility::addLLrefForTCAdescr('tx_chapted_domain_model_move', 'EXT:chapted/Resources/Private/Language/locallang_csh_tx_chapted_domain_model_move.xlf');
-ExtensionManagementUtility::allowTableOnStandardPages('tx_chapted_domain_model_move');
-
-ExtensionManagementUtility::addLLrefForTCAdescr('tx_chapted_domain_model_challenge', 'EXT:chapted/Resources/Private/Language/locallang_csh_tx_chapted_domain_model_challenge.xlf');
-ExtensionManagementUtility::allowTableOnStandardPages('tx_chapted_domain_model_challenge');
-
-ExtensionManagementUtility::addLLrefForTCAdescr('tx_chapted_domain_model_table', 'EXT:chapted/Resources/Private/Language/locallang_csh_tx_chapted_domain_model_table.xlf');
-ExtensionManagementUtility::allowTableOnStandardPages('tx_chapted_domain_model_table');

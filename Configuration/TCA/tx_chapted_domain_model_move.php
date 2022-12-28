@@ -9,6 +9,9 @@ return [
         'label' => 'media',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
         'versioningWS' => true,
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
@@ -126,27 +129,33 @@ return [
                             '0' => [
                                 'showitem' => '
 							--palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette', ],
+							--palette--;;filePalette',
+                            ],
                             File::FILETYPE_TEXT => [
                                 'showitem' => '
 							--palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette', ],
+							--palette--;;filePalette',
+                            ],
                             File::FILETYPE_IMAGE => [
                                 'showitem' => '
 							--palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette', ],
+							--palette--;;filePalette',
+                            ],
                             File::FILETYPE_AUDIO => [
                                 'showitem' => '
 							--palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette', ],
+							--palette--;;filePalette',
+                            ],
                             File::FILETYPE_VIDEO => [
                                 'showitem' => '
 							--palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette', ],
+							--palette--;;filePalette',
+                            ],
                             File::FILETYPE_APPLICATION => [
                                 'showitem' => '
 							--palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-							--palette--;;filePalette', ],
+							--palette--;;filePalette',
+                            ],
                         ],
                     ],
                 ]

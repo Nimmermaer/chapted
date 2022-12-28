@@ -6,6 +6,9 @@ return [
         'label' => 'month',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
         'versioningWS' => true,
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
