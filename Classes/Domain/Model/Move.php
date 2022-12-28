@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace ChaptedTeam\Chapted\Domain\Model;
 
-use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -34,6 +33,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
 /**
  * Move
  */
@@ -89,6 +89,17 @@ class Move extends AbstractEntity
     {
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
+    }
+
+    /**
+     * Initializes all ObjectStorage properties
+     * Do not modify this method!
+     * It will be rewritten on each save in the extension builder
+     * You may modify the constructor of this class instead
+     */
+    protected function initStorageObjects()
+    {
+        $this->player = new ObjectStorage();
     }
 
     /**
@@ -219,16 +230,5 @@ class Move extends AbstractEntity
     public function setPlayer(ObjectStorage $objectStorage): void
     {
         $this->player = $objectStorage;
-    }
-
-    /**
-     * Initializes all ObjectStorage properties
-     * Do not modify this method!
-     * It will be rewritten on each save in the extension builder
-     * You may modify the constructor of this class instead
-     */
-    protected function initStorageObjects()
-    {
-        $this->player = new ObjectStorage();
     }
 }

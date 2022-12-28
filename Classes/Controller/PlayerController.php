@@ -8,7 +8,6 @@ use ChaptedTeam\Chapted\Domain\Model\Player;
 use ChaptedTeam\Chapted\Domain\Repository\PlayerRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /***************************************************************
@@ -36,6 +35,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
 /**
  * PlayerController
  */
@@ -78,7 +78,8 @@ class PlayerController extends ActionController
      */
     public function createAction(Player $newPlayer): void
     {
-        $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', AbstractMessage::ERROR);
+        $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
+            '', AbstractMessage::ERROR);
         $this->playerRepository->add($newPlayer);
         $this->redirect('list');
     }
@@ -99,7 +100,8 @@ class PlayerController extends ActionController
      */
     public function updateAction(Player $player): void
     {
-        $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', AbstractMessage::ERROR);
+        $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
+            '', AbstractMessage::ERROR);
         $this->playerRepository->update($player);
         $this->redirect('list');
     }
@@ -109,7 +111,8 @@ class PlayerController extends ActionController
      */
     public function deleteAction(Player $player): void
     {
-        $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain', '', AbstractMessage::ERROR);
+        $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
+            '', AbstractMessage::ERROR);
         $this->playerRepository->remove($player);
         $this->redirect('list');
     }

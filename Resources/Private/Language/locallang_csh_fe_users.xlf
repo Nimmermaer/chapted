@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2017-02-25T21:59:16Z" product-name="chapted">
-		<header/>
-		<body>
-			<trans-unit id="wins.description">
-				<source>wins</source>
-			</trans-unit>
-			<trans-unit id="lose.description">
-				<source>lose</source>
-			</trans-unit>
-			<trans-unit id="custom_color.description">
-				<source>customColor</source>
-			</trans-unit>
-			<trans-unit id="custom_profil.description">
-				<source>normal
+    <file source-language="en" datatype="plaintext" original="messages" date="2017-02-25T21:59:16Z" product-name="chapted">
+        <header />
+        <body>
+            <trans-unit id="wins.description">
+                <source>wins</source>
+            </trans-unit>
+            <trans-unit id="lose.description">
+                <source>lose</source>
+            </trans-unit>
+            <trans-unit id="custom_color.description">
+                <source>customColor</source>
+            </trans-unit>
+            <trans-unit id="custom_profil.description">
+                <source>normal
 male
 female</source>
-			</trans-unit>
-			<trans-unit id="challenges.description">
-				<source>challenges</source>
-			</trans-unit>
-		</body>
-	</file>
+            </trans-unit>
+            <trans-unit id="challenges.description">
+                <source>challenges</source>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>

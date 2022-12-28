@@ -1,39 +1,52 @@
-
-<f:layout name="Default" />
+<f:layout name="Default"/>
 
 This Template is responsible for creating a table of domain objects.
 
 If you modify this template, do not forget to change the overwrite settings
 in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        List.html: keep
+Resources:
+Private:
+Templates:
+List.html: keep
 
 Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
 <f:section name="main">
-<h1>Listing for Table</h1>
+    <h1>Listing for Table</h1>
 
-<f:flashMessages />
+    <f:flashMessages/>
 
-<table  class="table tx_chapted" >
-	<tr>
-		<th><f:translate key="tx_chapted_domain_model_table.month" /></th>
-		<th><f:translate key="tx_chapted_domain_model_table.year" /></th>
-		<th> </th>
-		<th> </th>
-	</tr>
+    <table class="table tx_chapted">
+        <tr>
+            <th>
+                <f:translate key="tx_chapted_domain_model_table.month"/>
+            </th>
+            <th>
+                <f:translate key="tx_chapted_domain_model_table.year"/>
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
 
-	<f:for each="{tables}" as="table">
-		<tr>
-			<td><f:link.action action="show" arguments="{table : table}"> {table.month -> f:format.date()}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{table : table}"> {table.year -> f:format.date()}</f:link.action></td>
-			<td><f:link.action action="edit" arguments="{table : table}">Edit</f:link.action></td>
-			<td><f:link.action action="delete" arguments="{table : table}">Delete</f:link.action></td>
-		</tr>
-	</f:for>
-</table>
+        <f:for as="table" each="{tables}">
+            <tr>
+                <td>
+                    <f:link.action action="show" arguments="{table : table}"> {table.month -> f:format.date()}
+                    </f:link.action>
+                </td>
+                <td>
+                    <f:link.action action="show" arguments="{table : table}"> {table.year -> f:format.date()}
+                    </f:link.action>
+                </td>
+                <td>
+                    <f:link.action action="edit" arguments="{table : table}">Edit</f:link.action>
+                </td>
+                <td>
+                    <f:link.action action="delete" arguments="{table : table}">Delete</f:link.action>
+                </td>
+            </tr>
+        </f:for>
+    </table>
 
-<f:link.action action="new">New Table</f:link.action>
+    <f:link.action action="new">New Table</f:link.action>
 </f:section>

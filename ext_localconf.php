@@ -8,7 +8,7 @@ use ChaptedTeam\Chapted\Controller\PlayerController;
 use ChaptedTeam\Chapted\Controller\TableController;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
-if (! defined('TYPO3')) {
+if (!defined('TYPO3')) {
     die('Access denied.');
 }
 

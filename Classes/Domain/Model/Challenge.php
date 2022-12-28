@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace ChaptedTeam\Chapted\Domain\Model;
 
-use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -33,6 +32,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
 /**
  * Challenge
  */
@@ -44,7 +44,7 @@ class Challenge extends AbstractEntity
      * @var string
      * @Extbase\Validate("NotEmpty")
      */
-    protected $title = '';
+    protected string $title = '';
 
     /**
      * description
@@ -52,49 +52,49 @@ class Challenge extends AbstractEntity
      * @var string
      * @Extbase\Validate("NotEmpty")
      */
-    protected $description = '';
+    protected string $description = '';
 
     /**
      * reckoning
      *
      * @var string
      */
-    protected $reckoning = '';
+    protected string $reckoning = '';
 
     /**
      * likes
      *
      * @var int
      */
-    protected $likes = 0;
+    protected int $likes = 0;
 
     /**
      * winningPoint
      *
      * @var string
      */
-    protected $winningPoint = '';
+    protected string $winningPoint = '';
 
     /**
      * qrCode
      *
      * @var string
      */
-    protected $qrCode = '';
+    protected string $qrCode = '';
 
     /**
      * latitude
      *
      * @var string
      */
-    protected $latitude = '';
+    protected string $latitude = '';
 
     /**
      * longitude
      *
      * @var string
      */
-    protected $longitude = '';
+    protected string $longitude = '';
 
     /**
      * moves
@@ -119,6 +119,18 @@ class Challenge extends AbstractEntity
     {
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
+    }
+
+    /**
+     * Initializes all ObjectStorage properties
+     * Do not modify this method!
+     * It will be rewritten on each save in the extension builder
+     * You may modify the constructor of this class instead
+     */
+    protected function initStorageObjects()
+    {
+        $this->moves = new ObjectStorage();
+        $this->owner = new ObjectStorage();
     }
 
     /**
@@ -339,17 +351,5 @@ class Challenge extends AbstractEntity
     public function setOwner(ObjectStorage $objectStorage): void
     {
         $this->owner = $objectStorage;
-    }
-
-    /**
-     * Initializes all ObjectStorage properties
-     * Do not modify this method!
-     * It will be rewritten on each save in the extension builder
-     * You may modify the constructor of this class instead
-     */
-    protected function initStorageObjects()
-    {
-        $this->moves = new ObjectStorage();
-        $this->owner = new ObjectStorage();
     }
 }

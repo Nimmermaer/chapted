@@ -1,35 +1,37 @@
-
 plugin.tx_chapted_table {
-	view {
-		templateRootPaths.0 = {$plugin.tx_chapted_table.view.templateRootPath}
-		partialRootPaths.0 = {$plugin.tx_chapted_table.view.partialRootPath}
-		layoutRootPaths.0 = {$plugin.tx_chapted_table.view.layoutRootPath}
-	}
-	persistence {
-		storagePid = {$plugin.tx_chapted_table.persistence.storagePid}
-	}
+    view {
+        templateRootPaths.0 = {$plugin.tx_chapted_table.view.templateRootPath}
+        partialRootPaths.0 = {$plugin.tx_chapted_table.view.partialRootPath}
+        layoutRootPaths.0 = {$plugin.tx_chapted_table.view.layoutRootPath}
+    }
+
+    persistence {
+        storagePid = {$plugin.tx_chapted_table.persistence.storagePid}
+    }
 }
 
 plugin.tx_chapted_profile {
-	view {
-		templateRootPaths.0 = {$plugin.tx_chapted_profile.view.templateRootPath}
-		partialRootPaths.0 = {$plugin.tx_chapted_profile.view.partialRootPath}
-		layoutRootPaths.0 = {$plugin.tx_chapted_profile.view.layoutRootPath}
-	}
-	persistence {
-		storagePid = {$plugin.tx_chapted_profile.persistence.storagePid}
-	}
+    view {
+        templateRootPaths.0 = {$plugin.tx_chapted_profile.view.templateRootPath}
+        partialRootPaths.0 = {$plugin.tx_chapted_profile.view.partialRootPath}
+        layoutRootPaths.0 = {$plugin.tx_chapted_profile.view.layoutRootPath}
+    }
+
+    persistence {
+        storagePid = {$plugin.tx_chapted_profile.persistence.storagePid}
+    }
 }
 
 plugin.tx_chapted_teaser {
-	view {
-		templateRootPaths.0 = {$plugin.tx_chapted_teaser.view.templateRootPath}
-		partialRootPaths.0 = {$plugin.tx_chapted_teaser.view.partialRootPath}
-		layoutRootPaths.0 = {$plugin.tx_chapted_teaser.view.layoutRootPath}
-	}
-	persistence {
-		storagePid = {$plugin.tx_chapted_teaser.persistence.storagePid}
-	}
+    view {
+        templateRootPaths.0 = {$plugin.tx_chapted_teaser.view.templateRootPath}
+        partialRootPaths.0 = {$plugin.tx_chapted_teaser.view.partialRootPath}
+        layoutRootPaths.0 = {$plugin.tx_chapted_teaser.view.layoutRootPath}
+    }
+
+    persistence {
+        storagePid = {$plugin.tx_chapted_teaser.persistence.storagePid}
+    }
 }
 
 plugin.tx_chapted._CSS_DEFAULT_STYLE (
@@ -66,14 +68,15 @@ plugin.tx_chapted._CSS_DEFAULT_STYLE (
 
 )
 
- # Module configuration
+# Module configuration
 module.tx_chapted_web_chaptedchallenges {
-	persistence {
-		storagePid = {$module.tx_chapted_challenges.persistence.storagePid}
-	}
-	view {
-		templateRootPaths.0 = {$module.tx_chapted_challenges.view.templateRootPath}
-		partialRootPaths.0 = {$module.tx_chapted_challenges.view.partialRootPath}
-		layoutRootPaths.0 = {$module.tx_chapted_challenges.view.layoutRootPath}
-	}
+    persistence {
+        storagePid = {$module.tx_chapted_challenges.persistence.storagePid}
+    }
+
+    view {
+        templateRootPaths.0 = {$module.tx_chapted_challenges.view.templateRootPath}
+        partialRootPaths.0 = {$module.tx_chapted_challenges.view.partialRootPath}
+        layoutRootPaths.0 = {$module.tx_chapted_challenges.view.layoutRootPath}
+    }
 }

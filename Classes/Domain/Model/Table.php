@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ChaptedTeam\Chapted\Domain\Model;
 
+use DateTime;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /***************************************************************
@@ -31,6 +32,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
 /**
  * Table
  */
@@ -39,14 +41,14 @@ class Table extends AbstractEntity
     /**
      * month
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $month;
 
     /**
      * year
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $year;
 
@@ -60,7 +62,7 @@ class Table extends AbstractEntity
     /**
      * Returns the month
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getMonth()
     {
@@ -70,7 +72,7 @@ class Table extends AbstractEntity
     /**
      * Sets the month
      */
-    public function setMonth(\DateTime $dateTime): void
+    public function setMonth(DateTime $dateTime): void
     {
         $this->month = $dateTime;
     }
@@ -78,7 +80,7 @@ class Table extends AbstractEntity
     /**
      * Returns the year
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getYear()
     {
@@ -88,7 +90,7 @@ class Table extends AbstractEntity
     /**
      * Sets the year
      */
-    public function setYear(\DateTime $dateTime): void
+    public function setYear(DateTime $dateTime): void
     {
         $this->year = $dateTime;
     }
