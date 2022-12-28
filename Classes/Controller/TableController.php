@@ -8,6 +8,7 @@ use ChaptedTeam\Chapted\Domain\Model\Table;
 use ChaptedTeam\Chapted\Domain\Repository\TableRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /***************************************************************
@@ -78,8 +79,11 @@ class TableController extends ActionController
      */
     public function createAction(Table $newTable): void
     {
-        $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
-            '', AbstractMessage::ERROR);
+        $this->addFlashMessage(
+            'The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
+            '',
+            AbstractMessage::ERROR
+        );
         $this->tableRepository->add($newTable);
         $this->redirect('list');
     }
@@ -100,8 +104,11 @@ class TableController extends ActionController
      */
     public function updateAction(Table $table): void
     {
-        $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
-            '', AbstractMessage::ERROR);
+        $this->addFlashMessage(
+            'The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
+            '',
+            AbstractMessage::ERROR
+        );
         $this->tableRepository->update($table);
         $this->redirect('list');
     }
@@ -111,8 +118,11 @@ class TableController extends ActionController
      */
     public function deleteAction(Table $table): void
     {
-        $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
-            '', AbstractMessage::ERROR);
+        $this->addFlashMessage(
+            'The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
+            '',
+            AbstractMessage::ERROR
+        );
         $this->tableRepository->remove($table);
         $this->redirect('list');
     }

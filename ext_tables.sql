@@ -11,6 +11,8 @@ CREATE TABLE fe_users
     custom_profil   int(11) DEFAULT '0' NOT NULL,
     challenges      int(11) unsigned DEFAULT '0' NOT NULL,
     tx_extbase_type varchar(255) DEFAULT '' NOT NULL,
+    google_id       varchar(255) DEFAULT '' NOT NULL,
+    google_info     text,
 );
 
 #

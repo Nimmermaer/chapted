@@ -8,6 +8,7 @@ use ChaptedTeam\Chapted\Domain\Model\Move;
 use ChaptedTeam\Chapted\Domain\Repository\MoveRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /***************************************************************
@@ -78,8 +79,11 @@ class MoveController extends ActionController
      */
     public function createAction(Move $newMove): void
     {
-        $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
-            '', AbstractMessage::ERROR);
+        $this->addFlashMessage(
+            'The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
+            '',
+            AbstractMessage::ERROR
+        );
         $this->moveRepository->add($newMove);
         $this->redirect('list');
     }
@@ -100,8 +104,11 @@ class MoveController extends ActionController
      */
     public function updateAction(Move $move): void
     {
-        $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
-            '', AbstractMessage::ERROR);
+        $this->addFlashMessage(
+            'The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
+            '',
+            AbstractMessage::ERROR
+        );
         $this->moveRepository->update($move);
         $this->redirect('list');
     }
@@ -111,8 +118,11 @@ class MoveController extends ActionController
      */
     public function deleteAction(Move $move): void
     {
-        $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
-            '', AbstractMessage::ERROR);
+        $this->addFlashMessage(
+            'The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
+            '',
+            AbstractMessage::ERROR
+        );
         $this->moveRepository->remove($move);
         $this->redirect('list');
     }

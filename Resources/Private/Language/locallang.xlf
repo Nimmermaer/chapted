@@ -87,6 +87,15 @@
             <trans-unit id="tx_chapted_domain_model_table.challenges">
                 <source>Challenges</source>
             </trans-unit>
+            <trans-unit id="config.clientID">
+                <source>clientID</source>
+            </trans-unit>
+            <trans-unit id="config.clientSecret">
+                <source>clientSecret</source>
+            </trans-unit>
+            <trans-unit id="config.redirectUri">
+                <source>redirectUri</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

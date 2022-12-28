@@ -6,7 +6,6 @@ namespace ChaptedTeam\Chapted\Domain\Model;
 
 use DateTime;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /***************************************************************
  *
@@ -41,68 +40,44 @@ class Table extends AbstractEntity
 {
     /**
      * month
-     *
-     * @var DateTime
      */
     protected \DateTime $month;
 
     /**
      * year
-     *
-     * @var DateTime
      */
     protected \DateTime $year;
 
     /**
      * challenges
-     *
-     * @var Challenge
      */
     protected Challenge $challenge;
 
-    /**
-     * @return DateTime
-     */
     public function getMonth(): DateTime
     {
         return $this->month;
     }
 
-    /**
-     * @param DateTime $month
-     */
-    public function setMonth(DateTime $month): void
+    public function setMonth(DateTime $dateTime): void
     {
-        $this->month = $month;
+        $this->month = $dateTime;
     }
 
-    /**
-     * @return DateTime
-     */
     public function getYear(): DateTime
     {
         return $this->year;
     }
 
-    /**
-     * @param DateTime $year
-     */
-    public function setYear(DateTime $year): void
+    public function setYear(DateTime $dateTime): void
     {
-        $this->year = $year;
+        $this->year = $dateTime;
     }
 
-    /**
-     * @return Challenge
-     */
     public function getChallenge(): Challenge
     {
         return $this->challenge;
     }
 
-    /**
-     * @param Challenge $challenge
-     */
     public function setChallenge(Challenge $challenge): void
     {
         $this->challenge = $challenge;

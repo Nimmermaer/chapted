@@ -6,8 +6,10 @@ namespace ChaptedTeam\Chapted\Controller;
 
 use ChaptedTeam\Chapted\Domain\Model\Player;
 use ChaptedTeam\Chapted\Domain\Repository\PlayerRepository;
+use Google\Client;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /***************************************************************
@@ -70,7 +72,32 @@ class PlayerController extends ActionController
      */
     public function newAction(): ResponseInterface
     {
-        return $this->htmlResponse();
+        // init configuration
+        $clientID = $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['chapted']['google']['clientID'];
+        $clientSecret = $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['chapted']['google']['clientSecret'];
+        $redirectUri =$GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['chapted']['google']['redirectUri'];
+
+        // create Client Request to access Google API
+        $client = new Client();
+        $client->setClientId($clientID);
+        $client->setClientSecret($clientSecret);
+        $client->setRedirectUri($redirectUri);
+        $client->addScope('email');
+        $client->addScope('profile');
+
+        // authenticate code from Google OAuth Flow
+        if (isset($_GET['code'])) {
+            $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+            $client->setAccessToken($token['access_token']);
+
+            // get profile info
+            $googleServiceOauth2 = new \Google_Service_Oauth2($client);
+            $googleServiceOauth2->userinfo->get();
+
+            // now you can use this profile info to create account in your website and make user logged in.
+        }
+
+        return $this->htmlResponse("<a href='" . $client->createAuthUrl() . "'>Google Login</a>");
     }
 
     /**
@@ -78,8 +105,11 @@ class PlayerController extends ActionController
      */
     public function createAction(Player $newPlayer): void
     {
-        $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
-            '', AbstractMessage::ERROR);
+        $this->addFlashMessage(
+            'The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
+            '',
+            AbstractMessage::ERROR
+        );
         $this->playerRepository->add($newPlayer);
         $this->redirect('list');
     }
@@ -100,8 +130,11 @@ class PlayerController extends ActionController
      */
     public function updateAction(Player $player): void
     {
-        $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
-            '', AbstractMessage::ERROR);
+        $this->addFlashMessage(
+            'The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
+            '',
+            AbstractMessage::ERROR
+        );
         $this->playerRepository->update($player);
         $this->redirect('list');
     }
@@ -111,8 +144,11 @@ class PlayerController extends ActionController
      */
     public function deleteAction(Player $player): void
     {
-        $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
-            '', AbstractMessage::ERROR);
+        $this->addFlashMessage(
+            'The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
+            '',
+            AbstractMessage::ERROR
+        );
         $this->playerRepository->remove($player);
         $this->redirect('list');
     }

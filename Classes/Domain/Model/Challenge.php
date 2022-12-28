@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ChaptedTeam\Chapted\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -41,7 +42,6 @@ class Challenge extends AbstractEntity
     /**
      * title
      *
-     * @var string
      * @Extbase\Validate("NotEmpty")
      */
     protected string $title = '';
@@ -49,50 +49,37 @@ class Challenge extends AbstractEntity
     /**
      * description
      *
-     * @var string
      * @Extbase\Validate("NotEmpty")
      */
     protected string $description = '';
 
     /**
      * reckoning
-     *
-     * @var string
      */
     protected string $reckoning = '';
 
     /**
      * likes
-     *
-     * @var int
      */
     protected int $likes = 0;
 
     /**
      * winningPoint
-     *
-     * @var string
      */
     protected string $winningPoint = '';
 
     /**
      * qrCode
-     *
-     * @var string
      */
     protected string $qrCode = '';
 
     /**
      * latitude
-     *
-     * @var string
      */
     protected string $latitude = '';
 
     /**
      * longitude
-     *
-     * @var string
      */
     protected string $longitude = '';
 
@@ -122,21 +109,7 @@ class Challenge extends AbstractEntity
     }
 
     /**
-     * Initializes all ObjectStorage properties
-     * Do not modify this method!
-     * It will be rewritten on each save in the extension builder
-     * You may modify the constructor of this class instead
-     */
-    protected function initStorageObjects()
-    {
-        $this->moves = new ObjectStorage();
-        $this->owner = new ObjectStorage();
-    }
-
-    /**
      * Returns the title
-     *
-     * @return string
      */
     public function getTitle(): string
     {
@@ -153,8 +126,6 @@ class Challenge extends AbstractEntity
 
     /**
      * Returns the description
-     *
-     * @return string
      */
     public function getDescription(): string
     {
@@ -171,8 +142,6 @@ class Challenge extends AbstractEntity
 
     /**
      * Returns the reckoning
-     *
-     * @return string
      */
     public function getReckoning(): string
     {
@@ -189,8 +158,6 @@ class Challenge extends AbstractEntity
 
     /**
      * Returns the likes
-     *
-     * @return int
      */
     public function getLikes(): int
     {
@@ -207,8 +174,6 @@ class Challenge extends AbstractEntity
 
     /**
      * Returns the winningPoint
-     *
-     * @return string
      */
     public function getWinningPoint(): string
     {
@@ -225,8 +190,6 @@ class Challenge extends AbstractEntity
 
     /**
      * Returns the qrCode
-     *
-     * @return string
      */
     public function getQrCode(): string
     {
@@ -243,10 +206,8 @@ class Challenge extends AbstractEntity
 
     /**
      * Returns the latitude
-     *
-     * @return string
      */
-    public function getLatitude()
+    public function getLatitude(): string
     {
         return $this->latitude;
     }
@@ -261,8 +222,6 @@ class Challenge extends AbstractEntity
 
     /**
      * Returns the longitude
-     *
-     * @return string
      */
     public function getLongitude(): string
     {
@@ -351,5 +310,17 @@ class Challenge extends AbstractEntity
     public function setOwner(ObjectStorage $objectStorage): void
     {
         $this->owner = $objectStorage;
+    }
+
+    /**
+     * Initializes all ObjectStorage properties
+     * Do not modify this method!
+     * It will be rewritten on each save in the extension builder
+     * You may modify the constructor of this class instead
+     */
+    protected function initStorageObjects()
+    {
+        $this->moves = new ObjectStorage();
+        $this->owner = new ObjectStorage();
     }
 }

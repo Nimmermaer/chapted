@@ -6,3 +6,11 @@ services:
 
   ChaptedTeam\Chapted\:
     resource: '../Classes/*'
+
+  Google\Client:
+    public: true
+
+  ChaptedTeam\Chapted\Middlewares\GoogleFrontendLoginMiddleware:
+    public: true
+    arguments:
+      $client: '@Google\Client'

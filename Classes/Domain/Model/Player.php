@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace ChaptedTeam\Chapted\Domain\Model;
 
+use Google\Service\Oauth2\Userinfo;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /***************************************************************
@@ -37,31 +40,37 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Player
 {
+    protected string $username = '';
+
+    protected string $password = '';
+
+    protected string $name = '';
+
+    protected ?FileReference $image = null;
+
+    protected string $email = '';
+
+    protected string $googleId = '';
+
+    protected ?Userinfo $googleInfo = null;
+
     /**
      * wins
-     *
-     * @var string
      */
     protected string $wins = '';
 
     /**
      * lose
-     *
-     * @var string
      */
     protected string $lose = '';
 
     /**
      * customColor
-     *
-     * @var string
      */
     protected string $customColor = '';
 
     /**
      * normal
-     *
-     * @var int
      */
     protected int $customProfil = 0;
 
@@ -82,6 +91,137 @@ class Player
         $this->initStorageObjects();
     }
 
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+        return $this;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function getImage(): ?FileReference
+    {
+        return $this->image;
+    }
+
+    public function setImage(?FileReference $fileReference): self
+    {
+        $this->image = $fileReference;
+        return $this;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    public function getGoogleId(): string
+    {
+        return $this->googleId;
+    }
+
+    public function setGoogleId(string $googleId): self
+    {
+        $this->googleId = $googleId;
+        return $this;
+    }
+
+    public function getGoogleInfo(): ?Userinfo
+    {
+        return $this->googleInfo;
+    }
+
+    public function setGoogleInfo(?Userinfo $userinfo): self
+    {
+        $this->googleInfo = $userinfo;
+        return $this;
+    }
+
+    public function getWins(): string
+    {
+        return $this->wins;
+    }
+
+    public function setWins(string $wins): self
+    {
+        $this->wins = $wins;
+        return $this;
+    }
+
+    public function getLose(): string
+    {
+        return $this->lose;
+    }
+
+    public function setLose(string $lose): self
+    {
+        $this->lose = $lose;
+        return $this;
+    }
+
+    public function getCustomColor(): string
+    {
+        return $this->customColor;
+    }
+
+    public function setCustomColor(string $customColor): self
+    {
+        $this->customColor = $customColor;
+        return $this;
+    }
+
+    public function getCustomProfil(): int
+    {
+        return $this->customProfil;
+    }
+
+    public function setCustomProfil(int $customProfil): self
+    {
+        $this->customProfil = $customProfil;
+        return $this;
+    }
+
+    public function getChallenges(): ObjectStorage
+    {
+        return $this->challenges;
+    }
+
+    public function setChallenges(ObjectStorage $objectStorage): self
+    {
+        $this->challenges = $objectStorage;
+        return $this;
+    }
+
     /**
      * Initializes all ObjectStorage properties
      * Do not modify this method!
@@ -92,85 +232,4 @@ class Player
     {
         $this->challenges = new ObjectStorage();
     }
-
-    /**
-     * @return string
-     */
-    public function getWins(): string
-    {
-        return $this->wins;
-    }
-
-    /**
-     * @param string $wins
-     */
-    public function setWins(string $wins): void
-    {
-        $this->wins = $wins;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLose(): string
-    {
-        return $this->lose;
-    }
-
-    /**
-     * @param string $lose
-     */
-    public function setLose(string $lose): void
-    {
-        $this->lose = $lose;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCustomColor(): string
-    {
-        return $this->customColor;
-    }
-
-    /**
-     * @param string $customColor
-     */
-    public function setCustomColor(string $customColor): void
-    {
-        $this->customColor = $customColor;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCustomProfil(): int
-    {
-        return $this->customProfil;
-    }
-
-    /**
-     * @param int $customProfil
-     */
-    public function setCustomProfil(int $customProfil): void
-    {
-        $this->customProfil = $customProfil;
-    }
-
-    /**
-     * @return ObjectStorage
-     */
-    public function getChallenges(): ObjectStorage
-    {
-        return $this->challenges;
-    }
-
-    /**
-     * @param ObjectStorage $challenges
-     */
-    public function setChallenges(ObjectStorage $challenges): void
-    {
-        $this->challenges = $challenges;
-    }
-
 }

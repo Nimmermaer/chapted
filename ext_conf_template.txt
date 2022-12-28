@@ -1,0 +1,12 @@
+###################
+### Google Authentication ###
+###################
+
+# cat=Google Login; type=string; label=LLL:EXT:chapted/Resources/Private/Language/locallang.xlf:config.clientID
+google.clientID =
+
+# cat=Google Login; type=string; label=LLL:EXT:chapted/Resources/Private/Language/locallang.xlf:config.clientSecret
+google.clientSecret =
+
+# cat=Google Login; type=string; label=LLL:EXT:chapted/Resources/Private/Language/locallang.xlf:config.redirectUri
+google.redirectUri =

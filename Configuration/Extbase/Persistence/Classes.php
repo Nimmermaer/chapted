@@ -13,5 +13,22 @@ return [
     Player::class => [
         'recordType' => 'Player',
         'tableName' => 'fe_users',
+        'properties' => [
+            'wins' => [
+                'fieldName' => 'wins',
+            ],
+            'lose' => [
+                'fieldName' => 'lose',
+            ],
+            'customColor' => [
+                'fieldName' => 'custom_color',
+            ],
+            'customProfil' => [
+                'fieldName' => 'custom_profil',
+            ],
+            'challenges' => [
+                'fieldName' => 'challenges',
+            ],
+        ],
     ],
 ];

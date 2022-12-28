@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-use ChaptedTeam\Chapted\Controller\ChallengeController;
-use ChaptedTeam\Chapted\Controller\PlayerController;
-use ChaptedTeam\Chapted\Controller\TableController;
+use ChaptedTeam\Chapted\Controller\BackendController;
 
 return [
     'web_ChaptedChallenges' => [
@@ -19,14 +17,8 @@ return [
         'labels' => 'LLL:EXT:chapted/Resources/Private/Language/locallang_challenges.xlf',
         'extensionName' => 'Chapted',
         'controllerActions' => [
-            ChallengeController::class => [
-                'list, show, filter, new, create',
-            ],
-            PlayerController::class => [
-                'list, show, new',
-            ],
-            TableController::class => [
-                'list, show, new',
+            BackendController::class => [
+                'list',
             ],
         ],
     ],

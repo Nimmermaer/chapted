@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ChaptedTeam\Chapted\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -41,36 +42,26 @@ class Move extends AbstractEntity
 {
     /**
      * media
-     *
-     * @var FileReference
      */
     protected FileReference $media;
 
     /**
      * description
-     *
-     * @var string
      */
     protected string $description = '';
 
     /**
      * point
-     *
-     * @var int
      */
     protected int $point = 0;
 
     /**
      * field
-     *
-     * @var int
      */
     protected int $field = 0;
 
     /**
      * likeMove
-     *
-     * @var int
      */
     protected int $likeMove = 0;
 
@@ -80,7 +71,7 @@ class Move extends AbstractEntity
      * @var ObjectStorage<Player>
      * @Extbase\ORM\Cascade("remove")
      */
-    protected $player;
+    protected ObjectStorage $player;
 
     /**
      * __construct
@@ -89,6 +80,66 @@ class Move extends AbstractEntity
     {
         //Do not remove the next line: It would break the functionality
         $this->initStorageObjects();
+    }
+
+    public function getMedia(): FileReference
+    {
+        return $this->media;
+    }
+
+    public function setMedia(FileReference $fileReference): void
+    {
+        $this->media = $fileReference;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function getPoint(): int
+    {
+        return $this->point;
+    }
+
+    public function setPoint(int $point): void
+    {
+        $this->point = $point;
+    }
+
+    public function getField(): int
+    {
+        return $this->field;
+    }
+
+    public function setField(int $field): void
+    {
+        $this->field = $field;
+    }
+
+    public function getLikeMove(): int
+    {
+        return $this->likeMove;
+    }
+
+    public function setLikeMove(int $likeMove): void
+    {
+        $this->likeMove = $likeMove;
+    }
+
+    public function getPlayer(): ObjectStorage
+    {
+        return $this->player;
+    }
+
+    public function setPlayer(ObjectStorage $objectStorage): void
+    {
+        $this->player = $objectStorage;
     }
 
     /**
@@ -101,101 +152,4 @@ class Move extends AbstractEntity
     {
         $this->player = new ObjectStorage();
     }
-
-    /**
-     * @return FileReference
-     */
-    public function getMedia(): FileReference
-    {
-        return $this->media;
-    }
-
-    /**
-     * @param FileReference $media
-     */
-    public function setMedia(FileReference $media): void
-    {
-        $this->media = $media;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param string $description
-     */
-    public function setDescription(string $description): void
-    {
-        $this->description = $description;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPoint(): int
-    {
-        return $this->point;
-    }
-
-    /**
-     * @param int $point
-     */
-    public function setPoint(int $point): void
-    {
-        $this->point = $point;
-    }
-
-    /**
-     * @return int
-     */
-    public function getField(): int
-    {
-        return $this->field;
-    }
-
-    /**
-     * @param int $field
-     */
-    public function setField(int $field): void
-    {
-        $this->field = $field;
-    }
-
-    /**
-     * @return int
-     */
-    public function getLikeMove(): int
-    {
-        return $this->likeMove;
-    }
-
-    /**
-     * @param int $likeMove
-     */
-    public function setLikeMove(int $likeMove): void
-    {
-        $this->likeMove = $likeMove;
-    }
-
-    /**
-     * @return ObjectStorage
-     */
-    public function getPlayer(): ObjectStorage
-    {
-        return $this->player;
-    }
-
-    /**
-     * @param ObjectStorage $player
-     */
-    public function setPlayer(ObjectStorage $player): void
-    {
-        $this->player = $player;
-    }
-
 }
