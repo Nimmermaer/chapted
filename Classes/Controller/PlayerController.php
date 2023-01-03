@@ -43,6 +43,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class PlayerController extends ActionController
 {
+
     public function __construct(
         private readonly PlayerRepository $playerRepository
     ) {
@@ -75,7 +76,7 @@ class PlayerController extends ActionController
         // init configuration
         $clientID = $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['chapted']['google']['clientID'];
         $clientSecret = $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['chapted']['google']['clientSecret'];
-        $redirectUri =$GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['chapted']['google']['redirectUri'];
+        $redirectUri = $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['chapted']['google']['redirectUri'];
 
         // create Client Request to access Google API
         $client = new Client();
@@ -85,17 +86,6 @@ class PlayerController extends ActionController
         $client->addScope('email');
         $client->addScope('profile');
 
-        // authenticate code from Google OAuth Flow
-        if (isset($_GET['code'])) {
-            $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-            $client->setAccessToken($token['access_token']);
-
-            // get profile info
-            $googleServiceOauth2 = new \Google_Service_Oauth2($client);
-            $googleServiceOauth2->userinfo->get();
-
-            // now you can use this profile info to create account in your website and make user logged in.
-        }
 
         return $this->htmlResponse("<a href='" . $client->createAuthUrl() . "'>Google Login</a>");
     }

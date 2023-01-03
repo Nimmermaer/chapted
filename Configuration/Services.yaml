@@ -14,3 +14,8 @@ services:
     public: true
     arguments:
       $client: '@Google\Client'
+
+  ChaptedTeam\Chapted\Service\GoogleAuthenticationService:
+    public: true
+    arguments:
+      $client: '@Google\Client'

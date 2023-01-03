@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use ChaptedTeam\Chapted\Controller\ChallengeController;
+
 use ChaptedTeam\Chapted\Controller\MoveController;
 use ChaptedTeam\Chapted\Controller\PlayerController;
 use ChaptedTeam\Chapted\Controller\TableController;
+use ChaptedTeam\Chapted\Service\GoogleAuthenticationService;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3') || die();
@@ -53,3 +56,36 @@ ExtensionUtility::configurePlugin(
         ChallengeController::class => 'list',
     ]
 );
+ExtensionManagementUtility::addService(
+// Extension Key
+    'chapted',
+    // Service type
+    'auth',
+    // Service key
+    GoogleAuthenticationService::class,
+    [
+        'serviceSubTypes' => [
+            'authUserFE' => 'authUserFE',
+            'getUserFE' => 'getUserFE',
+            'processLoginDataFE' => 'processLoginDataFE',
+        ],
+        'title' => 'Google Auth',
+        'description' => 'An alternative way to login frontend users',
+        'subtype' => 'getUserFE,authUserFE,processLoginDataFE',
+        'available' => true,
+        'priority' => 60,
+        'quality' => 80,
+        'os' => '',
+        'exec' => '',
+        'className' => GoogleAuthenticationService::class,
+    ]
+);
+$GLOBALS['TYPO3_CONF_VARS']['SVCONF'] = [
+    'auth' => [
+        'setup' => [
+            'FE_alwaysFetchUser' => true,
+            'FE_alwaysAuthUser' => true,
+        ],
+    ],
+];
+
