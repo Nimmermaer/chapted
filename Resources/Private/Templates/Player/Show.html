@@ -19,6 +19,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
     <f:render arguments="{player:player}" partial="Player/Properties"/>
     <f:link.action action="list">Back to list</f:link.action>
     <br/>
-    <f:link.action action="new" controller="Move" arguments="{player:player}">New Move</f:link.action>
+    <f:link.action action="new" controller="Challenge" arguments="{player:player}">New Challenge</f:link.action>
+    <f:link.action action="list" controller="Challenge" arguments="{player:player}">Current Challenges</f:link.action>
 </f:section>
 </html>

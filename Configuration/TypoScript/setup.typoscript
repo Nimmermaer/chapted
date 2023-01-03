@@ -3,10 +3,7 @@ page {
         viewport = width=device-width, initial-scale=1
     }
     includeCSSLibs {
-        pure = https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css
-        pure.external = 1
-        pure.integrity = sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls
-        pure.crossorigin = anonymous
+        pure = EXT:chapted/Resources/Public/Css/layout.min.css
     }
 }
 
