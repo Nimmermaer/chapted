@@ -1,7 +1,9 @@
 <label for="media">
     <f:translate key="tx_chapted_domain_model_move.media"/>
 </label><br/>
-<span>File upload is not implemented!</span><br/><br/>
+<div class="output">
+    <f:form.hidden id="photo" name="image" />
+</div>
 <label for="description">
     <f:translate key="tx_chapted_domain_model_move.description"/>
 </label><br/>
@@ -9,12 +11,12 @@
 <label for="point">
     <f:translate key="tx_chapted_domain_model_move.point"/>
 </label><br/>
-<f:form.textfield class="form-control" property="point"/><br/>
+<f:form.textfield type="number" class="form-control" property="point"/><br/>
 <label for="field">
     <f:translate key="tx_chapted_domain_model_move.field"/>
 </label><br/>
-<f:form.textfield class="form-control" property="field"/><br/>
+<f:form.textfield type="number" class="form-control" property="field"/><br/>
 <label for="likeMove">
     <f:translate key="tx_chapted_domain_model_move.like_move"/>
 </label><br/>
-<f:form.textfield class="form-control" property="likeMove"/><br/>
+<f:form.textfield type="number" class="form-control" property="likeMove"/><br/>

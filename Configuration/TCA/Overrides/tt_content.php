@@ -15,8 +15,14 @@ call_user_func(static function (): void {
 
     ExtensionUtility::registerPlugin(
         'Chapted',
-        'Profile',
-        'Profile'
+        'ProfileNew',
+        'Profile:new'
+    );
+
+    ExtensionUtility::registerPlugin(
+        'Chapted',
+        'ProfileShow',
+        'Profile:show'
     );
 
     ExtensionUtility::registerPlugin(

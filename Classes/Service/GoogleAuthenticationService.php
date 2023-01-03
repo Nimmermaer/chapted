@@ -10,15 +10,16 @@ use Psr\Log\LoggerAwareTrait;
 use TYPO3\CMS\Core\Authentication\AbstractAuthenticationService;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Session\UserSession;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class GoogleAuthenticationService extends AbstractAuthenticationService implements LoggerAwareInterface
-
 {
     use LoggerAwareTrait;
 
     private array $configuration = [];
-    private \Google_Service_Oauth2 $currentLoginUser;
+
+    private \Google_Service_Oauth2 $googleServiceOauth2;
 
     public function __construct(
         private readonly Client $client
@@ -37,19 +38,50 @@ class GoogleAuthenticationService extends AbstractAuthenticationService implemen
         ];
     }
 
-    private function createNewFrontendUser(): int
+    public function init(): bool
+    {
+        return ($this->configuration['clientID'] ?? false) && ($_REQUEST['code'] ?? false);
+    }
+
+    public function getUser(): array
+    {
+        $this->googleServiceOauth2 = $this->getGoogleAccountInformation($_REQUEST['code']);
+        $user = $this->fetchUserRecord((string) $this->googleServiceOauth2->userinfo_v2_me->get()['id']);
+        if ($user) {
+            $this->pObj->createUserSession($user);
+            return $user;
+        }
+
+        return [];
+    }
+
+    /**
+     * @throws \JsonException
+     */
+    public function authUser(array $user): int
+    {
+        if ($user === []) {
+            self::createNewFrontendUser();
+            $this->logger->info('Create New user with Google: ');
+            return 200;
+        }
+
+        return 100;
+    }
+
+    private function createNewFrontendUser(): UserSession
     {
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($this->db_user['table']);
-         $connection->insert(
+        $connection->insert(
             'fe_users',
             [
                 'tx_extbase_type' => 'Player',
-                'name' => $this->currentLoginUser->userinfo_v2_me->get()['name'],
-                'email' => $this->currentLoginUser->userinfo_v2_me->get()['email'],
-                'google_id' => $this->currentLoginUser->userinfo_v2_me->get()['id'],
-                'username' => $this->currentLoginUser->userinfo_v2_me->get()['id'],
+                'name' => $this->googleServiceOauth2->userinfo_v2_me->get()['name'],
+                'email' => $this->googleServiceOauth2->userinfo_v2_me->get()['email'],
+                'google_id' => $this->googleServiceOauth2->userinfo_v2_me->get()['id'],
+                'username' => $this->googleServiceOauth2->userinfo_v2_me->get()['id'],
                 'google_info' => json_encode(
-                    (array)$this->currentLoginUser->userinfo_v2_me,
+                    (array) $this->googleServiceOauth2->userinfo_v2_me,
                     JSON_THROW_ON_ERROR
                 ),
                 'usergroup' => 1,
@@ -65,40 +97,14 @@ class GoogleAuthenticationService extends AbstractAuthenticationService implemen
                 Connection::PARAM_INT,
             ]
         );
-         return (int)$connection->lastInsertId('fe_users');
-
-    }
-
-
-    public function init(): bool
-    {
-        if (($this->configuration['clientID'] ?? false) && ($_REQUEST['code'] ?? false)) {
-            return true;
-        }
-        return false;
-    }
-
-    public function getUser(): array
-    {
-        $this->currentLoginUser =  $this->getGoogleAccountInformation($_REQUEST['code']);
-        $user = $this->fetchUserRecord((string)$this->currentLoginUser->userinfo_v2_me->get()['id']);
-        if ($user) {
-            return $user;
-        }
-        return [];
-    }
-
-    /**
-     * @throws \JsonException
-     */
-    public function authUser(array $user): int
-    {
-        if ($user === []) {
-            $user = self::createNewFrontendUser();
-            $this->logger->info('Create New user with Google: ' .$user);
-            return 200;
-        }
-        return 100;
+        $user = $connection->select(
+            ['*'],
+            'fe_users',
+            [
+                'uid' => (int) $connection->lastInsertId('fe_users'),
+            ]
+        )->fetchAssociative();
+        return $this->pObj->createUserSession($user);
     }
 
     private function getGoogleAccountInformation($token): \Google_Service_Oauth2
@@ -108,6 +114,7 @@ class GoogleAuthenticationService extends AbstractAuthenticationService implemen
         $this->client->setRedirectUri($this->configuration['redirectUri']);
         $this->client->addScope('email');
         $this->client->addScope('profile');
+
         $accessToken = $this->client->fetchAccessTokenWithAuthCode($token);
         $this->client->setAccessToken($accessToken['access_token']);
 

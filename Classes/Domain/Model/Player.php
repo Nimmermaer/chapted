@@ -7,6 +7,7 @@ namespace ChaptedTeam\Chapted\Domain\Model;
 use Google\Service\Oauth2\Userinfo;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /***************************************************************
@@ -38,7 +39,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /**
  * Player
  */
-class Player
+class Player extends AbstractEntity
 {
     protected string $username = '';
 

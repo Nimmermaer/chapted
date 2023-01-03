@@ -8,7 +8,9 @@ use ChaptedTeam\Chapted\Domain\Model\Player;
 use ChaptedTeam\Chapted\Domain\Repository\PlayerRepository;
 use Google\Client;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
@@ -43,7 +45,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class PlayerController extends ActionController
 {
-
     public function __construct(
         private readonly PlayerRepository $playerRepository
     ) {
@@ -62,8 +63,13 @@ class PlayerController extends ActionController
     /**
      * action show
      */
-    public function showAction(Player $player): ResponseInterface
+    public function showAction(Player $player = null): ResponseInterface
     {
+        if ($player === null) {
+            $context = GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user');
+            $player = $this->playerRepository->findByUsername($context->get('username'));
+        }
+
         $this->view->assign('player', $player);
         return $this->htmlResponse();
     }
@@ -85,7 +91,6 @@ class PlayerController extends ActionController
         $client->setRedirectUri($redirectUri);
         $client->addScope('email');
         $client->addScope('profile');
-
 
         return $this->htmlResponse("<a href='" . $client->createAuthUrl() . "'>Google Login</a>");
     }

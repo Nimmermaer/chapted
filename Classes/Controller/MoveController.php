@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace ChaptedTeam\Chapted\Controller;
 
 use ChaptedTeam\Chapted\Domain\Model\Move;
+use ChaptedTeam\Chapted\Domain\Model\Player;
 use ChaptedTeam\Chapted\Domain\Repository\MoveRepository;
+use ChaptedTeam\Chapted\Domain\Repository\PlayerRepository;
+use ChaptedTeam\Chapted\Utilities\Base64FileExtractor;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
@@ -43,7 +46,8 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 class MoveController extends ActionController
 {
     public function __construct(
-        private readonly MoveRepository $moveRepository
+        private readonly MoveRepository $moveRepository,
+        private readonly PlayerRepository $playerRepository
     ) {
     }
 
@@ -71,21 +75,26 @@ class MoveController extends ActionController
      */
     public function newAction(): ResponseInterface
     {
+        $this->view->assign('player', $this->request->getArgument('player'));
         return $this->htmlResponse();
     }
 
     /**
      * action create
      */
-    public function createAction(Move $newMove): void
+    public function createAction(Move $newMove): ResponseInterface
     {
-        $this->addFlashMessage(
-            'The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
-            '',
-            AbstractMessage::ERROR
-        );
+        try {
+            $fileReference = (new Base64FileExtractor())::getFileReferenceFromBase64(
+                ($this->request->getArguments()['image'] ?? ''),
+                $newMove
+            );
+            $newMove->setMedia($fileReference);
+        } catch (\Exception) {
+            // something goes wrong with the image
+        }
         $this->moveRepository->add($newMove);
-        $this->redirect('list');
+        return $this->redirect('show', 'Player' );
     }
 
     /**

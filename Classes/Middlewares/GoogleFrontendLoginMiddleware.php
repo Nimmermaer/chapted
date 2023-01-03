@@ -139,7 +139,7 @@ class GoogleFrontendLoginMiddleware implements MiddlewareInterface
         $this->context->setAspect('frontend.user', $frontendUser->createUserAspect());
 
         $serverRequest = $serverRequest->withAttribute('frontend.user', $frontendUser);
-        dd($this->context->getAspect('frontend.user'));
+
         $response = $requestHandler->handle($serverRequest);
         $frontendUser->storeSessionData();
         $response = $frontendUser->appendCookieToResponse($response);
