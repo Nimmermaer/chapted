@@ -1,3 +1,4 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 <f:layout name="Default"/>
 
 This Template is responsible for displaying a single view for a domain object
@@ -11,12 +12,13 @@ Show.html: keep
 
 Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
-<f:section name="content">
+<f:section name="main">
     <h1>Single View for Challenge</h1>
 
     <f:flashMessages/>
     <f:render arguments="{challenge:challenge}" partial="Challenge/Properties"/>
     <f:link.action action="list">Back to list</f:link.action>
     <br/>
-    <f:link.action action="create">New Challenge</f:link.action>
+    <f:link.action action="new">New Challenge</f:link.action>
 </f:section>
+</html>
