@@ -24,9 +24,29 @@
 <label for="latitude">
     <f:translate key="tx_chapted_domain_model_challenge.latitude"/>
 </label><br/>
-<f:form.textfield type="number" additionalAttributes="{step:'0.01'}"   class="form-control" property="latitude"/><br/>
+<f:asset.script identifier="geocoding">
+    const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+    };
+
+    function success(pos) {
+    const crd = pos.coords;
+    let longitude = document.getElementById('longitude');
+    let latitude = document.getElementById('latitude');
+    latitude.setAttribute('value', crd.latitude);
+    longitude.setAttribute('value', crd.longitude);
+    }
+    function error(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+</f:asset.script>
+<f:form.textfield id="latitude" type="number" additionalAttributes="{step:'0.01'}"   class="form-control" property="latitude"/><br/>
 <label for="longitude">
     <f:translate key="tx_chapted_domain_model_challenge.longitude"/>
 </label><br/>
-<f:form.textfield type="number" additionalAttributes="{step:'0.01'}"  class="form-control" property="longitude"/><br/>
+<f:form.textfield id="longitude" additionalAttributes="{step:'0.01'}"  class="form-control" property="longitude"/><br/>
 </html>
