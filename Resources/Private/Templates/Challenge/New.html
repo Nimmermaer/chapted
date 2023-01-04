@@ -19,7 +19,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 
     <f:render arguments="{object:Challenge}" partial="FormErrors"/>
     <f:asset.script identifier="editor">
-        InlineEditor
+        ClassicEditor
         .create( document.querySelector( '#editor' ) )
         .catch( error => {
         console.error( error );

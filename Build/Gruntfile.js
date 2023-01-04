@@ -74,7 +74,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 src: [
-                     "node_modules/@ckeditor/ckeditor5-build-inline/build/ckeditor.js",
+                     "node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js",
                 ],
                 dest: "<%= paths.js %>/Src/main.js"
             }
