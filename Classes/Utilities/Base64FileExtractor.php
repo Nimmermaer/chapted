@@ -27,7 +27,7 @@ class Base64FileExtractor
         return $resourceStorage->addFile(
             '/tmp/' . $tempName . '.png',
             $resourceStorage->getRootLevelFolder(),
-            (new LocalDriver())->sanitizeFileName($description) . time() . '.png'
+            (new LocalDriver())->sanitizeFileName($description ?: time()) . time() . '.png'
         );
     }
 }
