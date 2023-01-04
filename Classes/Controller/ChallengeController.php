@@ -6,15 +6,15 @@ namespace ChaptedTeam\Chapted\Controller;
 
 use ChaptedTeam\Chapted\Domain\Model\Challenge;
 use ChaptedTeam\Chapted\Domain\Repository\ChallengeRepository;
-use ChaptedTeam\Chapted\Domain\Repository\PlayerRepository;
 use ChaptedTeam\Chapted\Utilities\Base64FileExtractor;
 use chillerlan\QRCode\QRCode;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Core\DataHandling\DataHandler;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\StringUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
@@ -48,8 +48,10 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 /**
  * ChallengeController
  */
-class ChallengeController extends ActionController
+class ChallengeController extends ActionController implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     public function __construct(
         private readonly ChallengeRepository $challengeRepository,
         private readonly PersistenceManager $persistenceManager
@@ -89,40 +91,49 @@ class ChallengeController extends ActionController
     ])]
     public function createAction(Challenge $newChallenge): ResponseInterface
     {
-        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
-
         $this->challengeRepository->add($newChallenge);
         $this->persistenceManager->persistAll();
         $file = self::createQRCode($newChallenge);
-        $newId = StringUtility::getUniqueId('NEW');
 
-        // @todo configure Pid
-        $data = [
-            'sys_file_reference' => [
-                $newId => [
-                    'table_local' => 'sys_file',
-                    'uid_local' => $file->getUid(),
-                    'tablenames' => 'tx_chapted_domain_model_challenge',
-                    'uid_foreign' => $newChallenge->getUid(),
-                    'fieldname' => 'qr_code',
-                    'pid' => 5,
-                ],
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('sys_file_reference');
+        $connection->insert(
+            'sys_file_reference',
+            [
+                'uid_local' => $file->getUid(),
+                'tablenames' => 'tx_chapted_domain_model_challenge',
+                'uid_foreign' => $newChallenge->getUid(),
+                'fieldname' => 'qr_code',
+                'pid' => 5,
             ],
-            'tx_chapted_domain_model_challenge' => [
-                $newChallenge->getUid() => [
-                    'qr_code' => $newId,
-                ],
-            ],
-            'fe_users' => [
-                (string) $newChallenge->getOwner()->getUid() => [
-                    'challenges' => (string) $newChallenge->getUid(),
-                    'owner' => (string) $newChallenge->getOwner()->getUid(),
-                ],
-            ],
-        ];
+        );
+        $sys_file_reference_id = $connection->lastInsertId('sys_file_reference');
 
-        $dataHandler->start($data, []);
-        $dataHandler->process_datamap();
+        $connection->update(
+            'tx_chapted_domain_model_challenge',
+            [
+                'qr_code' => $sys_file_reference_id,
+                'owner' => (string) $newChallenge->getOwner()->getUid(),
+            ],
+            [
+                'uid' => $newChallenge->getUid(),
+            ],
+        );
+        $connection->select(
+            ['*'],
+            'fe_users',
+            [
+                'uid' => (string) $newChallenge->getOwner()->getUid(),
+            ]
+        );
+        $connection->update(
+            'fe_users',
+            [
+                'challenges' => (count($newChallenge->getOwner()->getChallenges()) + 1),
+            ],
+            [
+                'uid' => (string) $newChallenge->getOwner()->getUid(),
+            ],
+        );
 
         return $this->redirect('show', 'Player', 'chapted', [
             'player' => $newChallenge->getOwner(),
