@@ -1,4 +1,6 @@
 Documentation.tmpl
 ExtensionBuilder.json
 Configuration/ExtensionBuilder
+Build/node_modules/
+Resources/Public/Css/
 
