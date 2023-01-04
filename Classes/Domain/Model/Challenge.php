@@ -259,20 +259,14 @@ class Challenge extends AbstractEntity
         $this->moves = $objectStorage;
     }
 
-    /**
-     * @return Player|null
-     */
     public function getOwner(): ?Player
     {
         return $this->owner;
     }
 
-    /**
-     * @param Player|null $owner
-     */
-    public function setOwner(?Player $owner): void
+    public function setOwner(?Player $player): void
     {
-        $this->owner = $owner;
+        $this->owner = $player;
     }
 
     /**

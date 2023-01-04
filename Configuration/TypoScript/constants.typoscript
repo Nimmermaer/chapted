@@ -8,13 +8,11 @@ plugin {
             # cat=plugin.tx_chapted_table/file; type=string; label=Path to template layouts (FE)
             layoutRootPath = EXT:chapted/Resources/Private/Layouts/
         }
-
         persistence {
             # cat=plugin.tx_chapted_table//a; type=string; label=Default storage PID
-            storagePid =
+            storagePid = 
         }
     }
-
     tx_chapted_profile {
         view {
             # cat=plugin.tx_chapted_profile/file; type=string; label=Path to template root (FE)
@@ -24,13 +22,11 @@ plugin {
             # cat=plugin.tx_chapted_profile/file; type=string; label=Path to template layouts (FE)
             layoutRootPath = EXT:chapted/Resources/Private/Layouts/
         }
-
         persistence {
             # cat=plugin.tx_chapted_profile//a; type=string; label=Default storage PID
-            storagePid =
+            storagePid = 
         }
     }
-
     tx_chapted_challenges {
         view {
             # cat=module.tx_chapted_challenges/file; type=string; label=Path to template root (BE)
@@ -40,13 +36,11 @@ plugin {
             # cat=module.tx_chapted_challenges/file; type=string; label=Path to template layouts (BE)
             layoutRootPath = EXT:chapted/Resources/Private/Backend/Layouts/
         }
-
         persistence {
             # cat=module.tx_chapted_challenges//a; type=string; label=Default storage PID
-            storagePid =
+            storagePid = 
         }
     }
-
     tx_chapted_teaser {
         view {
             # cat=plugin.tx_chapted_teaser/file; type=string; label=Path to template root (FE)
@@ -56,10 +50,9 @@ plugin {
             # cat=plugin.tx_chapted_teaser/file; type=string; label=Path to template layouts (FE)
             layoutRootPath = EXT:chapted/Resources/Private/Layouts/
         }
-
         persistence {
             # cat=plugin.tx_chapted_teaser//a; type=string; label=Default storage PID
-            storagePid =
+            storagePid = 
         }
     }
 }

@@ -1,0 +1,12 @@
+mod {
+    web_list {
+        table {
+            tx_chapted_domain_model_challenge {
+                hideTable = 1
+            }
+            tx_chapted_domain_model_move {
+                hideTable = 1
+            }
+        }
+    }
+}
