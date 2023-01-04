@@ -79,7 +79,7 @@ call_user_func(static function (): void {
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_chapted_domain_model_challenge',
-                'foreign_field' => 'player',
+                'foreign_field' => 'owner',
                 'maxitems' => 9999,
                 'appearance' => [
                     'collapseAll' => true,
