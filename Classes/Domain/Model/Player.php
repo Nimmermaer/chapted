@@ -223,6 +223,16 @@ class Player extends AbstractEntity
         return $this;
     }
 
+    public function addChallenge(Challenge $challenge): void
+    {
+        $this->challenges->attach($challenge);
+    }
+
+    public function removeChallenge(Challenge $challenge): void
+    {
+        $this->challenges->detach($challenge);
+    }
+
     /**
      * Initializes all ObjectStorage properties
      * Do not modify this method!

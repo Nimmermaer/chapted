@@ -82,7 +82,7 @@ call_user_func(static function (): void {
                 'foreign_field' => 'player',
                 'maxitems' => 9999,
                 'appearance' => [
-                    'collapseAll' => 0,
+                    'collapseAll' => true,
                     'levelLinksPosition' => 'top',
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,

@@ -6,10 +6,18 @@ namespace ChaptedTeam\Chapted\Controller;
 
 use ChaptedTeam\Chapted\Domain\Model\Challenge;
 use ChaptedTeam\Chapted\Domain\Repository\ChallengeRepository;
+use ChaptedTeam\Chapted\Domain\Repository\PlayerRepository;
+use ChaptedTeam\Chapted\Utilities\Base64FileExtractor;
+use chillerlan\QRCode\QRCode;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
+use TYPO3\CMS\Core\Resource\File;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\StringUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
 /***************************************************************
  *
@@ -43,7 +51,8 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 class ChallengeController extends ActionController
 {
     public function __construct(
-        private readonly ChallengeRepository $challengeRepository
+        private readonly ChallengeRepository $challengeRepository,
+        private readonly PersistenceManager $persistenceManager
     ) {
     }
 
@@ -71,21 +80,53 @@ class ChallengeController extends ActionController
      */
     public function newAction(): ResponseInterface
     {
+        $this->view->assign('player', $this->request->getArgument('player'));
         return $this->htmlResponse();
     }
 
-    /**
-     * action create
-     */
-    public function createAction(Challenge $newChallenge): void
+    #[Extbase\IgnoreValidation([
+        'argumentName' => 'newChallenge',
+    ])]
+    public function createAction(Challenge $newChallenge): ResponseInterface
     {
-        $this->addFlashMessage(
-            'The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See http://wiki.typo3.org/T3Doc/Extension_Builder/Using_the_Extension_Builder#1._Model_the_domain',
-            '',
-            AbstractMessage::ERROR
-        );
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+
         $this->challengeRepository->add($newChallenge);
-        $this->redirect('list');
+        $this->persistenceManager->persistAll();
+        $file = self::createQRCode($newChallenge);
+        $newId = StringUtility::getUniqueId('NEW');
+
+        // @todo configure Pid
+        $data = [
+            'sys_file_reference' => [
+                $newId => [
+                    'table_local' => 'sys_file',
+                    'uid_local' => $file->getUid(),
+                    'tablenames' => 'tx_chapted_domain_model_challenge',
+                    'uid_foreign' => $newChallenge->getUid(),
+                    'fieldname' => 'qr_code',
+                    'pid' => 5,
+                ],
+            ],
+            'tx_chapted_domain_model_challenge' => [
+                $newChallenge->getUid() => [
+                    'qr_code' => $newId,
+                ],
+            ],
+            'fe_users' => [
+                (string) $newChallenge->getOwner()->getUid() => [
+                    'challenges' => (string) $newChallenge->getUid(),
+                    'owner' => (string) $newChallenge->getOwner()->getUid(),
+                ],
+            ],
+        ];
+
+        $dataHandler->start($data, []);
+        $dataHandler->process_datamap();
+
+        return $this->redirect('show', 'Player', 'chapted', [
+            'player' => $newChallenge->getOwner(),
+        ]);
     }
 
     /**
@@ -149,5 +190,23 @@ class ChallengeController extends ActionController
     public function filterAction(): ResponseInterface
     {
         return $this->htmlResponse();
+    }
+
+    private function createQRCode(Challenge $challenge): File
+    {
+        // @todo target pid muss konfigurierbar sein. Welche Stelle ?
+        $uriBuilder = $this->uriBuilder;
+        $uri = $uriBuilder->reset()
+            ->setArguments(
+                [
+                    'challenge' => $challenge->getUid(),
+                ]
+            )->setTargetPageUid(3)
+            ->setCreateAbsoluteUri(true)
+            ->build();
+        return Base64FileExtractor::getFileFromBase64Decode(
+            (new QRCode())->render($uri),
+            $challenge->getDescription()
+        );
     }
 }

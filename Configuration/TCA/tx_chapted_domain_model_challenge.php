@@ -173,9 +173,7 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:chapted/Resources/Private/Language/locallang_db.xlf:tx_chapted_domain_model_challenge.qr_code',
             'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim',
+                'type' => 'file',
             ],
         ],
         'latitude' => [
@@ -217,17 +215,9 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:chapted/Resources/Private/Language/locallang_db.xlf:tx_chapted_domain_model_challenge.owner',
             'config' => [
-                'type' => 'inline',
+                'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'fe_users',
-                'foreign_field' => 'challenge',
-                'maxitems' => 9999,
-                'appearance' => [
-                    'collapseAll' => 0,
-                    'levelLinksPosition' => 'top',
-                    'showSynchronizationLink' => 1,
-                    'showPossibleLocalizationRecords' => 1,
-                    'showAllLocalizationLink' => 1,
-                ],
             ],
         ],
         'player' => [

@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace ChaptedTeam\Chapted\Domain\Model;
 
+use ChaptedTeam\Chapted\Domain\Validator\ProfanityValidator;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\Validate;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 
 /***************************************************************
  *
@@ -39,18 +42,20 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  */
 class Challenge extends AbstractEntity
 {
-    /**
-     * title
-     *
-     * @Extbase\Validate("NotEmpty")
-     */
+    #[Extbase\Validate([
+        'validator' => NotEmptyValidator::class,
+    ])]
+    #[Extbase\Validate([
+        'validator' => ProfanityValidator::class,
+    ])]
     protected string $title = '';
 
-    /**
-     * description
-     *
-     * @Extbase\Validate("NotEmpty")
-     */
+    #[Extbase\Validate([
+        'validator' => NotEmptyValidator::class,
+    ])]
+    #[Extbase\Validate([
+        'validator' => ProfanityValidator::class,
+    ])]
     protected string $description = '';
 
     /**
@@ -71,7 +76,7 @@ class Challenge extends AbstractEntity
     /**
      * qrCode
      */
-    protected string $qrCode = '';
+    protected ?FileReference $qrCode = null;
 
     /**
      * latitude
@@ -86,18 +91,14 @@ class Challenge extends AbstractEntity
     /**
      * moves
      *
-     * @var ObjectStorage<Move>
-     * @Extbase\ORM\Cascade("remove")
+     * @var ObjectStorage<Move>|null
      */
-    protected ObjectStorage $moves;
+    #[Extbase\ORM\Cascade([
+        'value' => 'remove',
+    ])]
+    protected ?ObjectStorage $moves = null;
 
-    /**
-     * owner
-     *
-     * @var ObjectStorage<Player>
-     * @Extbase\ORM\Cascade("remove")
-     */
-    protected ObjectStorage $owner;
+    protected ?Player $owner = null;
 
     /**
      * __construct
@@ -188,20 +189,14 @@ class Challenge extends AbstractEntity
         $this->winningPoint = $winningPoint;
     }
 
-    /**
-     * Returns the qrCode
-     */
-    public function getQrCode(): string
+    public function getQrCode(): ?FileReference
     {
         return $this->qrCode;
     }
 
-    /**
-     * Sets the qrCode
-     */
-    public function setQrCode(string $qrCode): void
+    public function setQrCode(?FileReference $fileReference): void
     {
-        $this->qrCode = $qrCode;
+        $this->qrCode = $fileReference;
     }
 
     /**
@@ -254,62 +249,30 @@ class Challenge extends AbstractEntity
         $this->moves->detach($move);
     }
 
-    /**
-     * Returns the moves
-     *
-     * @return ObjectStorage<Move> $moves
-     */
-    public function getMoves(): ObjectStorage
+    public function getMoves(): ?ObjectStorage
     {
         return $this->moves;
     }
 
-    /**
-     * Sets the moves
-     *
-     * @param ObjectStorage<Move> $objectStorage
-     */
-    public function setMoves(ObjectStorage $objectStorage): void
+    public function setMoves(?ObjectStorage $objectStorage): void
     {
         $this->moves = $objectStorage;
     }
 
     /**
-     * Adds a Player
+     * @return Player|null
      */
-    public function addOwner(Player $player): void
-    {
-        $this->owner->attach($player);
-    }
-
-    /**
-     * Removes a Player
-     *
-     * @param Player $player The Player to be removed
-     */
-    public function removeOwner(Player $player): void
-    {
-        $this->owner->detach($player);
-    }
-
-    /**
-     * Returns the owner
-     *
-     * @return ObjectStorage<Player> $owner
-     */
-    public function getOwner(): ObjectStorage
+    public function getOwner(): ?Player
     {
         return $this->owner;
     }
 
     /**
-     * Sets the owner
-     *
-     * @param ObjectStorage<Player> $objectStorage
+     * @param Player|null $owner
      */
-    public function setOwner(ObjectStorage $objectStorage): void
+    public function setOwner(?Player $owner): void
     {
-        $this->owner = $objectStorage;
+        $this->owner = $owner;
     }
 
     /**
@@ -321,6 +284,5 @@ class Challenge extends AbstractEntity
     protected function initStorageObjects()
     {
         $this->moves = new ObjectStorage();
-        $this->owner = new ObjectStorage();
     }
 }

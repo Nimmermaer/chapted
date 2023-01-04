@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace ChaptedTeam\Chapted\Controller;
 
 use ChaptedTeam\Chapted\Domain\Model\Move;
-use ChaptedTeam\Chapted\Domain\Model\Player;
 use ChaptedTeam\Chapted\Domain\Repository\MoveRepository;
-use ChaptedTeam\Chapted\Domain\Repository\PlayerRepository;
 use ChaptedTeam\Chapted\Utilities\Base64FileExtractor;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Messaging\AbstractMessage;
@@ -46,8 +44,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 class MoveController extends ActionController
 {
     public function __construct(
-        private readonly MoveRepository $moveRepository,
-        private readonly PlayerRepository $playerRepository
+        private readonly MoveRepository $moveRepository
     ) {
     }
 
@@ -85,16 +82,17 @@ class MoveController extends ActionController
     public function createAction(Move $newMove): ResponseInterface
     {
         try {
-            $fileReference = (new Base64FileExtractor())::getFileReferenceFromBase64(
+            (new Base64FileExtractor())::getFileFromBase64Decode(
                 ($this->request->getArguments()['image'] ?? ''),
-                $newMove
+                $newMove->getDescription()
             );
-            $newMove->setMedia($fileReference);
+            // $newMove->setMedia($fileReference);
         } catch (\Exception) {
             // something goes wrong with the image
         }
+
         $this->moveRepository->add($newMove);
-        return $this->redirect('show', 'Player' );
+        return $this->redirect('show', 'Player');
     }
 
     /**

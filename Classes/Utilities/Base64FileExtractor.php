@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace ChaptedTeam\Chapted\Utilities;
 
-use ChaptedTeam\Chapted\Domain\Model\FileReference;
-use ChaptedTeam\Chapted\Domain\Model\Move;
 use TYPO3\CMS\Core\Resource\Driver\LocalDriver;
 use TYPO3\CMS\Core\Resource\Exception\ExistingTargetFileNameException;
 use TYPO3\CMS\Core\Resource\Exception\InvalidFileNameException;
@@ -19,22 +17,17 @@ class Base64FileExtractor
      * @throws ExistingTargetFileNameException
      * @throws InvalidFileNameException
      */
-    public static function getFileReferenceFromBase64(string $base64Content, Move $move): FileReference
+    public static function getFileFromBase64Decode(string $base64Content, string $description): File
     {
         $storageRepository = GeneralUtility::makeInstance(StorageRepository::class);
         $resourceStorage = $storageRepository->getDefaultStorage();
         [, $data] = explode(';base64,', $base64Content);
         $tempName = microtime();
         file_put_contents('/tmp/' . $tempName . '.png', base64_decode($data, true));
-        /** @var File $file */
-        $file = $resourceStorage->addFile(
+        return $resourceStorage->addFile(
             '/tmp/' . $tempName . '.png',
             $resourceStorage->getRootLevelFolder(),
-            (new LocalDriver())->sanitizeFileName($move->getDescription()) . time() . '.png'
+            (new LocalDriver())->sanitizeFileName($description) . time() . '.png'
         );
-
-        $fileReference = new FileReference();
-        $fileReference->setOriginalResource($file);
-        return $fileReference;
     }
 }

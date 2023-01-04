@@ -66,8 +66,8 @@ class PlayerController extends ActionController
     public function showAction(Player $player = null): ResponseInterface
     {
         if ($player === null) {
-            $context = GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user');
-            $player = $this->playerRepository->findByUsername($context->get('username'));
+            $userAspect = GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user');
+            $player = $this->playerRepository->findOneByUsername($userAspect->get('username'));
         }
 
         $this->view->assign('player', $player);
@@ -109,11 +109,9 @@ class PlayerController extends ActionController
         $this->redirect('list');
     }
 
-    /**
-     * action edit
-     *
-     * @Extbase\IgnoreValidation("player")
-     */
+    #[Extbase\IgnoreValidation([
+        'argumentName' => 'player',
+    ])]
     public function editAction(Player $player): ResponseInterface
     {
         $this->view->assign('player', $player);

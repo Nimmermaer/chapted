@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace ChaptedTeam\Chapted\Domain\Model;
 
+use ChaptedTeam\Chapted\Domain\Validator\ProfanityValidator;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 
 /***************************************************************
  *
@@ -42,11 +44,13 @@ class Move extends AbstractEntity
     /**
      * media
      */
-    protected FileReference $media;
+    protected ?FileReference $media = null;
 
-    /**
-     * description
-     */
+    #[Extbase\Validate([
+        'validator' => NotEmptyValidator::class,
+    ])] #[Extbase\Validate([
+        'validator' => ProfanityValidator::class,
+    ])]
     protected string $description = '';
 
     /**
@@ -81,12 +85,12 @@ class Move extends AbstractEntity
         $this->initStorageObjects();
     }
 
-    public function getMedia(): FileReference
+    public function getMedia(): ?FileReference
     {
         return $this->media;
     }
 
-    public function setMedia(FileReference $fileReference): void
+    public function setMedia(?FileReference $fileReference): void
     {
         $this->media = $fileReference;
     }

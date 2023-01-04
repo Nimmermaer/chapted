@@ -44,11 +44,12 @@ ExtensionUtility::configurePlugin(
     [
         PlayerController::class => 'show, edit, sendNotificationMail, sendInviteMail',
         MoveController::class => 'new, create, delete',
+        ChallengeController::class => 'new, create, list, delete',
     ],
     // non-cacheable actions
     [
-        PlayerController::class => 'new, show, edit, ',
-        MoveController::class => 'new, create, delete',
+        PlayerController::class => 'show, edit',
+        ChallengeController::class => 'new, create, delete',
     ]
 );
 
