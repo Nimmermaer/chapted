@@ -69,6 +69,7 @@ ExtensionUtility::configurePlugin(
     ]
 );
 
+
 $GLOBALS['TYPO3_CONF_VARS']['SVCONF'] = [
     'auth' => [
         'setup' => [

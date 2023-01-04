@@ -1,7 +1,8 @@
 #
-# PageTS for teste
+# PageTS for chapted
 #
-@import 'EXT:teste/Configuration/TsConfig/Page/RTE.tsconfig'
-@import 'EXT:teste/Configuration/TsConfig/Page/TCEFORM.tsconfig'
-@import 'EXT:teste/Configuration/TsConfig/Page/TCEMAIN.tsconfig'
-@import 'EXT:teste/Configuration/TsConfig/Page/Mod/WebLayout/BackendLayouts.tsconfig'
+@import 'EXT:chapted/Configuration/TsConfig/Page/RTE.tsconfig'
+@import 'EXT:chapted/Configuration/TsConfig/Page/TCEFORM.tsconfig'
+@import 'EXT:chapted/Configuration/TsConfig/Page/TCEMAIN.tsconfig'
+@import 'EXT:chapted/Configuration/TsConfig/Page/Mod/WebLayout/BackendLayouts.tsconfig'
+@import 'EXT:chapted/Configuration/TsConfig/Page/Mod/WebList/Mod.tsconfig'

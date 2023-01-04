@@ -5,6 +5,9 @@ page {
     includeCSSLibs {
         pure = EXT:chapted/Resources/Public/Css/layout.min.css
     }
+    includeJS {
+        main = EXT:chapted/Resources/Public/JavaScript/Src/main.js
+    }
 }
 
 plugin {

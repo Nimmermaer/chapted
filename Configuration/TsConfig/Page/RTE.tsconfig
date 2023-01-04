@@ -3,6 +3,6 @@
 #############
 RTE {
     default {
-        preset = teste
+        preset = chapted
     }
 }

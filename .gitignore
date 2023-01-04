@@ -3,4 +3,5 @@ ExtensionBuilder.json
 Configuration/ExtensionBuilder
 Build/node_modules/
 Resources/Public/Css/
+Resources/Public/JavaScript/
 

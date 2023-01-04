@@ -29,6 +29,8 @@
     "watch": "./node_modules/.bin/grunt watch"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-inline": "^35.4.0",
+    "grunt-contrib-concat": "^2.1.0",
     "purecss": "^3.0.0"
   }
 }

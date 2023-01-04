@@ -18,6 +18,13 @@ Otherwise your changes will be overwritten the next time you save the extension 
     <f:flashMessages/>
 
     <f:render arguments="{object:Challenge}" partial="FormErrors"/>
+    <f:asset.script identifier="editor">
+        InlineEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+        console.error( error );
+        } );
+    </f:asset.script>
     <f:form action="create" enctype="multipart/form-data" name="newChallenge" object="{newChallenge}">
         <f:form.hidden name="player" property="owner" value="{player}" />
         <f:render partial="Challenge/FormFields"/>

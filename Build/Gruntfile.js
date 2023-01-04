@@ -14,11 +14,11 @@ module.exports = function(grunt) {
             css: '<%= paths.resources %>Public/Css/',
             fonts: '<%= paths.resources %>Public/Fonts/',
             img: '<%= paths.resources %>Public/Images/',
-            js: '<%= paths.resources %>Public/JavaScript/'
+            js: '<%= paths.resources %>Public/JavaScript'
         },
         banner: '/*!\n' +
-            ' * teste v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
-            ' * Copyright 2017-<%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
+            ' * chapted v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
+            ' * Copyright 2023-<%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
             ' * Licensed under the <%= pkg.license %> license\n' +
             ' */\n',
         uglify: {
@@ -67,6 +67,18 @@ module.exports = function(grunt) {
                 dest: '<%= paths.css %>layout.min.css'
             }
         },
+        concat: {
+            options: {
+                stripBanners: true,
+                sourceMap:true
+            },
+            dist: {
+                src: [
+                     "node_modules/@ckeditor/ckeditor5-build-inline/build/ckeditor.js",
+                ],
+                dest: "<%= paths.js %>/Src/main.js"
+            }
+        },
         imagemin: {
             extension: {
                 files: [{
@@ -98,6 +110,7 @@ module.exports = function(grunt) {
      * Register tasks
     //  */
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
@@ -108,7 +121,7 @@ module.exports = function(grunt) {
      * Grunt update task
      */
     grunt.registerTask('css', ['sass', 'postcss', 'cssmin']);
-    grunt.registerTask('js', ['uglify']);
+    grunt.registerTask('js', ['uglify', 'concat']);
     grunt.registerTask('build', ['js', 'css', 'imagemin']);
     grunt.registerTask('default', ['build']);
 

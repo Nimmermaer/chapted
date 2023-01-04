@@ -1,4 +1,4 @@
 #
 # BACKENDLAYOUTS
 #
-<INCLUDE_TYPOSCRIPT: source="DIR:EXT:teste/Configuration/TsConfig/Page/Mod/WebLayout/BackendLayouts" extensions="tsconfig">
+@import 'EXT:chapted/Configuration/TsConfig/Page/Mod/WebLayout/BackendLayouts/default.tsconfig'
