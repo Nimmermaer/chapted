@@ -48,7 +48,8 @@ class Move extends AbstractEntity
 
     #[Extbase\Validate([
         'validator' => NotEmptyValidator::class,
-    ])] #[Extbase\Validate([
+    ])]
+    #[Extbase\Validate([
         'validator' => ProfanityValidator::class,
     ])]
     protected string $description = '';
